@@ -21,6 +21,7 @@
 - nginx:1.21.1
 
 ## ER図
+![ER図](/src/er-diagram.drawio.png)
 
 ## URL
 - 開発環境 : [http://localhost/](http://localhost/ )
