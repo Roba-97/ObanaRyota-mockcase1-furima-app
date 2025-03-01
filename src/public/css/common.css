@@ -1,0 +1,24 @@
+.header {
+    background-color: rgba(0, 0, 0, 1);
+    display: grid;
+    align-items: center;
+    height: 82px;
+  
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+}
+
+.header__heading {
+    color: rgba(255, 255, 255, 1) ;
+    font-weight: lighter;
+    font-size: 32px;
+  
+    grid-column: 1;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: center;
+}
