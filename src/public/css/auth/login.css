@@ -36,7 +36,8 @@
 }
 
 .login-form__error-message {
-    
+    margin: 10px 0;
+    color: rgba(255, 85, 85, 1);
 }
 
 .login-form__btn {

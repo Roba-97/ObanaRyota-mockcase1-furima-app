@@ -36,7 +36,8 @@
 }
 
 .register-form__error-message {
-    
+    margin: 10px 0;
+    color: rgba(255, 85, 85, 1);
 }
 
 .register-form__btn {
