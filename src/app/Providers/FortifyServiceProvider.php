@@ -37,7 +37,7 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // $this->app->bind(FortifyLoginRequest::class, LoginRequest::class);
+        $this->app->bind(FortifyLoginRequest::class, LoginRequest::class);
 
         Fortify::createUsersUsing(CreateNewUser::class);
         
@@ -54,15 +54,5 @@ class FortifyServiceProvider extends ServiceProvider
             
             return Limit::perMinute(10)->by($email . $request->ip());
         });
-
-        /*
-        Fortify::authenticateUsing(function (LoginRequest $request) {
-            $user = User::where('email', $request->email)->first();
-    
-            if ($user && Hash::check($request->password, $user->password)) {
-                return $user;
-            }
-        });
-        */
     }
 }
