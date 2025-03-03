@@ -11,14 +11,16 @@
 </head>
 
 <body>
-  <header class="header">
-    <h1 class="header__heading">coachtech</h1>
-    @yield('search')
-		@yield('nav')
-  </header>
-  <main class="content">
-    @yield('content')
-	</main>
+  <div class="app">
+    <header class="header">
+      <h1 class="header__heading">coachtechフリマ</h1>
+      <div class="header__logo"></div>
+      @yield('header')
+    </header>
+    <main class="content">
+      @yield('content')
+    </main>
+  </div>
 </body>
 
 </html>

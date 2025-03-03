@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
+@section('header')
+@include('layouts.header')
+@endsection
+
 @section('content')
-<form action="/logout" method="post">
-@csrf
-<button type="submit">ログアウト</button>
-</form>
+<h2>アイテム一覧ページ</h2>
 @endsection
