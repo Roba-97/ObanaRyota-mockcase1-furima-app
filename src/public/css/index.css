@@ -4,21 +4,24 @@
     border-bottom: solid 2px #5F5F5F;
 }
 
-.tab__form{
+.tab__link{
+    display: block;
     margin: 0 50px;
-}
-
-.tab__form:first-of-type {
-    margin-left: 200px;
-}
-
-.tab__btn {
     padding: 5px 20px;
     border: none;
     background-color: inherit;
+    color: #000000;
     font-size: 24px;
-    outline: none;
+    text-decoration: none;
     cursor: pointer;
+}
+
+.tab__link--active {
+    color: #FF0000;
+}
+
+.tab__link:first-of-type {
+    margin-left: 200px;
 }
 
 .item-list {
@@ -29,13 +32,13 @@
 }
 
 .item-list__item {
-    padding-bottom: 20px;
     width: 290px;
-    height: 320px;
+    position: relative;
 }
 
 .item-list__img {
     width: 100%;
+    height: 290px;
     border-radius: 4px;
     object-fit: cover;
 }
@@ -43,4 +46,28 @@
 .item-list__name {
     font-size: 25px;
     margin-top: 5px;
+}
+
+.item-list__sold-mask {
+    top: 0; 
+    left: 0;
+    width: 100%;
+    height: 290px;
+    position: absolute;
+    z-index:100;
+}
+
+.item-list__sold-text {
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:100%;
+    border-radius:4px;
+}
+
+.item-list__sold-text span {
+    color: #FFFFFF;
+    font-size: 34px;
+    font-weight: bold;
 }

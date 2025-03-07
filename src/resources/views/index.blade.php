@@ -10,19 +10,31 @@
 
 @section('content')
 <div class="tab">
-	<form class="tab__form" action="/" method="get">
-		<button class="tab__btn" type="submit">おすすめ</button>
-	</form>
-	<form class="tab__form" action="/?tab=mylist" method="get">
-		<button class="tab__btn" type="submit">マイリスト</button>
-	</form>
+	@if($showMylist)
+	<a class="tab__link" href="/">おすすめ</a>
+	<a class="tab__link tab__link--active" href="/?tab=mylist" >マイリスト</a>
+	@else
+	<a class="tab__link tab__link--active" href="/">おすすめ</a>
+	<a class="tab__link" href="/?tab=mylist" >マイリスト</a>
+	@endif
 </div>
 <div class="item-list">
-	@for($i = 0; $i < 8; $i++) 
+	@foreach($items as $item)
 	<div class="item-list__item">
-		<img src="https://placehold.jp/d9d9d9/000/190x190.png?text=%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F" alt="商品画像" class="item-list__img">
-		<p class="item-list__name">商品名</p>
+		@if($item->sold_flag)
+		<a href="/item/{{ $item->id }}">
+			<div class="item-list__sold-mask">
+				<div class="item-list__sold-text"><span>sold</span></div>
+			</div>
+			<img class="item-list__img" src="{{ $item->image_path }}" alt="商品画像">
+		</a>
+		@else
+		<a href="/item/{{ $item->id }}">
+			<img class="item-list__img" src="{{ $item->image_path }}" alt="商品画像">
+		</a>
+		@endif
+		<p class="item-list__name">{{ $item->name }}</p>
 	</div>
-	@endfor
+	@endforeach
 </div>
 @endsection
