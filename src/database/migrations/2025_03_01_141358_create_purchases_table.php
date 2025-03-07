@@ -16,7 +16,7 @@ class CreatePurchasesTable extends Migration
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
             $table->foreignId('item_id')->constrained();
-            $table->foreignId('buyer_id')->nullable()->constrained('profiles')->nullOnDelete();
+            $table->foreignId('buyer_id')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
         });
     }

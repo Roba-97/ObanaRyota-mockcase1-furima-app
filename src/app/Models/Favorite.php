@@ -11,7 +11,7 @@ class Favorite extends Model
 
     protected $fillable = [
         'item_id',
-        'profile_id',
+        'user_id',
     ];
 
     public function item()
@@ -21,6 +21,6 @@ class Favorite extends Model
 
     public function profile()
     {
-        return $this->belongsTo(Profile::class);
+        return $this->belongsTo(User::class);
     }
 }

@@ -12,4 +12,9 @@ class Condition extends Model
     protected $fillable = [
         'content'
     ];
+
+    public function item()
+    {
+        return $this->belongsTo(Item::class);
+    }
 }
