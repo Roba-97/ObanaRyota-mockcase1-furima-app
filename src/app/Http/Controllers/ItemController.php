@@ -28,4 +28,9 @@ class ItemController extends Controller
 
         return view('index', ['items' => $items, 'showMylist' => $showMylist]);
     }
+
+    public function detail(Item $item)
+    {
+        return view('detail', ['item' => $item]);
+    }
 }

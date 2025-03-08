@@ -12,10 +12,10 @@
 <div class="tab">
 	@if($showMylist)
 	<a class="tab__link" href="/">おすすめ</a>
-	<a class="tab__link tab__link--active" href="/?tab=mylist" >マイリスト</a>
+	<a class="tab__link tab__link--active" href="/?page=mylist" >マイリスト</a>
 	@else
 	<a class="tab__link tab__link--active" href="/">おすすめ</a>
-	<a class="tab__link" href="/?tab=mylist" >マイリスト</a>
+	<a class="tab__link" href="/?page=mylist" >マイリスト</a>
 	@endif
 </div>
 <div class="item-list">

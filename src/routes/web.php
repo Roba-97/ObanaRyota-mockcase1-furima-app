@@ -16,6 +16,8 @@ use App\Http\Controllers\ItemController;
 */
 
 Route::get('/', [Itemcontroller::class, 'index']);
+Route::get('/item/{item}', [Itemcontroller::class, 'detail']);
+
 
 Route::get('/mypage/profile', function () {
     return view('profile');
