@@ -1,3 +1,4 @@
+/* 選択タブ */
 .tab {
     margin: 40px 0 60px;
     display: flex;
@@ -15,15 +16,14 @@
     text-decoration: none;
     cursor: pointer;
 }
-
+.tab__link:first-of-type {
+    margin-left: 200px;
+}
 .tab__link--active {
     color: #FF0000;
 }
 
-.tab__link:first-of-type {
-    margin-left: 200px;
-}
-
+/* 商品一覧 */
 .item-list {
     margin: 0 auto;
     display: grid;
@@ -70,4 +70,31 @@
     color: #FFFFFF;
     font-size: 34px;
     font-weight: bold;
+}
+
+@media screen and (max-width: 960px) {
+    .tab  {
+        justify-content: space-around;
+    }
+    .tab__link {
+        margin: 0;
+    }
+    .tab__link:first-of-type {
+        margin-left: 0;
+    }
+    .item-list  {
+        gap: 30px
+    }
+    .item-list__img  {
+        height: 150px;
+    }
+    .item-list__item {
+        width: 150px;
+    }
+    .item-list__name  {
+        font-size: 20px;
+    }
+    .item-list__sold-mask {
+        height: 150px;
+    }
 }
