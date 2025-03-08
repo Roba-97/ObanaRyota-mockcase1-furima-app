@@ -11,22 +11,23 @@ class ItemController extends Controller
 {
     public function index(Request $request)
     {
+        // dd($request);
         $showMylist = false;
         
         if($request->page === "mylist" && Auth::check()) {
             $showMylist = true;
             $itemsId = Auth::user()->favorites()->select('Item_id')->get();
-            $items = Item::whereIn('id', $itemsId)->where('seller_id', '<>', Auth::user()->id)->select('id','image_path','name','sold_flag')->get();
+            $items = Item::KeywordSearch($request->keyword)->whereIn('id', $itemsId)->where('seller_id', '<>', Auth::user()->id)->select('id','image_path','name','sold_flag')->get();
+        }
+        elseif(Auth::check()) {
+            $items = Item::KeywordSearch($request->keyword)->where('seller_id', '<>', Auth::user()->id)->select('id','image_path','name','sold_flag')->get();
         }
         elseif($request->page === "mylist") {
             $showMylist = true;
             $items = [];
         }
-        elseif(Auth::check()) {
-            $items = Item::where('seller_id', '<>', Auth::user()->id)->select('id','image_path','name','sold_flag')->get();
-        }
         else {
-            $items = Item::select('id','image_path','name','sold_flag')->get();
+            $items = Item::KeywordSearch($request->keyword)->select('id','image_path','name','sold_flag')->get();
         }
 
         return view('index', ['items' => $items, 'showMylist' => $showMylist]);
