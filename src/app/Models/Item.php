@@ -20,6 +20,13 @@ class Item extends Model
         'sold_flag'
     ];
 
+    public function scopeKeywordSearch($query, $keyword)
+    {
+        if (!empty($keyword)) {
+            $query->where('name', 'like', '%' . $keyword . '%');
+        }
+    }
+
     public function seller()
     {
         return $this->belongsTo(User::class);

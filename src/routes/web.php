@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ItemController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [Itemcontroller::class, 'index']);
+Route::get('/item/{item}', [Itemcontroller::class, 'detail']);
+
 
 Route::get('/mypage/profile', function () {
     return view('profile');

@@ -1,6 +1,7 @@
 <div class="header__search">
-	<form action="" class="header__search-form">
-		<input class="header__search-input" type="text" placeholder="なにをお探しですか？">
+	<form class="header__search-form" action="/" method="get">
+		<input class="header__search-input" type="text" name="keyword" placeholder="なにをお探しですか？">
+		<button class="header__search-btn" type="submit">検索</button>
 	</form>
 </div>
 

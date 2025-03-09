@@ -1,0 +1,252 @@
+.item-detail {
+    margin: 100px auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.item-detail__item-img, .item-detail__detail {
+    width: 690px;
+    padding: 0 45px;
+}
+
+.item-detail__item-img img {
+    display: inline-block;
+    margin: 45px auto;
+    width: 600px;
+    height: 600px;
+    object-fit: cover;
+}
+
+.item-detail__name {
+    margin: 0;
+    font-size: 45px;
+}
+
+.item-detail__brand {
+    margin: 0;
+    font-size: 20px;
+}
+
+.item-detail__price {
+    font-size: 30px;
+    margin: 30px 0 0;
+}
+
+.item-detail__price span {
+    font-size: 45px;
+}
+
+.item-detail__icon {
+    display: flex;
+}
+
+.item-detail__icon-like, .item-detail__icon-comment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15px 0 15px 45px;
+}
+
+.icon__img {
+    display: block;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    margin-bottom: 5px;
+}
+
+.icon__count {
+    font-size: 18px;
+}
+
+.item-detail__desc-heading, .item-detail__info-heading {
+    margin: 35px 0 0;
+    font-size: 36px;
+}
+
+.item-detail__desc-text {
+    margin: 45px 0;
+    font-size: 24px;
+}
+
+/* 商品情報 */
+.item-datail__info-category, .item-detail__info-condition {
+    margin-top: 25px;
+    display: flex;
+}
+
+.info-category__heading, .info-condition__heading {
+    padding-right: 50px;
+    font-size: 24px;
+    font-weight: bold;
+    white-space: nowrap; 
+}
+.info-category__heading p, .info-condition__heading p {
+    margin: 0;
+}
+
+.info-category__list span, .info-condition__text span{
+    display: inline-block;
+    padding: 2px 30px;
+    font-size: 20px;
+    text-align: center;
+}
+.info-category__list {
+    display: flex;
+    flex-wrap: wrap;
+}
+.info-category__list span {
+    margin-right: 25px;
+    margin-bottom: 10px;
+    background-color: #D9D9D9;
+    border: none;
+    border-radius: 15px;
+}
+
+/* コメント */
+.item-detail__comment-heading {
+    margin: 75px 0 25px;
+    color: #5F5F5F;
+    font-size: 36px;
+}
+
+.comment__user-img {
+    display: inline-block;
+    margin-right: 25px;
+    width: 70px;
+    height: 70px;
+    border: none;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.comment__user-name {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.comment__text {
+    margin: 20px 0 50px;
+    padding: 20px 15px;
+    font-size: 20px;
+    background-color: #E5E5E5;
+    border-radius: 5px;
+}
+.comment__text p {
+    margin: 0;
+}
+
+.comment-form_label {
+    display: block;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.comment-form__input {
+    display: block;
+    margin-bottom: 48px;
+    padding: 10px;
+    width: 100%;
+    border: solid 2px #5F5F5F;
+    border-radius: 5px;
+    font-size: 20px;
+    outline: none;
+}
+
+/* ボタン */
+.item-detail__purchase-btn, .comment-form__btn {
+    display: inline-block;
+    width: 100%;
+    height: 56px;
+    line-height: 56px;
+    background-color: #FF5555;
+    border: none;
+    border-radius: 4px;
+    color: #FFFFFF;
+    text-align: center;
+    outline: none;
+    font-size: 30px;
+}
+.comment-form__btn {
+    font-size: 25px;
+}
+
+@media screen and (max-width: 960px) {
+    .item-detail {
+        margin: 50px auto;
+    }
+    .item-detail__item-img, .item-detail__detail {
+        width: 370px;
+        padding: 0 20px;
+    }
+    .item-detail__item-img img {
+        margin: 30px auto;
+        width: 300px;
+        height: 300px;
+    }
+    .item-detail__name {
+        font-size: 30px;
+    }
+    .item-detail__brand {
+        font-size: 16px;
+    }
+    .item-detail__price {
+        margin: 20px 0 0;
+        font-size: 20px;
+    }
+    .item-detail__price span {
+        font-size: 30px;
+    }
+    .icon__img {
+        width: 30px;
+        height: 30px;
+    }
+    .icon__count {
+        font-size: 12px;
+    }
+    .item-detail__desc-heading, .item-detail__info-heading {
+        font-size: 25px;
+    }
+    .item-detail__desc-text {
+        margin: 25px 0;
+        font-size: 18px;
+    }
+    .info-category__heading, .info-condition__heading {
+        padding-right: 20px;
+        font-size: 18px; 
+    }
+    .info-category__list span, .info-condition__text span{
+        padding: 2px 15px;
+        font-size: 16px;
+    }
+    .info-category__list span {
+        margin-right: 15px;
+        margin-bottom: 5px;
+    }
+    .item-detail__comment-heading {
+        margin: 50px 0 20px;
+        font-size: 25px;
+    }
+    .comment__user-img {
+        width: 50px;
+        height: 50px;
+    }
+    .comment__user-name {
+        font-size: 20px;
+    }
+    .comment__text {
+        padding: 15px 10px;
+        font-size: 16px;
+    }
+    .comment-form_label {
+        font-size: 20px;
+    }
+    .item-detail__purchase-btn, .comment-form__btn {
+        height: 42px;
+        line-height: 42px;
+        font-size: 22px;
+    }
+    .comment-form__btn {
+        font-size: 18px;
+    }
+}
