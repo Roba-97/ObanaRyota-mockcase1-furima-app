@@ -11,7 +11,6 @@ class ItemController extends Controller
 {
     public function index(Request $request)
     {
-        // dd($request);
         $showMylist = false;
         
         if($request->page === "mylist" && Auth::check()) {
@@ -31,10 +30,5 @@ class ItemController extends Controller
         }
 
         return view('index', ['items' => $items, 'showMylist' => $showMylist]);
-    }
-
-    public function detail(Item $item)
-    {
-        return view('detail', ['item' => $item]);
     }
 }

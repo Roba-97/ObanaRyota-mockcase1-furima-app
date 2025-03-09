@@ -17,7 +17,7 @@
 		@else
 		<li class="header__nav-item"><a href="/login">ログイン</a></li>
 		@endif
-		<li class="header__nav-item"><a href="">マイページ</a></li>
-		<li class="header__nav-item header__nav-item--sell"><a href="">出品</a></li>
+		<li class="header__nav-item"><a href="/mypage">マイページ</a></li>
+		<li class="header__nav-item header__nav-item--sell"><a href="/sell">出品</a></li>
   </ul>
 </nav>
