@@ -1,5 +1,5 @@
 <div class="header__search">
-	<form class="header__search-form" action="/" method="get">
+	<form class="header__search-form" action="/search" method="get">
 		<input class="header__search-input" type="text" name="keyword" placeholder="なにをお探しですか？">
 		<button class="header__search-btn" type="submit">検索</button>
 	</form>

@@ -12,4 +12,9 @@ class DetailController extends Controller
     {
         return view('detail', ['item' => $item]);
     }
+
+    public function comment(Item $item)
+    {
+        return view('detail', ['item' => $item]);
+    }
 }

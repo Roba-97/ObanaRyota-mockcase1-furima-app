@@ -20,18 +20,17 @@ use App\Http\Controllers\PurchaseController;
 */
 
 Route::get('/', [ItemController::class, 'index']);
+Route::get('/search', [ItemController::class, 'search']);
 Route::get('/item/{item}', [DetailController::class, 'index']);
 
-/*
 Route::middleware('auth')->group(function () {
-    post('/item/{item}', [DetailController::class, 'comment']);
-    get('/mypage', [MypageController::class, 'index']);
-    get('/mypage/profile', [MypageController::class, 'edit']);
-    patch('/mypage/profile', [MypageController::class, 'update']);
-    get('/sell', [ExhibitController::class, 'index']);
-    post('/sell', [ExhibitController::class, 'store']);
-    get('/purchase/address/{item}', [PurchaseController::class, 'edit']);
-    get('/purchase/{item}', [PurchaseController::class, 'index']);
-    post('/purchase/{item}', [PurchaseController::class, 'store']);
+    Route::post('/item/{item}', [DetailController::class, 'comment']);
+    Route::get('/mypage', [MypageController::class, 'index']);
+    Route::get('/mypage/profile', [MypageController::class, 'edit']);
+    Route::patch('/mypage/profile', [MypageController::class, 'update']);
+    Route::get('/sell', [ExhibitController::class, 'index']);
+    Route::post('/sell', [ExhibitController::class, 'store']);
+    Route::get('/purchase/address/{item}', [PurchaseController::class, 'edit']);
+    Route::get('/purchase/{item}', [PurchaseController::class, 'index']);
+    Route::post('/purchase/{item}', [PurchaseController::class, 'store']);
 });
-*/
