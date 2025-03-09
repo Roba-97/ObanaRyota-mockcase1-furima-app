@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/profile.css')}}">
+<link rel="stylesheet" href="{{ asset('css/exhibit.css')}}">
 @endsection
 
 @section('header')
@@ -9,5 +9,5 @@
 @endsection
 
 @section('content')
-<h2>プロフィール編集ページ</h2>
+<h2>出品ページ</h2>
 @endsection

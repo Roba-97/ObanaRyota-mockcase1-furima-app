@@ -30,7 +30,7 @@
                 <div class="icon__count">1</div>
             </div>
         </div>
-        <form class="item-detail__purchase" action="/purcahse/{{ $item->id }}" method="get">
+        <form class="item-detail__purchase" action="/purchase/{{ $item->id }}" method="get">
             <button class="item-detail__purchase-btn" type="submit">購入手続きへ</button>
         </form>
         <div class="item-detail__desc">
@@ -57,7 +57,7 @@
                 <span class="comment__user-name">admin</span>
                 <div class="comment__text"><p>ユーザのコメント</p></div>
             </div>
-            <form class="item-detail__comment-form" action="" method="post">
+            <form class="item-detail__comment-form" action="/comment/{{ $item->id }}" method="post">
                 @csrf
                 <label class="comment-form_label" for="input-comment">商品へのコメント</label>
                 <textarea class="comment-form__input" name="content" id="input-comment" rows="10"></textarea>
