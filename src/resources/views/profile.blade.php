@@ -9,11 +9,11 @@
 @endsection
 
 @section('content')
-<div class="profile">
-  <h2 class="profile__heading">プロフィール設定</h2>
+<div class="profile-form">
+  <h2 class="profile-form__heading">プロフィール設定</h2>
   <div class="profile-form__inner">
     <form class="profile-form__form" action="/mypage/profile" method="post">
-      @method('DELETE')
+      @method('PATCH')
       @csrf
 			<div class="profile-form__group-img">
 				<img class="profile-form__img" src="https://placehold.jp/150x150.png" alt="">

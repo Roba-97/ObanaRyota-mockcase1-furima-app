@@ -1,10 +1,10 @@
-.profile {
+.profile-form {
     margin: 75px 0;
     display: flex;
     flex-direction: column;
 }
 
-.profile__heading {
+.profile-form__heading {
     margin: 0;
     text-align: center;
     font-size: 36px;
@@ -85,14 +85,6 @@
     color: #FFFFFF;
     text-align: center;
     font-size: 26px;
-}
-
-.profile-form__link {
-    display: block;
-    color: #0073CC;
-    text-align: center;
-    text-decoration: none;
-    font-size: 20px;
 }
 
 @media screen and (max-width: 960px) {
