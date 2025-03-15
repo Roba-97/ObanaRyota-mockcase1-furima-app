@@ -35,7 +35,7 @@
         </form>
         <div class="item-detail__desc">
             <h2 class="item-detail__desc-heading">商品説明</h2>
-            <p class="item-detail__desc-text">{{ $item->detail }}</p>
+            <p class="item-detail__desc-text">{!! nl2br(e($item->detail)) !!}</p>
         </div>
         <div class="item-detail__info">
             <h2 class="item-detail__info-heading">商品情報</h2>
@@ -62,7 +62,7 @@
                 <img src="{{ asset('images/default_user_icon.png') }}" alt="ユーザアイコン" class="comment__user-img">
                 @endisset
                 <span class="comment__user-name">{{ $comment->user()->first()->name }}</span>
-                <div class="comment__text"><p>{{ $comment->content }}</p></div>
+                <div class="comment__text"><p>{!! nl2br(e($comment->content)) !!}</p></div>
             @endforeach
             </div>
             <form class="item-detail__comment-form" action="/comment/{{ $item->id }}" method="post">
