@@ -17,7 +17,7 @@
   <div class="app">
     <header class="header">
       <h1 class="header__heading">coachtechフリマ</h1>
-      <div class="header__logo"></div>
+      <a class="header__logo" href="/"></a>
       @yield('header')
     </header>
     <main class="content">

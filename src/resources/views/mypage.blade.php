@@ -9,5 +9,28 @@
 @endsection
 
 @section('content')
-<h2>マイページ</h2>
+<div class="user">
+    <img class="user__img" src="https://placehold.jp/150x150.png" alt="">
+    <span class="user__name">ユーザー名</span>
+    <form class="user_edit-form" action="/mypage/profile" method="get">
+        <button class="user_edit-btn" type="submit">プロフィールを編集</button>
+    </form>
+</div>
+<div class="tab">
+	@if($showSellItems)
+    <a class="tab__link tab__link--active" href="/mypage/?page=sell">出品した商品</a>
+	<a class="tab__link" href="/mypage/?page=buy" >購入した商品</a>
+	@else
+    <a class="tab__link" href="/mypage/?page=sell">出品した商品</a>
+	<a class="tab__link tab__link--active" href="/mypage/?page=buy" >購入した商品</a>
+	@endif
+</div>
+<div class="item-list">
+	@foreach($items as $item)
+	<div class="item-list__item">
+		<img class="item-list__img" src="{{ $item->image_path }}" alt="商品画像">
+		<p class="item-list__name">{{ $item->name }}</p>
+	</div>
+	@endforeach
+</div>
 @endsection

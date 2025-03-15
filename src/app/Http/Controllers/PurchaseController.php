@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Item;
+
 class PurchaseController extends Controller
 {
-    public function index()
+    public function index(Item $item)
     {
-        return view('purchase');
+        return view('purchase', ['item' => $item]);
     }
 
     public function store()

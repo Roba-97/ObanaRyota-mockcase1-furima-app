@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/mypage/profile', [MypageController::class, 'update']);
     Route::get('/sell', [ExhibitController::class, 'index']);
     Route::post('/sell', [ExhibitController::class, 'store']);
-    Route::get('/purchase/address/{item}', [PurchaseController::class, 'edit']);
+    Route::get('/purchase/address/', [PurchaseController::class, 'edit']);
     Route::get('/purchase/{item}', [PurchaseController::class, 'index']);
     Route::post('/purchase/{item}', [PurchaseController::class, 'store']);
 });
