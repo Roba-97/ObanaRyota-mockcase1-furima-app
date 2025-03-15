@@ -19,7 +19,7 @@ class Favorite extends Model
         return $this->belongsTo(Item::class);
     }
 
-    public function profile()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

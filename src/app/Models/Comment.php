@@ -20,8 +20,8 @@ class Comment extends Model
         return $this->belongsTo(Item::class);
     }
 
-    public function profile()
+    public function user()
     {
-        return $this->belongsTo(Profile::class);
+        return $this->belongsTo(User::class);
     }
 }
