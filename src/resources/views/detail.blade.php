@@ -22,11 +22,21 @@
         </div>
         <div class="item-detail__icon">
             <div class="item-detail__icon-like">
-                <img class="icon__img" src="{{ asset('images/star.png') }}" alt="">
+                @if(Auth::check() && Auth::user()->favorites()->where('item_id', $item->id)->exists())
+                <a href="/favorite/{{ $item->id }}">
+                    <img class="icon__img" src="{{ asset('images/filled_star.png') }}" alt="">
+                </a>
+                @else
+                <a href="/favorite/{{ $item->id }}">
+                    <img class="icon__img" src="{{ asset('images/star.png') }}" alt="">
+                </a>
+                @endif
                 <div class="icon__count">{{ $item->favorites()->count() }}</div>
             </div>
             <div class="item-detail__icon-comment">
-                <img class="icon__img" src="{{ asset('images/comment.png') }}" alt="">
+                <a href="#comment-heading">
+                    <img class="icon__img" src="{{ asset('images/comment.png') }}" alt="">
+                </a>
                 <div class="icon__count">{{ $comments->count() }}</div>
             </div>
         </div>
@@ -53,7 +63,7 @@
             </div>
         </div>
         <div class="item-detail__comment">
-            <h2 class="item-detail__comment-heading">コメント({{ $comments->count() }})</h2>
+            <h2 id="comment-heading" class="item-detail__comment-heading">コメント({{ $comments->count() }})</h2>
             <div class="item-detail__comment-content">
             @foreach($comments as $comment)
                 @isset($comment->user()->first()->profile()->first()->image_path)

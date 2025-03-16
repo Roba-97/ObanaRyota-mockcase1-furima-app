@@ -24,7 +24,8 @@ Route::get('/search', [ItemController::class, 'search']);
 Route::get('/item/{item}', [DetailController::class, 'index'])->name('detail.index');
 
 Route::middleware('auth')->group(function () {
-    Route::post('/comment/{item}', [DetailController::class, 'comment'])->name('comment');
+    Route::get('/favorite/{item}', [DetailController::class, 'toggleItemFavorite']);
+    Route::post('/comment/{item}', [DetailController::class, 'comment']);
     Route::get('/mypage', [MypageController::class, 'index']);
     Route::get('/mypage/profile', [MypageController::class, 'edit']);
     Route::patch('/mypage/profile', [MypageController::class, 'update']);

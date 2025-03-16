@@ -45,7 +45,7 @@ class ItemController extends Controller
             $itemsId = Auth::user()->favorites()->select('Item_id')->get();
             $items = Item::KeywordSearch($request->keyword)->whereIn('id', $itemsId)->where('seller_id', '<>', Auth::user()->id)->select($column)->get();
         }
-        else if(Auth::check()) {
+        elseif(Auth::check()) {
             $items = Item::KeywordSearch($request->keyword)->where('seller_id', '<>', Auth::user()->id)->select($column)->get();
         }
         elseif($showMylist) {
