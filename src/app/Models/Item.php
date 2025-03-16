@@ -37,7 +37,7 @@ class Item extends Model
     }
 
     public function condition() {
-        return $this->hasOne(Condition::class);
+        return $this->belongsTo(Condition::class);
     }
 
     public function comments()

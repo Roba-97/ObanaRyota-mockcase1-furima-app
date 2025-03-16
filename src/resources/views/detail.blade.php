@@ -17,17 +17,27 @@
     <div class="item-detail__detail">
         <div class="item-detail__top">
             <h2 class="item-detail__name">{{ $item->name }}</h2>
-            <p class="item-detail__brand">ブランド名</p>
+            <p class="item-detail__brand">{{ $item->brand }}</p>
             <p class="item-detail__price">￥<span>{{ number_format($item->price) }}</span>(税込)</p>
         </div>
         <div class="item-detail__icon">
             <div class="item-detail__icon-like">
-                <img class="icon__img" src="{{ asset('images/star.png') }}" alt="">
-                <div class="icon__count">3</div>
+                @if(Auth::check() && Auth::user()->favorites()->where('item_id', $item->id)->exists())
+                <a href="/favorite/{{ $item->id }}">
+                    <img class="icon__img" src="{{ asset('images/filled_star.png') }}" alt="">
+                </a>
+                @else
+                <a href="/favorite/{{ $item->id }}">
+                    <img class="icon__img" src="{{ asset('images/star.png') }}" alt="">
+                </a>
+                @endif
+                <div class="icon__count">{{ $item->favorites()->count() }}</div>
             </div>
             <div class="item-detail__icon-comment">
-                <img class="icon__img" src="{{ asset('images/comment.png') }}" alt="">
-                <div class="icon__count">1</div>
+                <a href="#comment-heading">
+                    <img class="icon__img" src="{{ asset('images/comment.png') }}" alt="">
+                </a>
+                <div class="icon__count">{{ $comments->count() }}</div>
             </div>
         </div>
         <form class="item-detail__purchase" action="/purchase/{{ $item->id }}" method="get">
@@ -35,32 +45,45 @@
         </form>
         <div class="item-detail__desc">
             <h2 class="item-detail__desc-heading">商品説明</h2>
-            <p class="item-detail__desc-text">{{ $item->detail }}</p>
+            <p class="item-detail__desc-text">{!! nl2br(e($item->detail)) !!}</p>
         </div>
         <div class="item-detail__info">
             <h2 class="item-detail__info-heading">商品情報</h2>
             <div class="item-datail__info-category">
                 <div class="info-category__heading"><p>カテゴリー</p></div>
                 <div class="info-category__list">
-                    <span>洋服</span><span>メンズ</span><span>ファッション</span>
+                    @foreach($categories as $category)
+                    <span>{{ $category->content }}</span>
+                    @endforeach
                 </div>
             </div>
             <div class="item-detail__info-condition">
                 <div class="info-condition__heading"><p>商品の状態</p></div>
-                <div class="info-condition__text"><span>良好</span></div>
+                <div class="info-condition__text"><span>{{ $condition->content }}</span></div>
             </div>
         </div>
         <div class="item-detail__comment">
-            <h2 class="item-detail__comment-heading">コメント(1)</h2>
+            <h2 id="comment-heading" class="item-detail__comment-heading">コメント({{ $comments->count() }})</h2>
             <div class="item-detail__comment-content">
-                <img src="https://placehold.jp/150x150.png" alt="ユーザアイコン" class="comment__user-img">
-                <span class="comment__user-name">admin</span>
-                <div class="comment__text"><p>ユーザのコメント</p></div>
+            @foreach($comments as $comment)
+                @isset($comment->user()->first()->profile()->first()->image_path)
+                <img src="{{ $comment->user()->first()->profile()->first()->image_path }}" alt="ユーザアイコン" class="comment__user-img">
+                @else
+                <img src="{{ asset('images/default_user_icon.png') }}" alt="ユーザアイコン" class="comment__user-img">
+                @endisset
+                <span class="comment__user-name">{{ $comment->user()->first()->name }}</span>
+                <div class="comment__text"><p>{!! nl2br(e($comment->content)) !!}</p></div>
+            @endforeach
             </div>
-            <form class="item-detail__comment-form" action="/comment/{{ $item->id }}" method="post">
+            <form id="comment-form" class="item-detail__comment-form" action="/comment/{{ $item->id }}" method="post">
                 @csrf
                 <label class="comment-form_label" for="input-comment">商品へのコメント</label>
-                <textarea class="comment-form__input" name="content" id="input-comment" rows="10"></textarea>
+                <textarea class="comment-form__input" name="content" id="input-comment" rows="10">{{ old('content') }}</textarea>
+                <p class="comment-form__error-message">
+                    @error('content')
+                    {{ $message }}
+                    @enderror
+                </p>
                 <button class="comment-form__btn" type="submit">コメントを送信する</button>
             </form>
         </div>

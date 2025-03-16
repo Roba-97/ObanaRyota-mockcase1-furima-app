@@ -54,6 +54,9 @@
     object-fit: cover;
     margin-bottom: 5px;
 }
+.icon__img:hover {
+    transform: scale(1.1);
+}
 
 .icon__count {
     font-size: 18px;
@@ -144,13 +147,18 @@
 
 .comment-form__input {
     display: block;
-    margin-bottom: 48px;
     padding: 10px;
     width: 100%;
     border: solid 2px #5F5F5F;
     border-radius: 5px;
     font-size: 20px;
     outline: none;
+}
+
+.comment-form__error-message {
+    margin: 10px 0 0;
+    color: #FF5555;
+    font-size: 20px;
 }
 
 /* ボタン */
@@ -168,6 +176,7 @@
     font-size: 30px;
 }
 .comment-form__btn {
+    margin-top: 48px;
     font-size: 25px;
 }
 
