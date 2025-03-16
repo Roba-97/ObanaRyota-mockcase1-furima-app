@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Comment;
 use App\Models\Item;
 use App\Models\User;
+use App\Http\Requests\CommentRequest;
 
 class DetailController extends Controller
 {
@@ -20,9 +21,8 @@ class DetailController extends Controller
         return view('detail', compact('item', 'categories', 'condition', 'comments'));
     }
 
-    public function comment(Request $request, Item $item)
+    public function comment(CommentRequest $request, Item $item)
     {
-
         $data = [
             'item_id' => $item->id,
             'user_id' => Auth::user()->id,
@@ -31,7 +31,6 @@ class DetailController extends Controller
 
         Comment::create($data);
 
-        return redirect()->action([DetailController::class, 'index'], ['item' => $item->id]);
-
+        return redirect()->route('detail.index', ['item' => $item->id])->withFragment('comment-form');
     }
 }

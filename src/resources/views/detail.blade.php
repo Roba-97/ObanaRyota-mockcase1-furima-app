@@ -65,10 +65,15 @@
                 <div class="comment__text"><p>{!! nl2br(e($comment->content)) !!}</p></div>
             @endforeach
             </div>
-            <form class="item-detail__comment-form" action="/comment/{{ $item->id }}" method="post">
+            <form id="comment-form" class="item-detail__comment-form" action="/comment/{{ $item->id }}" method="post">
                 @csrf
                 <label class="comment-form_label" for="input-comment">商品へのコメント</label>
-                <textarea class="comment-form__input" name="content" id="input-comment" rows="10"></textarea>
+                <textarea class="comment-form__input" name="content" id="input-comment" rows="10">{{ old('content') }}</textarea>
+                <p class="comment-form__error-message">
+                    @error('content')
+                    {{ $message }}
+                    @enderror
+                </p>
                 <button class="comment-form__btn" type="submit">コメントを送信する</button>
             </form>
         </div>
