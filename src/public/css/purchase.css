@@ -63,6 +63,12 @@
     font-size: 16px;
 }
 
+.purchase-info__select-error, .purchase-info__address-error {
+    margin: 10px 0 0 75px;;
+    color: #FF5555;
+    font-size: 16px;
+}
+
 .purchase-info__address-top {
     display: flex;
     justify-content: space-between;

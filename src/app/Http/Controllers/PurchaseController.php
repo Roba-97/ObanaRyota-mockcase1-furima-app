@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Item;
 use App\Models\Purchase;
+use App\Http\Requests\PurchaseRequest;
 
 class PurchaseController extends Controller
 {
@@ -14,9 +16,17 @@ class PurchaseController extends Controller
         return view('purchase', ['item' => $item]);
     }
 
-    public function store(Request $request, Item $item)
+    public function store(PurchaseRequest $request, Item $item)
     {
-        dd($request);
+        $item->update(['sold_flag' => true]);
+
+        Purchase::create([
+            'item_id' => $item->id,
+            'buyer_id' => Auth::user()->id,
+            'payment' => $request->input('payment'),
+            'delivery_address' => $request->input('delivery_address'),
+        ]);
+
         return redirect('/mypage?page=buy'); 
     }
 

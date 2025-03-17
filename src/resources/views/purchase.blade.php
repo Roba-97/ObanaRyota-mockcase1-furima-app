@@ -24,6 +24,11 @@
         </div>
         <div class="purchase-info__method">
             <livewire:select-component />
+            <p class="purchase-info__select-error">
+                @error('payment')
+                {{ $message }}
+                @enderror
+            </p>
         </div>
         <div class="purchase-info__address">
             <div class="purchase-info__address-top">
@@ -32,6 +37,11 @@
             </div>
             <p class="purchase-info__address-text" >
                 〒 {{ Auth::user()->profile()->first()->postcode }}<br>{{ Auth::user()->profile()->first()->address }}
+            </p>
+            <p class="purchase-info__address-error">
+                @error('delivery_address')
+                {{ $message }}
+                @enderror
             </p>
         </div>
     </div>
