@@ -36,7 +36,7 @@
                 <a class="purchase-info__address-link" href="/purchase/address/{{ $item->id }}">変更する</a>
             </div>
             <p class="purchase-info__address-text" >
-                〒 {{ Auth::user()->profile()->first()->postcode }}<br>{{ Auth::user()->profile()->first()->address }}
+                〒 {{ $delivery_address->postcode }}<br>{{ $delivery_address->address . $delivery_address->building}}
             </p>
             <p class="purchase-info__address-error">
                 @error('delivery_address')
@@ -58,7 +58,7 @@
                     <livewire:display-component />
                 </tr>
             </table>
-            <input type="hidden" name="delivery_address" value="{{ Auth::user()->profile()->first()->address }}">
+            <input type="hidden" name="delivery_address" value="{{ $delivery_address->address . $delivery_address->building}}">
             <button class="purchase-summary__form-btn" type="submit">購入する</button>
         </form>
     </div>    

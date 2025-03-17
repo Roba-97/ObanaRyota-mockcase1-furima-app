@@ -13,7 +13,9 @@ class PurchaseController extends Controller
 {
     public function index(Item $item)
     {
-        return view('purchase', ['item' => $item]);
+        $delivery_address = Auth::user()->profile()->select('postcode', 'address', 'building')->first();
+
+        return view('purchase', compact('item', 'delivery_address'));
     }
 
     public function store(PurchaseRequest $request, Item $item)
@@ -30,13 +32,19 @@ class PurchaseController extends Controller
         return redirect('/mypage?page=buy'); 
     }
 
-    public function edit()
+    public function edit(Item $item)
     {
-        return view('address');
+        return view('address', ['item' => $item]);
     }
 
-    public function update()
+    public function update(Request $request, Item $item)
     {
-        return redirect()->route('purchase.index', ['item' => $item->id]); 
+        $delivery_address = (object) [
+            'postcode' => $request->input('postcode'),
+            'address' => $request->input('address'),
+            'building' => $request->input('building')
+        ];
+        
+        return view('purchase', compact('item', 'delivery_address')); 
     }
 }
