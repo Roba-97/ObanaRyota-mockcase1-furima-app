@@ -4,6 +4,10 @@
 <link rel="stylesheet" href="{{ asset('css/purchase.css')}}">
 @endsection
 
+@section('livewireStyles')
+@livewireStyles
+@endsection
+
 @section('header')
 @include('layouts.header')
 @endsection
@@ -19,25 +23,21 @@
             </div>
         </div>
         <div class="purchase-info__method">
-            <form action="">
-                <label class="purchase-info__method-label" for="">支払い方法</label>
-                <select class="purchase-info__select" name="" id="">
-                    <option class="purchase-info__select-item" value="">選択してください</option>
-                    <option class="purchase-info__select-item" value="">コンビニ払い</option>
-                    <option class="purchase-info__select-item" value="">カード払い</option>
-                </select>
-            </form>
+            <livewire:select-component />
         </div>
         <div class="purchase-info__address">
             <div class="purchase-info__address-top">
                 <label class="purchase-info__address-label" for="">配送先</label>
-                <a class="purchase-info__address-link" href="">変更する</a>
+                <a class="purchase-info__address-link" href="/purchase/address/{{ $item->id }}">変更する</a>
             </div>
-            <p class="purchase-info__address-text" >〒 XXX-YYYY<br>ここには配送先住所が入ります</p>
+            <p class="purchase-info__address-text" >
+                〒 {{ Auth::user()->profile()->first()->postcode }}<br>{{ Auth::user()->profile()->first()->address }}
+            </p>
         </div>
     </div>
     <div class="purchase-summary">
-        <div class="purchase-summary__inner">
+        <form class="purchase-summary__inner" action="/purchase/{{ $item->id }}" method="post">
+        @csrf
             <table class="purchase-summary__table">
                 <tr class="purchase-summary__table-row">
                     <th class="purchase-summary__table-heading">商品代金</th>
@@ -45,14 +45,16 @@
                 </tr>
                 <tr class="purchase-summary__table-row">
                     <th class="purchase-summary__table-heading">支払い方法</th>
-                    <td class="purchase-summary__table-text">コンビニ払い</td>
+                    <livewire:display-component />
                 </tr>
             </table>
-            <form class="purchase-summary__form" action="" method="post">
-                @csrf
-                <button class="purchase-summary__form-btn">購入する</button>
-            </form>
-        </div>
+            <input type="hidden" name="delivery_address" value="{{ Auth::user()->profile()->first()->address }}">
+            <button class="purchase-summary__form-btn" type="submit">購入する</button>
+        </form>
     </div>    
 </div>
+@endsection
+
+@section('livewireScripts')
+@livewireScripts
 @endsection

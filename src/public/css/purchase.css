@@ -8,14 +8,11 @@
     margin-right: 70px;
 }
 
-.purchase-info__item, .purchase-info__method, .purchase-info__address{
+.purchase-info__item {
+    display: flex;
     border-bottom: solid 1px #000000;
     margin-bottom: 25px;
     padding-bottom: 50px;
-}
-
-.purchase-info__item {
-    display: flex;
 }
 
 .purchase-info__item-img {
@@ -39,8 +36,13 @@
     margin: 10px 0 0;
 }
 
+.purchase-info__method, .purchase-info__address{
+    border-bottom: solid 1px #000000;
+    margin-bottom: 25px;
+    padding: 0 20px 50px;
+}
+
 .purchase-info__method-label {
-    margin-left: 20px;
     display: block;
     font-size: 20px;
     font-weight: 700;
@@ -62,7 +64,6 @@
 }
 
 .purchase-info__address-top {
-    margin: 0 20px;
     display: flex;
     justify-content: space-between;
 }
@@ -87,6 +88,7 @@
 .purchase-summary__inner {
     width: 440px;
 }
+
 .purchase-summary__table {
     width: 100%;
     margin-bottom: 50px;
