@@ -17,6 +17,8 @@ class CreatePurchasesTable extends Migration
             $table->id();
             $table->foreignId('item_id')->constrained();
             $table->foreignId('buyer_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->tinyInteger('payment'); // 1:カード、2:コンビニ払い
+            $table->string('delivery_address');
             $table->timestamps();
         });
     }

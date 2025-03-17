@@ -19,6 +19,7 @@ class CreateProfilesTable extends Migration
             $table->string('image_path')->nullable();
             $table->string('postcode', 8);
             $table->string('address');
+            $table->string('building');
             $table->timestamps();
         });
     }
