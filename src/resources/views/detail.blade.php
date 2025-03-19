@@ -50,7 +50,9 @@
         <div class="item-detail__info">
             <h2 class="item-detail__info-heading">商品情報</h2>
             <div class="item-datail__info-category">
-                <div class="info-category__heading"><p>カテゴリー</p></div>
+                <div class="info-category__heading">
+                    <p>カテゴリー</p>
+                </div>
                 <div class="info-category__list">
                     @foreach($categories as $category)
                     <span>{{ $category->content }}</span>
@@ -58,22 +60,26 @@
                 </div>
             </div>
             <div class="item-detail__info-condition">
-                <div class="info-condition__heading"><p>商品の状態</p></div>
+                <div class="info-condition__heading">
+                    <p>商品の状態</p>
+                </div>
                 <div class="info-condition__text"><span>{{ $condition->content }}</span></div>
             </div>
         </div>
         <div class="item-detail__comment">
             <h2 id="comment-heading" class="item-detail__comment-heading">コメント({{ $comments->count() }})</h2>
             <div class="item-detail__comment-content">
-            @foreach($comments as $comment)
+                @foreach($comments as $comment)
                 @isset($comment->user()->first()->profile()->first()->image_path)
                 <img src="{{ $comment->user()->first()->profile()->first()->image_path }}" alt="ユーザアイコン" class="comment__user-img">
                 @else
                 <img src="{{ asset('images/default_user_icon.png') }}" alt="ユーザアイコン" class="comment__user-img">
                 @endisset
                 <span class="comment__user-name">{{ $comment->user()->first()->name }}</span>
-                <div class="comment__text"><p>{!! nl2br(e($comment->content)) !!}</p></div>
-            @endforeach
+                <div class="comment__text">
+                    <p>{!! nl2br(e($comment->content)) !!}</p>
+                </div>
+                @endforeach
             </div>
             <form id="comment-form" class="item-detail__comment-form" action="/comment/{{ $item->id }}" method="post">
                 @csrf
