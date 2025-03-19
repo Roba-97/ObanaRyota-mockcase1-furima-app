@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Item;
 use App\Models\Purchase;
+use App\Http\Requests\AddressRequest;
 use App\Http\Requests\PurchaseRequest;
 
 class PurchaseController extends Controller
@@ -29,7 +30,7 @@ class PurchaseController extends Controller
             'delivery_address' => $request->input('delivery_address'),
         ]);
 
-        return redirect('/mypage?page=buy'); 
+        return redirect('/mypage?page=buy');
     }
 
     public function edit(Item $item)
@@ -37,14 +38,14 @@ class PurchaseController extends Controller
         return view('address', ['item' => $item]);
     }
 
-    public function update(Request $request, Item $item)
+    public function update(AddressRequest $request, Item $item)
     {
         $delivery_address = (object) [
             'postcode' => $request->input('postcode'),
             'address' => $request->input('address'),
             'building' => $request->input('building')
         ];
-        
-        return view('purchase', compact('item', 'delivery_address')); 
+
+        return view('purchase', compact('item', 'delivery_address'));
     }
 }
