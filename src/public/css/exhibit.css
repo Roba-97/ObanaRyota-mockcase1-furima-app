@@ -48,9 +48,11 @@
     font-size: 16px;
     outline: none;
 }
-
+.sell-form__label-img:hover {
+    cursor: pointer;
+}
 .sell-form__input-img {
-    display: none;
+    
 }
 
 .sell-form__group {
@@ -79,10 +81,7 @@
     outline: none;
 }
 
-.sell-form__input-check{
-    display: none;
-}
-
+/* チェックボックス */
 .sell-form__label-check {
     display: inline-block;
     margin: 0 10px 15px 0;
@@ -93,6 +92,18 @@
     border: solid 1px #FF5555;
     border-radius: 15px;
     color: #FF5555;
+    font-size: 15px;
+}
+.sell-form__label-check:hover {
+    cursor: pointer;
+}
+.sell-form__input-check:checked + .sell-form__label-check {
+    background-color: #FF5555;
+    border: solid 1px #FF5555;
+    color: #FFFFFF;
+}
+.sell-form__input-check {
+    display: none;
 }
 
 .sell-form__select {
@@ -103,7 +114,6 @@
     border-radius: 4px;
     outline: none;
 }
-
 .sell-form__select-item {
     background-color: #636769;
     color: #FFFFFF;
@@ -118,10 +128,20 @@
     outline: none;
 }
 
-.sell-form__error-message {
-    margin: 10px 0;
-    color: #FF5555;
-    font-size: 20px;
+.sell-form__group-price {
+    position: relative;
+}
+.sell-form__input-symbol {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #000000;
+    font-size: 24px;
+    font-weight: 700;
+}
+.sell-form__input--price {
+    padding-left: 40px;
 }
 
 .sell-form__btn {
@@ -135,6 +155,12 @@
     color: #FFFFFF;
     text-align: center;
     font-size: 26px;
+}
+
+.sell-form__error-message {
+    margin: 10px 0;
+    color: #FF5555;
+    font-size: 20px;
 }
 
 @media screen and (max-width: 960px) {

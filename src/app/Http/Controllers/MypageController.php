@@ -53,8 +53,12 @@ class MypageController extends Controller
     {
         User::find(Auth::user()->id)->update(['name' => $request->name]);
         Profile::where('user_id', Auth::user()->id)
-            ->update($request->except('name'));
+            ->update([
+                'postcode' => $request->postcode,
+                'address' => $request->address,
+                'building' => $request->building,
+            ]);
 
-        return view('profile');
+        return redirect('mypage');
     }
 }
