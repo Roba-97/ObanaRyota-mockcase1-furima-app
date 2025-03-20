@@ -12,10 +12,10 @@
 <div class="tab">
 	@if($showMylist)
 	<a class="tab__link" href="/">おすすめ</a>
-	<a class="tab__link tab__link--active" href="/?page=mylist" >マイリスト</a>
+	<a class="tab__link tab__link--active" href="/?page=mylist">マイリスト</a>
 	@else
 	<a class="tab__link tab__link--active" href="/">おすすめ</a>
-	<a class="tab__link" href="/?page=mylist" >マイリスト</a>
+	<a class="tab__link" href="/?page=mylist">マイリスト</a>
 	@endif
 </div>
 <div class="item-list">
@@ -26,11 +26,11 @@
 			<div class="item-list__sold-mask">
 				<div class="item-list__sold-text"><span>sold</span></div>
 			</div>
-			<img class="item-list__img" src="{{ $item->image_path }}" alt="商品画像">
+			<img class="item-list__img" src="{{ asset($item->image_path) }}" alt="商品画像">
 		</a>
 		@else
 		<a href="/item/{{ $item->id }}">
-			<img class="item-list__img" src="{{ $item->image_path }}" alt="商品画像">
+			<img class="item-list__img" src="{{ asset($item->image_path) }}" alt="商品画像">
 		</a>
 		@endif
 		<p class="item-list__name">{{ $item->name }}</p>

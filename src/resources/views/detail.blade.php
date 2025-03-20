@@ -12,7 +12,7 @@
 
 <div class="item-detail">
     <div class="item-detail__item-img">
-        <img src="{{ $item->image_path }}" alt="商品画像">
+        <img src="{{ asset($item->image_path) }}" alt="商品画像">
     </div>
     <div class="item-detail__detail">
         <div class="item-detail__top">
@@ -71,7 +71,7 @@
             <div class="item-detail__comment-content">
                 @foreach($comments as $comment)
                 @isset($comment->user()->first()->profile()->first()->image_path)
-                <img src="{{ $comment->user()->first()->profile()->first()->image_path }}" alt="ユーザアイコン" class="comment__user-img">
+                <img src="{{ asset($comment->user()->first()->profile()->first()->image_path) }}" alt="ユーザアイコン" class="comment__user-img">
                 @else
                 <img src="{{ asset('images/default_user_icon.png') }}" alt="ユーザアイコン" class="comment__user-img">
                 @endisset
