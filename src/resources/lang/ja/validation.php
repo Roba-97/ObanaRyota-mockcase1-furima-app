@@ -136,9 +136,6 @@ return [
         'password' => [
             'min' => 'パスワードは:min文字以上で入力してください'
         ],
-        'postcode' => [
-            'regex' => '郵便番号はハイフンを含む半角数字で入力してください'
-        ]
     ],
 
     /*
@@ -157,8 +154,5 @@ return [
         'email' => 'メールアドレス',
         'password' => 'パスワード',
         'password_confirmation' => '確認用パスワード',
-        'postcode' => '郵便番号',
-        'address' => '住所',
-        'building' => '建物名',
     ],
 ];

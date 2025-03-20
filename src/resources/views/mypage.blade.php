@@ -32,7 +32,7 @@
 <div class="item-list">
 	@foreach($items as $item)
 	<div class="item-list__item">
-		<img class="item-list__img" src="{{ $item->image_path }}" alt="商品画像">
+		<img class="item-list__img" src="{{ asset( $item->image_path ) }}" alt="商品画像">
 		<p class="item-list__name">{{ $item->name }}</p>
 	</div>
 	@endforeach

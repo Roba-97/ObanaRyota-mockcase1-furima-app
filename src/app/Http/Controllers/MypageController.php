@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
 use App\Models\User;
 use App\Models\Profile;
-use App\Http\Requests\AddressRequest;
+use App\Http\Requests\ProfileRequest;
 
 class MypageController extends Controller
 {
@@ -49,12 +49,42 @@ class MypageController extends Controller
         return view('profile');
     }
 
-    public function update(AddressRequest $request)
+    public function update(ProfileRequest $request)
     {
+        if (null !== $request->file('image')) {
+            $path = $request->file('image')->store('public/images/users');
+            $path = 'storage/images/users/' . basename($path);
+        } else {
+            $path = null;
+        }
+
+        // 初回ログインユーザへの処理
+        if (!Auth::user()->profile()->exists()) {
+            User::find(Auth::user()->id)->update(['name' => $request->name]);
+            Profile::create([
+                'user_id' => Auth::user()->id,
+                'image_path' => $path,
+                'postcode' => $request->postcode,
+                'address' => $request->address,
+                'building' => $request->building,
+            ]);
+            return redirect('mypage');
+        }
+
+        // 事前に写真が登録されていた場合の処理
+        if (null !== Profile::where('user_id', Auth::user()->id)->first()->image_path && $path == null) {
+            $path = Profile::where('user_id', Auth::user()->id)->first()->image_path;
+        }
+
         User::find(Auth::user()->id)->update(['name' => $request->name]);
         Profile::where('user_id', Auth::user()->id)
-            ->update($request->except('name'));
+            ->update([
+                'image_path' => $path,
+                'postcode' => $request->postcode,
+                'address' => $request->address,
+                'building' => $request->building,
+            ]);
 
-        return view('profile');
+        return redirect('mypage');
     }
 }
