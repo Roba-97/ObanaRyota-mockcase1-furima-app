@@ -25,7 +25,6 @@ class MypageController extends Controller
             $items = Item::whereIn('id', $itemsId)->select(['id', 'image_path', 'name'])->get();
         }
 
-
         return view('mypage', ['items' => $items, 'showSellItems' => $showSellItems]);
     }
 
@@ -40,13 +39,14 @@ class MypageController extends Controller
             ];
         } else {
             $profile = [
-                'name' => Auth::user()->name
+                'name' => Auth::user()->name,
+                'postcode' => '',
+                'address' => '',
+                'building' => '',
             ];
         }
 
-        session()->put('_old_input', $profile);
-
-        return view('profile');
+        return view('profile', compact('profile'));
     }
 
     public function update(ProfileRequest $request)
@@ -68,10 +68,10 @@ class MypageController extends Controller
                 'address' => $request->address,
                 'building' => $request->building,
             ]);
-            return redirect('mypage');
+            return redirect('/');
         }
 
-        // 事前に写真が登録されていた場合の処理
+        // 事前に写真が登録されていた場合image_pathは変更しない
         if (null !== Profile::where('user_id', Auth::user()->id)->first()->image_path && $path == null) {
             $path = Profile::where('user_id', Auth::user()->id)->first()->image_path;
         }
@@ -85,6 +85,6 @@ class MypageController extends Controller
                 'building' => $request->building,
             ]);
 
-        return redirect('mypage');
+        return redirect('/mypage');
     }
 }

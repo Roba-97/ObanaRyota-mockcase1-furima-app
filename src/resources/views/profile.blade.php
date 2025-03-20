@@ -31,7 +31,7 @@
 			</div>
 			<div class="profile-form__group">
 				<label class="profile-form__label" for="name">ユーザー名</label>
-				<input class="profile-form__input" type="text" name="name" id="name" value="{{ old('name') }}">
+				<input class="profile-form__input" type="text" name="name" id="name" value="{{ old('name', $profile['name']) }}">
 				<p class="profile-form__error-message">
 					@error('name')
 					{{ $message }}
@@ -40,7 +40,7 @@
 			</div>
 			<div class="profile-form__group">
 				<label class="profile-form__label" for="postcode">郵便番号</label>
-				<input class="profile-form__input" type="text" name="postcode" id="postcode" value="{{ old('postcode') }}">
+				<input class="profile-form__input" type="text" name="postcode" id="postcode" value="{{ old('postcode', $profile['postcode']) }}">
 				<p class="profile-form__error-message">
 					@error('postcode')
 					{{ $message }}
@@ -49,7 +49,7 @@
 			</div>
 			<div class="profile-form__group">
 				<label class="profile-form__label" for="address">住所</label>
-				<input class="profile-form__input" type="text" name="address" id="address" value="{{ old('address') }}">
+				<input class="profile-form__input" type="text" name="address" id="address" value="{{ old('address', $profile['address']) }}">
 				<p class="profile-form__error-message">
 					@error('address')
 					{{ $message }}
@@ -58,7 +58,7 @@
 			</div>
 			<div class="profile-form__group">
 				<label class="profile-form__label" for="building">建物名</label>
-				<input class="profile-form__input" type="text" name="building" id="building" value="{{ old('building') }}">
+				<input class="profile-form__input" type="text" name="building" id="building" value="{{ old('building', $profile['building']) }}">
 				<p class="profile-form__error-message">
 					@error('building')
 					{{ $message }}
