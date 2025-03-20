@@ -20,7 +20,7 @@ class ExhibitController extends Controller
         return view('exhibit', compact('categories', 'conditions'));
     }
 
-    public function store(Request $request)
+    public function store(ExhibitRequest $request)
     {
         $path = $request->file('image')->store('public/images/items');
 

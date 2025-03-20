@@ -19,6 +19,11 @@
 				<label class="sell-form__label-img" for="image_input">画像を選択する</label>
 				<input class="sell-form__input-img" type="file" id="image_input" name="image">
 			</div>
+			<p class="sell-form__error-message">
+				@error('image')
+				{{ $message }}
+				@enderror
+			</p>
 			<h3 class="sell-form__sub-heading">商品の詳細</h3>
 			<div class="sell-form__group">
 				<label class="sell-form__label sell-form__label--category">カテゴリー</label>
@@ -26,6 +31,11 @@
 				<input class="sell-form__input-check" id="{{ 'category' . $category->id }}" type="checkbox" name="categories[]" value="{{ $category->id }}">
 				<label class="sell-form__label-check" for="{{ 'category' . $category->id }}">{{ $category->content }}</label>
 				@endforeach
+				<p class="sell-form__error-message">
+					@error('categories')
+					{{ $message }}
+					@enderror
+				</p>
 			</div>
 			<div class="sell-form__group">
 				<label class="sell-form__label sell-form__label--condition">商品の状態</label>
@@ -35,6 +45,11 @@
 					<option class="sell-form__select-item" value="{{ $condition->id }}">{{ $condition->content }}</option>
 					@endforeach
 				</select>
+				<p class="sell-form__error-message">
+					@error('condition_id')
+					{{ $message }}
+					@enderror
+				</p>
 			</div>
 
 			<h3 class="sell-form__sub-heading">商品名と説明</h3>
