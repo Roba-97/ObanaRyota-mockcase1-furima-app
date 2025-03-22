@@ -7,7 +7,7 @@
 .address-form__heading {
     margin: 0;
     text-align: center;
-    font-size: 36px;
+    font-size: 3.6rem;
 }
 
 .address-form__inner {
@@ -24,7 +24,7 @@
 
 .address-form__label {
     display: block;
-    font-size: 24px;
+    font-size: 2.4rem;
     font-weight: 700;
 }
 
@@ -34,14 +34,14 @@
     padding: 10px;
     border: solid 1px #5F5F5F;
     border-radius: 4px;
-    font-size: 24px;
+    font-size: 2.4rem;
     outline: none;
 }
 
 .address-form__error-message {
     margin: 10px 0;
     color: #FF5555;
-    font-size: 20px;
+    font-size: 2rem;
 }
 
 .address-form__btn {
@@ -54,7 +54,7 @@
     border-radius: 5px;
     color: #FFFFFF;
     text-align: center;
-    font-size: 26px;
+    font-size: 2.6rem;
 }
 
 @media screen and (max-width: 960px) {

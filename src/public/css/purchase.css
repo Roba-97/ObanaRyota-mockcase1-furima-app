@@ -26,7 +26,7 @@
     display: flex;
     flex-direction: column;
     margin-left: 50px;
-    font-size: 30px;
+    font-size: 3rem;
 }
 
 .purchase-info__item-name {
@@ -44,7 +44,7 @@
 
 .purchase-info__method-label {
     display: block;
-    font-size: 20px;
+    font-size: 2rem;
     font-weight: 700;
 }
 
@@ -60,13 +60,13 @@
 .purchase-info__select-item {
     background-color: #636769;
     color: #FFFFFF;
-    font-size: 16px;
+    font-size: 1.6rem;
 }
 
 .purchase-info__select-error, .purchase-info__address-error {
     margin: 10px 0 0 75px;;
     color: #FF5555;
-    font-size: 16px;
+    font-size: 1.6rem;
 }
 
 .purchase-info__address-top {
@@ -75,19 +75,19 @@
 }
 
 .purchase-info__address-label {
-    font-size: 20px;
+    font-size: 2rem;
     font-weight: 700;
 }
 
 .purchase-info__address-link {
     color: #0073CC;
-    font-size: 20px;
+    font-size: 2rem;
     text-decoration: none;
 }
 
 .purchase-info__address-text {
     margin: 50px 0 0 75px;
-    font-size: 20px;
+    font-size: 2rem;
     font-weight: 600;
 }
 
@@ -105,13 +105,13 @@
 }
 
 .purchase-summary__table-heading {
-    font-size: 20px;
+    font-size: 2rem;
     font-weight: 400;
     padding: 40px 0;
 }
 
 .purchase-summary__table-text {
-    font-size: 24px;
+    font-size: 2.4rem;
     text-align: center;
     padding: 40px 0;
 }
@@ -126,6 +126,6 @@
     border: none;
     border-radius: 5px;
     color: #FFFFFF;
-    font-size: 26px;
+    font-size: 2.6rem;
     text-align: center;
 }

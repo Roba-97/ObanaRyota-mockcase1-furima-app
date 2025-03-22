@@ -1,3 +1,6 @@
+html {
+    font-size: 62.5%; /* -> 10px */
+}
 
 .inter-bold {
     font-family: "Inter", serif;
@@ -51,7 +54,7 @@
     width: 500px;
     background-color: #FFFFFF;
     border-radius: 5px;
-    font-size: 24px;
+    font-size: 2.4rem;
 }
 
 .header__search-input {
@@ -90,7 +93,7 @@
 .header__nav-list {
     display: flex;
     justify-content: space-around;
-    font-size: 24px;
+    font-size: 2.4rem;
 }
 
 .header__nav-item a {

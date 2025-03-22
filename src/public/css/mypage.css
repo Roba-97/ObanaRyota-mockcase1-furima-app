@@ -15,7 +15,7 @@
 .user__name {
     display: block;
     margin: 0 300px 0 75px;
-    font-size: 36px;
+    font-size: 3.6rem;
 }
 
 .user_edit-btn {
@@ -27,7 +27,7 @@
     border: solid 2px #FF5555;
     border-radius: 10px;
     color: #FF5555;
-    font-size: 26px;
+    font-size: 2.6rem;
 }
 
 .tab {
@@ -43,7 +43,7 @@
     border: none;
     background-color: inherit;
     color: #000000;
-    font-size: 24px;
+    font-size: 2.4rem;
     text-decoration: none;
     cursor: pointer;
 }
@@ -74,7 +74,7 @@
 }
 
 .item-list__name {
-    font-size: 25px;
+    font-size: 2.5rem;
     margin-top: 5px;
 }
 
@@ -98,7 +98,7 @@
 
 .item-list__sold-text span {
     color: #FFFFFF;
-    font-size: 34px;
+    font-size: 3.4rem;
     font-weight: bold;
 }
 

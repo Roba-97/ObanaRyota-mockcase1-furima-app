@@ -12,7 +12,7 @@
     border: none;
     background-color: inherit;
     color: #000000;
-    font-size: 24px;
+    font-size: 2.4rem;
     text-decoration: none;
     cursor: pointer;
 }
@@ -44,7 +44,7 @@
 }
 
 .item-list__name {
-    font-size: 25px;
+    font-size: 2.5rem;
     margin-top: 5px;
 }
 
@@ -68,7 +68,7 @@
 
 .item-list__sold-text span {
     color: #FFFFFF;
-    font-size: 34px;
+    font-size: 3.4rem;
     font-weight: bold;
 }
 

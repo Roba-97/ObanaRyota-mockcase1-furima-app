@@ -19,21 +19,21 @@
 
 .item-detail__name {
     margin: 0;
-    font-size: 45px;
+    font-size: 4.5rem;
 }
 
 .item-detail__brand {
     margin: 0;
-    font-size: 20px;
+    font-size: 2rem;
 }
 
 .item-detail__price {
-    font-size: 30px;
+    font-size: 3rem;
     margin: 30px 0 0;
 }
 
 .item-detail__price span {
-    font-size: 45px;
+    font-size: 4.5rem;
 }
 
 .item-detail__icon {
@@ -59,17 +59,17 @@
 }
 
 .icon__count {
-    font-size: 18px;
+    font-size: 1.8rem;
 }
 
 .item-detail__desc-heading, .item-detail__info-heading {
     margin: 35px 0 0;
-    font-size: 36px;
+    font-size: 3.6rem;
 }
 
 .item-detail__desc-text {
     margin: 45px 0;
-    font-size: 24px;
+    font-size: 2.4rem;
 }
 
 /* 商品情報 */
@@ -80,7 +80,7 @@
 
 .info-category__heading, .info-condition__heading {
     padding-right: 50px;
-    font-size: 24px;
+    font-size: 2.4rem;
     font-weight: bold;
     white-space: nowrap; 
 }
@@ -91,7 +91,7 @@
 .info-category__list span, .info-condition__text span{
     display: inline-block;
     padding: 2px 30px;
-    font-size: 20px;
+    font-size: 2rem;
     text-align: center;
 }
 .info-category__list {
@@ -110,7 +110,7 @@
 .item-detail__comment-heading {
     margin: 75px 0 25px;
     color: #5F5F5F;
-    font-size: 36px;
+    font-size: 3.6rem;
 }
 
 .comment__user-img {
@@ -124,14 +124,14 @@
 }
 
 .comment__user-name {
-    font-size: 30px;
+    font-size: 3rem;
     font-weight: bold;
 }
 
 .comment__text {
     margin: 20px 0 50px;
     padding: 20px 15px;
-    font-size: 20px;
+    font-size: 2rem;
     background-color: #E5E5E5;
     border-radius: 5px;
 }
@@ -141,7 +141,7 @@
 
 .comment-form_label {
     display: block;
-    font-size: 28px;
+    font-size: 2.8rem;
     font-weight: bold;
 }
 
@@ -151,14 +151,14 @@
     width: 100%;
     border: solid 2px #5F5F5F;
     border-radius: 5px;
-    font-size: 20px;
+    font-size: 2rem;
     outline: none;
 }
 
 .comment-form__error-message {
     margin: 10px 0 0;
     color: #FF5555;
-    font-size: 20px;
+    font-size: 2rem;
 }
 
 /* ボタン */
@@ -173,11 +173,11 @@
     color: #FFFFFF;
     text-align: center;
     outline: none;
-    font-size: 30px;
+    font-size: 3rem;
 }
 .comment-form__btn {
     margin-top: 48px;
-    font-size: 25px;
+    font-size: 2.5rem;
 }
 
 @media screen and (max-width: 960px) {
