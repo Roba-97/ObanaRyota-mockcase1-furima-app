@@ -29,7 +29,7 @@ class ExhibitRequest extends FormRequest
             'condition_id' => 'required',
             'name' => 'required',
             'detail' => 'required|max:255',
-            'price' => 'required|integer|min:0',
+            'price' => 'required|integer|min:1',
         ];
     }
 

@@ -27,6 +27,7 @@ class PurchaseController extends Controller
             'item_id' => $item->id,
             'buyer_id' => Auth::user()->id,
             'payment' => $request->input('payment'),
+            'delivery_postcode' => $request->input('delivery_postcode'),
             'delivery_address' => $request->input('delivery_address'),
         ]);
 

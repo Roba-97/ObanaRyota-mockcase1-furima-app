@@ -11,7 +11,7 @@
 @section('content')
 <div class="user">
 	@isset(Auth::user()->profile()->first()->image_path)
-	<img class="user__img" src="{{ Auth::user()->profile()->first()->image_path }}" alt="ユーザアイコン">
+	<img class="user__img" src="{{ asset(Auth::user()->profile()->first()->image_path) }}" alt="ユーザアイコン">
 	@else
 	<img class="user__img" src="{{ asset('images/default_user_icon.png') }}" alt="ユーザアイコン">
 	@endisset
@@ -32,7 +32,18 @@
 <div class="item-list">
 	@foreach($items as $item)
 	<div class="item-list__item">
-		<img class="item-list__img" src="{{ asset( $item->image_path ) }}" alt="商品画像">
+		@if($showSellItems && $item->sold_flag)
+		<a href="/item/{{ $item->id }}">
+			<div class="item-list__sold-mask">
+				<div class="item-list__sold-text"><span>sold</span></div>
+			</div>
+			<img class="item-list__img" src="{{ asset( $item->image_path ) }}" alt="商品画像">
+		</a>
+		@else
+		<a href="/item/{{ $item->id }}">
+			<img class="item-list__img" src="{{ asset( $item->image_path ) }}" alt="商品画像">
+		</a>
+		@endif
 		<p class="item-list__name">{{ $item->name }}</p>
 	</div>
 	@endforeach

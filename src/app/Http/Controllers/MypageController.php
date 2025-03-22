@@ -19,10 +19,10 @@ class MypageController extends Controller
         if ($request->page === "buy") {
             $showSellItems = false;
             $itemsId = Auth::user()->purchases()->select('item_id')->get();
-            $items = Item::whereIn('id', $itemsId)->select(['id', 'image_path', 'name'])->get();
+            $items = Item::whereIn('id', $itemsId)->select(['id', 'image_path', 'name', 'sold_flag'])->get();
         } else {
             $itemsId = Auth::user()->items()->select('id')->get();
-            $items = Item::whereIn('id', $itemsId)->select(['id', 'image_path', 'name'])->get();
+            $items = Item::whereIn('id', $itemsId)->select(['id', 'image_path', 'name', 'sold_flag'])->get();
         }
 
         return view('mypage', ['items' => $items, 'showSellItems' => $showSellItems]);

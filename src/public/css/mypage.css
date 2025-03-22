@@ -78,6 +78,30 @@
     margin-top: 5px;
 }
 
+.item-list__sold-mask {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 290px;
+    position: absolute;
+    z-index: 100;
+}
+
+.item-list__sold-text {
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    border-radius: 4px;
+}
+
+.item-list__sold-text span {
+    color: #FFFFFF;
+    font-size: 34px;
+    font-weight: bold;
+}
+
 @media screen and (max-width: 960px) {
     .user__img  {
         width: 100px;

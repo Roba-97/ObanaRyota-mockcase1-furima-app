@@ -58,6 +58,7 @@
                     <livewire:display-component />
                 </tr>
             </table>
+            <input type="hidden" name="delivery_postcode" value="{{ $delivery_address->postcode}}">
             <input type="hidden" name="delivery_address" value="{{ $delivery_address->address . $delivery_address->building}}">
             <button class="purchase-summary__form-btn" type="submit">購入する</button>
         </form>

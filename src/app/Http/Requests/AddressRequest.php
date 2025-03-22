@@ -36,7 +36,7 @@ class AddressRequest extends FormRequest
             'postcode.required' => '郵便番号を入力してください',
             'postcode.regex' => '郵便番号はハイフンを含む半角数字で入力してください',
             'address.required' => '住所を入力してください',
-            'address.required' => '建物名を入力してください',
+            'building.required' => '建物名を入力してください',
         ];
     }
 }

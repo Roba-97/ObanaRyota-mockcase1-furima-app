@@ -13,6 +13,7 @@ class Purchase extends Model
         'item_id',
         'buyer_id',
         'payment',
+        'delivery_postcode',
         'delivery_address',
     ];
 
