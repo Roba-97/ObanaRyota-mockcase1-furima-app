@@ -91,9 +91,6 @@
     .item-list__item {
         width: 150px;
     }
-    .item-list__name  {
-        font-size: 20px;
-    }
     .item-list__sold-mask {
         height: 150px;
     }

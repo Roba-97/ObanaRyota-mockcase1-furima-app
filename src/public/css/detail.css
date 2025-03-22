@@ -193,40 +193,21 @@
         width: 300px;
         height: 300px;
     }
-    .item-detail__name {
-        font-size: 30px;
-    }
-    .item-detail__brand {
-        font-size: 16px;
-    }
     .item-detail__price {
         margin: 20px 0 0;
-        font-size: 20px;
-    }
-    .item-detail__price span {
-        font-size: 30px;
     }
     .icon__img {
         width: 30px;
         height: 30px;
     }
-    .icon__count {
-        font-size: 12px;
-    }
-    .item-detail__desc-heading, .item-detail__info-heading {
-        font-size: 25px;
-    }
     .item-detail__desc-text {
         margin: 25px 0;
-        font-size: 18px;
     }
     .info-category__heading, .info-condition__heading {
         padding-right: 20px;
-        font-size: 18px; 
     }
     .info-category__list span, .info-condition__text span{
         padding: 2px 15px;
-        font-size: 16px;
     }
     .info-category__list span {
         margin-right: 15px;
@@ -234,28 +215,16 @@
     }
     .item-detail__comment-heading {
         margin: 50px 0 20px;
-        font-size: 25px;
     }
     .comment__user-img {
         width: 50px;
         height: 50px;
     }
-    .comment__user-name {
-        font-size: 20px;
-    }
     .comment__text {
         padding: 15px 10px;
-        font-size: 16px;
-    }
-    .comment-form_label {
-        font-size: 20px;
     }
     .item-detail__purchase-btn, .comment-form__btn {
         height: 42px;
         line-height: 42px;
-        font-size: 22px;
-    }
-    .comment-form__btn {
-        font-size: 18px;
     }
 }

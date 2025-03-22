@@ -109,14 +109,12 @@
     }
     .user__name {
         margin: 0 200px 0 50px;
-        font-size: 25px;
     }
     .user_edit-btn {
         padding: 0 25px;
         height: 45px;
         line-height: 45px;
         background-color: inherit;
-        font-size: 20px;
     }
     .tab  {
         justify-content: space-around;
@@ -135,9 +133,6 @@
     }
     .item-list__item {
         width: 150px;
-    }
-    .item-list__name  {
-        font-size: 20px;
     }
     .item-list__sold-mask {
         height: 150px;
