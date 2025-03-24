@@ -14,7 +14,7 @@
     margin: 45px auto;
     width: 600px;
     height: 600px;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .item-detail__name {
