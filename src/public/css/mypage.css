@@ -1,5 +1,5 @@
 .user {
-    margin: 100px auto;
+    margin: 75px auto;
     display: flex;
     align-items: center;
 }
@@ -32,14 +32,14 @@
 
 .tab {
     margin-bottom: 60px;
+    padding: 0 5%;
     display: flex;
     border-bottom: solid 2px #5F5F5F;
 }
 
 .tab__link{
     display: block;
-    margin: 0 50px;
-    padding: 5px 20px;
+    margin: 5px 75px;
     border: none;
     background-color: inherit;
     color: #000000;
@@ -47,9 +47,7 @@
     text-decoration: none;
     cursor: pointer;
 }
-.tab__link:first-of-type {
-    margin-left: 200px;
-}
+
 .tab__link--active {
     color: #FF0000;
 }
@@ -108,7 +106,7 @@
         height: 100px;
     }
     .user__name {
-        margin: 0 200px 0 50px;
+        margin: 0 150px 0 50px;
     }
     .user_edit-btn {
         padding: 0 25px;
@@ -117,13 +115,7 @@
         background-color: inherit;
     }
     .tab  {
-        justify-content: space-around;
-    }
-    .tab__link {
-        margin: 0;
-    }
-    .tab__link:first-of-type {
-        margin-left: 0;
+        justify-content: center;
     }
     .item-list {
         grid-template-columns: repeat(3, 1fr);

@@ -1,14 +1,14 @@
 /* 選択タブ */
 .tab {
     margin: 40px 0 60px;
+    padding: 0 5%;
     display: flex;
     border-bottom: solid 2px #5F5F5F;
 }
 
 .tab__link{
     display: block;
-    margin: 0 50px;
-    padding: 5px 20px;
+    margin: 5px 75px;
     border: none;
     background-color: inherit;
     color: #000000;
@@ -16,9 +16,7 @@
     text-decoration: none;
     cursor: pointer;
 }
-.tab__link:first-of-type {
-    margin-left: 200px;
-}
+
 .tab__link--active {
     color: #FF0000;
 }
@@ -73,14 +71,8 @@
 }
 
 @media screen and (max-width: 960px) {
-    .tab  {
-        justify-content: space-around;
-    }
-    .tab__link {
-        margin: 0;
-    }
-    .tab__link:first-of-type {
-        margin-left: 0;
+    .tab {
+        justify-content: center;
     }
     .item-list  {
         grid-template-columns: repeat(3, 1fr);
