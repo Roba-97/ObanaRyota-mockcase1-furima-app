@@ -61,4 +61,15 @@
     .address-form__form {
         width: 480px;
     }
+    .address-form__group {
+        margin-top: 50px;
+    }
+    .address-form__input {
+        height: 40px;
+    }
+    .address-form__btn {
+        height: 50px;
+        line-height: 50px;
+        margin: 60px 0 0px;
+    }
 }

@@ -170,6 +170,9 @@
     .sell-form__form {
         width: 480px;
     }
+    .sell-form__group-img {
+        height: 120px;
+    }
     .sell-form__sub-heading {
         margin-top: 50px;
     }
