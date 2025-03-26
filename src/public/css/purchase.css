@@ -1,11 +1,11 @@
 .purchase {
-    margin: 100px auto;
+    margin: 100px 50px;
     display: flex;
+    justify-content: space-between;
 }
 
 .purchase-info {
-    width: 750px;
-    margin-right: 70px;
+    width: 60%;
 }
 
 .purchase-info__item {
@@ -36,7 +36,7 @@
     margin: 10px 0 0;
 }
 
-.purchase-info__method, .purchase-info__address{
+.purchase-info__method, .purchase-info__address {
     border-bottom: solid 1px #000000;
     margin-bottom: 25px;
     padding: 0 20px 50px;
@@ -91,8 +91,8 @@
     font-weight: 600;
 }
 
-.purchase-summary__inner {
-    width: 440px;
+.purchase-summary {
+    width: 35%;
 }
 
 .purchase-summary__table {
@@ -116,7 +116,6 @@
     padding: 40px 0;
 }
 
-
 .purchase-summary__form-btn {
     display: inline-block;
     width: 100%;
@@ -128,4 +127,30 @@
     color: #FFFFFF;
     font-size: 2.6rem;
     text-align: center;
+}
+
+@media screen and (max-width: 960px) {
+    .purchase {
+        margin: 75px 50px;
+        flex-direction: column;
+    }
+    .purchase-info__item {
+        padding-bottom: 30px;
+    }
+    .purchase-info, .purchase-summary {
+        width: 100%;
+    }
+    .purchase-info__method, .purchase-info__address {
+        padding: 0 20px 30px;
+    }
+    .purchase-info__select, .purchase-info__address-text {
+        margin: 35px 0 0 60px;
+    }
+    .purchase-summary__table {
+        margin: 0 auto 25px;
+        width: 50%;
+    }
+    .purchase-summary__table-heading, .purchase-summary__table-text {
+        padding: 20px 0;
+    }
 }
