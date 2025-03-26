@@ -26,11 +26,11 @@
 			<div class="item-list__sold-mask">
 				<div class="item-list__sold-text"><span>sold</span></div>
 			</div>
-			<img class="item-list__img" src="{{ asset($item->image_path) }}" alt="商品画像">
+			<img class="item-list__img" src="{{ asset($item->image_path) }}" alt="{{ $item->name }}の商品画像">
 		</a>
 		@else
 		<a href="/item/{{ $item->id }}">
-			<img class="item-list__img" src="{{ asset($item->image_path) }}" alt="商品画像">
+			<img class="item-list__img" src="{{ asset($item->image_path) }}" alt="{{ $item->name }}の商品画像">
 		</a>
 		@endif
 		<p class="item-list__name">{{ $item->name }}</p>
