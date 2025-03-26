@@ -14,6 +14,7 @@ class PurchaseController extends Controller
 {
     public function index(Item $item)
     {
+        session()->forget('selectedValue');
         $delivery_address = Auth::user()->profile()->select('postcode', 'address', 'building')->first();
 
         return view('purchase', compact('item', 'delivery_address'));
