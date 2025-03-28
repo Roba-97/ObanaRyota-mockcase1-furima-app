@@ -4,6 +4,10 @@
 <link rel="stylesheet" href="{{ asset('css/exhibit.css')}}">
 @endsection
 
+@section('livewireStyles')
+@livewireStyles
+@endsection
+
 @section('header')
 @include('layouts.header')
 @endsection
@@ -15,14 +19,13 @@
         <form class="sell-form__form" action="/sell" method="post" enctype="multipart/form-data">
             @csrf
             <label class="sell-form__label" for="name">商品画像</label>
-            <div class="sell-form__group-img">
-                <label class="sell-form__label-img" for="image_input">画像を選択する</label>
-                <input class="sell-form__input-img" type="file" id="image_input" name="image">
-            </div>
+            <livewire:item-image-preview-component />
             <p class="sell-form__error-message">
-                @error('image')
-                {{ $message }}
-                @enderror
+                @if ($errors->has('image'))
+                {{ $errors->first('image') }}
+                @elseif ($errors->any())
+                画像を再度アップロードしてください
+                @endif
             </p>
             <h3 class="sell-form__sub-heading">商品の詳細</h3>
             <div class="sell-form__group">
@@ -93,4 +96,8 @@
         </form>
     </div>
 </div>
+@endsection
+
+@section('livewireScripts')
+@livewireScripts
 @endsection
