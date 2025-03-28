@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Tests\TestCase;
 
-// テストケースID2,3
+// テストケースID:2,3
 class AuthenticationTest extends TestCase
 {
     use RefreshDatabase;
@@ -68,6 +68,7 @@ class AuthenticationTest extends TestCase
 
     public function test_logout_success()
     {
+        /** @var \App\Models\User $user */
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)->post('/logout');

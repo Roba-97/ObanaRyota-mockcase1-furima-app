@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-// テストケースID1
+// テストケースID:1
 class UserRegistrationTest extends TestCase
 {
     use RefreshDatabase;
