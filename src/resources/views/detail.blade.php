@@ -8,12 +8,14 @@
 @include('layouts.header')
 @endsection
 
+@section('livewireStyles')
+@livewireStyles
+@endsection
+
 @section('content')
 
 <div class="item-detail">
-    <div class="item-detail__item-img">
-        <img src="{{ asset($item->image_path) }}" alt="商品画像">
-    </div>
+    <livewire:popup-component :item="$item" />
     <div class="item-detail__detail">
         <div class="item-detail__top">
             <h2 class="item-detail__name">{{ $item->name }}</h2>
@@ -40,9 +42,15 @@
                 <div class="icon__count">{{ $comments->count() }}</div>
             </div>
         </div>
+        @if($item->sold_flag)
+        <div class="item-detail__purchase" action="/purchase/{{ $item->id }}" method="get">
+            <span class="item-detail__purchase-btn item-detail__purchase-btn--sold">この商品は購入されています</span>
+        </div>
+        @else
         <form class="item-detail__purchase" action="/purchase/{{ $item->id }}" method="get">
             <button class="item-detail__purchase-btn" type="submit">購入手続きへ</button>
         </form>
+        @endif
         <div class="item-detail__desc">
             <h2 class="item-detail__desc-heading">商品説明</h2>
             <p class="item-detail__desc-text">{!! nl2br(e($item->detail)) !!}</p>
@@ -95,4 +103,8 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('livewireScripts')
+@livewireScripts
 @endsection

@@ -11,29 +11,70 @@
 
 .item-detail__item-img img {
     display: inline-block;
-    margin: 45px auto;
+    margin: 45px auto 15px;
     width: 600px;
-    height: 600px;
-    object-fit: cover;
+    max-height: 600px;
+    object-fit: contain;
+}
+
+/* 画像ポップアップ */
+.popup {
+    position: fixed;
+    /* 画面全体を基準に配置 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 85vw;
+    max-height: 85vh;
+}
+.popup__bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #5F5F5F99;
+}
+.popup__img {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+}
+.popup__close {
+    display: inline-block;
+    padding: 5px 15px;
+    font-size: 3rem;
+}
+.popup__hint {
+    margin: 0;
+    font-size: 1.8rem;
+    text-align: center;
 }
 
 .item-detail__name {
     margin: 0;
-    font-size: 45px;
+    font-size: 4.5rem;
 }
 
 .item-detail__brand {
     margin: 0;
-    font-size: 20px;
+    font-size: 2rem;
 }
 
 .item-detail__price {
-    font-size: 30px;
+    font-size: 3rem;
     margin: 30px 0 0;
 }
 
 .item-detail__price span {
-    font-size: 45px;
+    font-size: 4.5rem;
 }
 
 .item-detail__icon {
@@ -59,17 +100,17 @@
 }
 
 .icon__count {
-    font-size: 18px;
+    font-size: 1.8rem;
 }
 
 .item-detail__desc-heading, .item-detail__info-heading {
     margin: 35px 0 0;
-    font-size: 36px;
+    font-size: 3.6rem;
 }
 
 .item-detail__desc-text {
     margin: 45px 0;
-    font-size: 24px;
+    font-size: 2.4rem;
 }
 
 /* 商品情報 */
@@ -80,7 +121,7 @@
 
 .info-category__heading, .info-condition__heading {
     padding-right: 50px;
-    font-size: 24px;
+    font-size: 2.4rem;
     font-weight: bold;
     white-space: nowrap; 
 }
@@ -91,7 +132,7 @@
 .info-category__list span, .info-condition__text span{
     display: inline-block;
     padding: 2px 30px;
-    font-size: 20px;
+    font-size: 2rem;
     text-align: center;
 }
 .info-category__list {
@@ -110,7 +151,7 @@
 .item-detail__comment-heading {
     margin: 75px 0 25px;
     color: #5F5F5F;
-    font-size: 36px;
+    font-size: 3.6rem;
 }
 
 .comment__user-img {
@@ -124,14 +165,14 @@
 }
 
 .comment__user-name {
-    font-size: 30px;
+    font-size: 3rem;
     font-weight: bold;
 }
 
 .comment__text {
     margin: 20px 0 50px;
     padding: 20px 15px;
-    font-size: 20px;
+    font-size: 2rem;
     background-color: #E5E5E5;
     border-radius: 5px;
 }
@@ -141,7 +182,7 @@
 
 .comment-form_label {
     display: block;
-    font-size: 28px;
+    font-size: 2.8rem;
     font-weight: bold;
 }
 
@@ -151,14 +192,14 @@
     width: 100%;
     border: solid 2px #5F5F5F;
     border-radius: 5px;
-    font-size: 20px;
+    font-size: 2rem;
     outline: none;
 }
 
 .comment-form__error-message {
     margin: 10px 0 0;
     color: #FF5555;
-    font-size: 20px;
+    font-size: 2rem;
 }
 
 /* ボタン */
@@ -173,60 +214,50 @@
     color: #FFFFFF;
     text-align: center;
     outline: none;
-    font-size: 30px;
+    font-size: 3rem;
 }
 .comment-form__btn {
     margin-top: 48px;
-    font-size: 25px;
+    font-size: 2.5rem;
+}
+.item-detail__purchase-btn--sold {
+    background-color: #FFFFFF;
+    border: dashed 1px #FF5555;
+    color: #FF5555;
+    font-size: 2.5rem;
 }
 
 @media screen and (max-width: 960px) {
     .item-detail {
-        margin: 50px auto;
+        margin: 0 auto 50px;
+        flex-direction: column;
     }
     .item-detail__item-img, .item-detail__detail {
-        width: 370px;
-        padding: 0 20px;
+        width: 450px;
+        padding: 0;
     }
     .item-detail__item-img img {
-        margin: 30px auto;
-        width: 300px;
-        height: 300px;
-    }
-    .item-detail__name {
-        font-size: 30px;
-    }
-    .item-detail__brand {
-        font-size: 16px;
+        width: 100%;
+        max-height: 450px;
     }
     .item-detail__price {
-        margin: 20px 0 0;
-        font-size: 20px;
+        margin: 0;
     }
-    .item-detail__price span {
-        font-size: 30px;
+    .item-detail__icon-like {
+        margin-left: 15px;
     }
     .icon__img {
         width: 30px;
         height: 30px;
     }
-    .icon__count {
-        font-size: 12px;
-    }
-    .item-detail__desc-heading, .item-detail__info-heading {
-        font-size: 25px;
-    }
     .item-detail__desc-text {
         margin: 25px 0;
-        font-size: 18px;
     }
     .info-category__heading, .info-condition__heading {
         padding-right: 20px;
-        font-size: 18px; 
     }
     .info-category__list span, .info-condition__text span{
         padding: 2px 15px;
-        font-size: 16px;
     }
     .info-category__list span {
         margin-right: 15px;
@@ -234,28 +265,20 @@
     }
     .item-detail__comment-heading {
         margin: 50px 0 20px;
-        font-size: 25px;
     }
     .comment__user-img {
         width: 50px;
         height: 50px;
     }
-    .comment__user-name {
-        font-size: 20px;
-    }
     .comment__text {
+        margin: 15px 0 35px;
         padding: 15px 10px;
-        font-size: 16px;
-    }
-    .comment-form_label {
-        font-size: 20px;
     }
     .item-detail__purchase-btn, .comment-form__btn {
         height: 42px;
         line-height: 42px;
-        font-size: 22px;
     }
     .comment-form__btn {
-        font-size: 18px;
+        margin-top: 24px;
     }
 }

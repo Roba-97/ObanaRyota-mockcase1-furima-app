@@ -7,7 +7,7 @@
 .sell-form__heading {
     margin: 0 0 50px;
     text-align: center;
-    font-size: 36px;
+    font-size: 3.6rem;
 }
 
 .sell-form__sub-heading {
@@ -15,7 +15,7 @@
     border-bottom: solid 1px #5F5F5F;
     color: #5F5F5F;
     text-align: left;
-    font-size: 30px;
+    font-size: 3rem;
 }
 
 .sell-form__inner {
@@ -37,22 +37,29 @@
     border-radius: 4px;
 }
 
+.sell-form__img {
+    display: inline-block;
+    margin-right: 50px;
+    height: 90%;
+    aspect-ratio: 1;
+    object-fit: contain;
+}
+
 .sell-form__label-img {
     display: inline-block;
-    margin: 0 auto;
     padding: 12px 30px;
     background-color: inherit;
     border: solid 2px #FF5555;
     border-radius: 10px;
     color: #FF5555;
-    font-size: 16px;
+    font-size: 1.6rem;
     outline: none;
 }
 .sell-form__label-img:hover {
     cursor: pointer;
 }
 .sell-form__input-img {
-    
+    display: none;
 }
 
 .sell-form__group {
@@ -61,7 +68,7 @@
 
 .sell-form__label {
     display: block;
-    font-size: 24px;
+    font-size: 2.4rem;
     font-weight: 700;
 }
 .sell-form__label--category {
@@ -77,7 +84,7 @@
     padding: 10px;
     border: solid 1px #5F5F5F;
     border-radius: 4px;
-    font-size: 24px;
+    font-size: 2.4rem;
     outline: none;
 }
 
@@ -92,7 +99,7 @@
     border: solid 1px #FF5555;
     border-radius: 15px;
     color: #FF5555;
-    font-size: 15px;
+    font-size: 1.5rem;
 }
 .sell-form__label-check:hover {
     cursor: pointer;
@@ -124,7 +131,7 @@
     padding: 10px;
     border: solid 1px #5F5F5F;
     border-radius: 4px;
-    font-size: 24px;
+    font-size: 2.4rem;
     outline: none;
 }
 
@@ -137,7 +144,7 @@
     top: 50%;
     transform: translateY(-50%);
     color: #000000;
-    font-size: 24px;
+    font-size: 2.4rem;
     font-weight: 700;
 }
 .sell-form__input--price {
@@ -154,17 +161,40 @@
     border-radius: 5px;
     color: #FFFFFF;
     text-align: center;
-    font-size: 26px;
+    font-size: 2.6rem;
 }
 
 .sell-form__error-message {
     margin: 10px 0;
     color: #FF5555;
-    font-size: 20px;
+    font-size: 2rem;
 }
 
 @media screen and (max-width: 960px) {
+    .sell-form {
+        margin: 50px 0;
+    }
     .sell-form__form {
-        width: 420px;
+        width: 480px;
+    }
+    .sell-form__group-img {
+        height: 120px;
+    }
+    .sell-form__sub-heading {
+        margin-top: 50px;
+    }
+    .sell-form__label-check {
+        margin: 0 7.5px 10px 0;
+        padding: 0 10px;
+        height: 28px;
+        line-height: 28px;
+    }
+    .sell-form__input, .sell-form__select {
+        height: 35px;
+    }
+    .sell-form__btn {
+        height: 45px;
+        line-height: 45px;
+        margin: 45px 0 0px;
     }
 }

@@ -1,3 +1,6 @@
+html {
+    font-size: 62.5%; /* -> 10px */
+}
 
 .inter-bold {
     font-family: "Inter", serif;
@@ -51,7 +54,7 @@
     width: 500px;
     background-color: #FFFFFF;
     border-radius: 5px;
-    font-size: 24px;
+    font-size: 2.4rem;
 }
 
 .header__search-input {
@@ -90,7 +93,7 @@
 .header__nav-list {
     display: flex;
     justify-content: space-around;
-    font-size: 24px;
+    font-size: 2.4rem;
 }
 
 .header__nav-item a {
@@ -127,26 +130,29 @@
 }
 
 @media screen and (max-width: 960px) {
+    html {
+        font-size: 43.75%; /* タブレットでのフォントサイズは通常の70%(10px -> 7px)に*/
+    }
     .header__logo {
         margin: auto 0 auto 10px;
         width: 187.5px;
         height: 20px;
     }
     .header__search-form {
+        font-size: 14px;
         width: auto;
-        font-size: 16px;
     }
     .header__nav {
         margin-right: 10px;
+    }
+    .header__nav-list {
+        font-size: 14px;
     }
     .header__search-input {
         width: min-content;
     }
     .header__search-btn {
         white-space: nowrap;
-    }
-    .header__nav-list {
-        font-size: 16px;
     }
     .header__nav-item a, .header__nav-logout{
         padding: 5px;

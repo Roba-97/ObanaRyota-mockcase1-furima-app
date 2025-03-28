@@ -8,13 +8,19 @@ class SelectComponent extends Component
 {
     public $selectedValue = '';
 
-    public function updated($propertyName)
+    public function mount()
     {
-        if ($propertyName === 'selectedValue') {
-            $this->emit('valueUpdated', $this->selectedValue);
-        }
+        $this->selectedValue = session('selectedValue', '');
     }
-    
+
+    public function updatedSelectedValue($value)
+    {
+        session()->put('selectedValue', $value);
+
+        $this->emit('valueUpdated', $value);
+    }
+
+
     public function render()
     {
         return view('livewire.select-component');

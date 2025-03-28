@@ -7,7 +7,7 @@
 .profile-form__heading {
     margin: 0;
     text-align: center;
-    font-size: 36px;
+    font-size: 3.6rem;
 }
 
 .profile-form__inner {
@@ -32,9 +32,9 @@
 .profile-form__img {
     display: inline-block;
     width: 150px;
-    height: 150px;
     border-radius: 50%;
-    object-fit: cover;
+    object-fit: contain;
+    aspect-ratio: 1;
 }
 
 .profile-form__label-img {
@@ -45,7 +45,7 @@
     border: solid 2px #FF5555;
     border-radius: 10px;
     color: #FF5555;
-    font-size: 20px;
+    font-size: 2rem;
     outline: none;
 }
 
@@ -55,7 +55,7 @@
 
 .profile-form__label {
     display: block;
-    font-size: 24px;
+    font-size: 2.4rem;
     font-weight: 700;
 }
 
@@ -65,14 +65,14 @@
     padding: 10px;
     border: solid 1px #5F5F5F;
     border-radius: 4px;
-    font-size: 24px;
+    font-size: 2.4rem;
     outline: none;
 }
 
 .profile-form__error-message {
     margin: 10px 0;
     color: #FF5555;
-    font-size: 20px;
+    font-size: 2rem;
 }
 
 .profile-form__btn {
@@ -85,15 +85,22 @@
     border-radius: 5px;
     color: #FFFFFF;
     text-align: center;
-    font-size: 26px;
+    font-size: 2.6rem;
 }
 
 @media screen and (max-width: 960px) {
     .profile-form__form {
-        width: 420px;
+        width: 480px;
     }
     .profile-form__img {
         width: 100px;
-        height: 100px;
+    }
+    .profile-form__input {
+        height: 40px;
+    }
+    .profile-form__btn {
+        height: 50px;
+        line-height: 50px;
+        margin: 50px 0 0px;
     }
 }
