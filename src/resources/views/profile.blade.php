@@ -4,6 +4,10 @@
 <link rel="stylesheet" href="{{ asset('css/profile.css')}}">
 @endsection
 
+@section('livewireStyles')
+@livewireStyles
+@endsection
+
 @section('header')
 @include('layouts.header')
 @endsection
@@ -16,18 +20,7 @@
 			@method('PATCH')
 			@csrf
 			<div class="profile-form__group-img">
-				@isset(Auth::user()->profile()->first()->image_path)
-				<img class="profile-form__img" src="{{ asset(Auth::user()->profile()->first()->image_path) }}" alt="ユーザアイコン">
-				@else
-				<img class="profile-form__img" src="{{ asset('images/default_user_icon.png') }}" alt="ユーザアイコン">
-				@endisset
-				<label class="profile-form__label-img" for="image_input">画像を選択する</label>
-				<input class="profile-form__input-img" type="file" id="image_input" name="image">
-				<p class="profile-form__error-message">
-					@error('image')
-					{{ $message }}
-					@enderror
-				</p>
+				<livewire:profile-image-preview-component />
 			</div>
 			<div class="profile-form__group">
 				<label class="profile-form__label" for="name">ユーザー名</label>
@@ -73,4 +66,8 @@
 		</form>
 	</div>
 </div>
+@endsection
+
+@section('livewireScripts')
+@livewireScripts
 @endsection
