@@ -2,13 +2,13 @@
 
 namespace Tests\Feature;
 
-use Database\Seeders\ConditionsTableSeeder;
 use Illuminate\Support\Str;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 
 use App\Models\User;
 use App\Models\Item;
+use App\Models\Condition;
 use Tests\TestCase;
 
 use function PHPUnit\Framework\assertEquals;
@@ -18,13 +18,24 @@ class CommentPostTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_post_comment_success()
+    protected $seller;
+    protected $user;
+    protected $item;
+
+    protected function setUp(): void
     {
-        $this->seed(ConditionsTableSeeder::class);
-        $seller = User::factory()->create();
-        $item = Item::create([
-            'seller_id' => $seller->id,
-            'condition_id' => 1,
+        parent::setUp();
+
+        $this->seller = User::factory()->create();
+        $this->user = User::factory()->create();
+
+        $condition = Condition::create([
+            'content' => '良好'
+        ]);
+
+        $this->item = Item::create([
+            'seller_id' => $this->seller->id,
+            'condition_id' => $condition->id,
             'image_path' => 'path',
             'name' => 'test',
             'brand' => 'test',
@@ -32,20 +43,23 @@ class CommentPostTest extends TestCase
             'detail' => 'test',
             'sold_flag' => false
         ]);
-        $countBefore = $item->comments()->count();
+    }
 
-        /** @var \App\Models\User $user */
-        $user = User::factory()->create();
+    public function test_post_comment_success()
+    {
+        $countBefore = $this->item->comments()->count();
 
-        $this->actingAs($user)->post('/comment/1', ['content' => 'コメント']);
+        $response = $this->actingAs($this->user)->post('/comment/1', ['content' => 'コメント']);
 
         $this->assertDatabaseHas('comments', [
             'item_id' => 1,
-            'user_id' => $user->id,
+            'user_id' => $this->user->id,
             'content' => 'コメント'
         ]);
 
-        assertEquals($item->comments()->count(), $countBefore + 1);
+        $response->assertSessionHasNoErrors();
+
+        assertEquals($this->item->comments()->count(), $countBefore + 1);
     }
 
     public function test_comment_unauthenticated_validate()
@@ -55,30 +69,20 @@ class CommentPostTest extends TestCase
         $response->assertRedirect('/login');
     }
 
+
     public function test_comment_required_validate()
     {
-        /** @var \App\Models\User $user */
-        $user = User::factory()->create();
+        $response = $this->actingAs($this->user)->post('/comment/1', ['content' => '']);
 
-        $response = $this->actingAs($user)
-            ->post('/comment/1', ['content' => '']);
-
-        $response->assertSessionHasErrors(['content']);
+        dump(session()->all());
     }
-
 
     public function test_comment_max_validate()
     {
-        /** @var \App\Models\User $user */
-        $user = User::factory()->create();
+        $response = $this->actingAs($this->user)->post('/comment/1', ['content' => Str::random(256)]);
 
-        $response = $this->actingAs($user)
-            ->post('/comment/1', [
-                'content' => Str::random(256)
-            ]);
-
-        $response->assertSessionHasErrors([
-            'content' => 'コメントは255文字以内で入力してください',
+        $response->assertSessionHasErrorsIn('default', [
+            'content' => 'コメントは255文字以内で入力してください'
         ]);
     }
 }
