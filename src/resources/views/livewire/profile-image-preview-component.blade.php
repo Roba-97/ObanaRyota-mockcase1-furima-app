@@ -1,8 +1,12 @@
 <div>
-    @if ($image)
+    @if($image)
     <img class="profile-form__img" src="{{ $image->temporaryUrl() }}" alt="更新ユーザアイコン">
-    @elseif(Auth::user()->profile()->first()->image_path)
+    @elseif(Auth::user()->profile()->exists())
+    @if(Auth::user()->profile()->first()->image_path)
     <img class="profile-form__img" src="{{ asset(Auth::user()->profile()->first()->image_path) }}" alt="ユーザアイコン">
+    @else
+    <img class="profile-form__img" src="{{ asset('images/default_user_icon.png') }}" alt="ユーザアイコン">
+    @endif
     @else
     <img class="profile-form__img" src="{{ asset('images/default_user_icon.png') }}" alt="ユーザアイコン">
     @endif
