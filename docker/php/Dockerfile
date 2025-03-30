@@ -9,5 +9,14 @@ RUN apt update \
 RUN curl -sS https://getcomposer.org/installer | php \
   && mv composer.phar /usr/local/bin/composer \
   && composer self-update
+  
+RUN apt-get update && apt-get install -y \
+  zlib1g-dev \
+  libzip-dev \
+  mariadb-client \
+  libfreetype6-dev \
+  libjpeg62-turbo-dev \
+  libpng-dev \
+  && docker-php-ext-install zip pdo_mysql gd 
 
 WORKDIR /var/www
