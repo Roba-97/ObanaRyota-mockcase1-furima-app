@@ -19,11 +19,16 @@ use App\Http\Controllers\PurchaseController;
 |
 */
 
+Route::get('/verify', function () {
+    return view('auth.verify');
+});
+
 Route::get('/', [ItemController::class, 'index']);
 Route::get('/search', [ItemController::class, 'search']);
 Route::get('/item/{item}', [DetailController::class, 'index'])->name('detail.index');
 
-Route::middleware('auth')->group(function () {
+
+Route::middleware('auth', 'verified')->group(function () {
     Route::get('/favorite/{item}', [DetailController::class, 'toggleItemFavorite']);
     Route::post('/comment/{item}', [DetailController::class, 'comment']);
     Route::get('/mypage', [MypageController::class, 'index']);

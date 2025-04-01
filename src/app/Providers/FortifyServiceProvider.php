@@ -14,6 +14,7 @@ use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Contracts\LoginResponse;
 use Laravel\Fortify\Contracts\LogoutResponse;
+use Laravel\Fortify\Contracts\VerifyEmailViewResponse;
 
 use Laravel\Fortify\Http\Requests\LoginRequest as FortifyLoginRequest;
 use App\Http\Requests\LoginRequest;
@@ -38,6 +39,13 @@ class FortifyServiceProvider extends ServiceProvider
                 return redirect('/login');
             }
         });
+
+        $this->app->instance(VerifyEmailViewResponse::class, new class implements VerifyEmailViewResponse {
+            public function toResponse($request)
+            {
+                return redirect('/verify');
+            }
+        });
     }
 
     /**
@@ -48,18 +56,18 @@ class FortifyServiceProvider extends ServiceProvider
         $this->app->bind(FortifyLoginRequest::class, LoginRequest::class);
 
         Fortify::createUsersUsing(CreateNewUser::class);
-        
+
         Fortify::registerView(function () {
             return view('auth.register');
         });
-        
+
         Fortify::loginView(function () {
             return view('auth.login');
         });
-        
+
         RateLimiter::for('login', function (Request $request) {
             $email = (string) $request->email;
-            
+
             return Limit::perMinute(10)->by($email . $request->ip());
         });
     }
