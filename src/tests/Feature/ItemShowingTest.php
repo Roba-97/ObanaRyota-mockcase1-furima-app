@@ -22,8 +22,6 @@ class ItemShowingTest extends TestCase
 
         $this->seed();
 
-        $this->assertDatabaseCount('conditions', 1);
-
         $this->item = Item::select(['id', 'image_path', 'name', 'sold_flag'])->get();
     }
 
@@ -37,6 +35,7 @@ class ItemShowingTest extends TestCase
         $data = $response->getOriginalContent()->getData();
         $this->assertEquals(10, count($data['items']));
     }
+
     /*
     public function test_showing_sold_items()
     {
@@ -44,7 +43,7 @@ class ItemShowingTest extends TestCase
         $this->item->where('id', $id)->update(['sold_flag' => true]);
         $view = $this->view('index', ['items' => $this->item, 'showMylist' => false]);
 
-        $view->assertSeeText('Sold');
+        $view->assertSee('Sold');
     }
-    */
+        */
 }

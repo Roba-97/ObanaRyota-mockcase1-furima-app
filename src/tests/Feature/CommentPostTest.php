@@ -11,8 +11,6 @@ use App\Models\Item;
 use App\Models\Condition;
 use Tests\TestCase;
 
-use function PHPUnit\Framework\assertEquals;
-
 // テストケースID:9
 class CommentPostTest extends TestCase
 {
@@ -59,7 +57,7 @@ class CommentPostTest extends TestCase
 
         $response->assertSessionHasNoErrors();
 
-        assertEquals($this->item->comments()->count(), $countBefore + 1);
+        $this->assertEquals($this->item->comments()->count(), $countBefore + 1);
     }
 
     public function test_comment_unauthenticated_validate()
