@@ -36,9 +36,16 @@
     text-decoration: none;
 }
 
+.verify__form {
+    text-align: center;
+}
+
 .verify__link {
-    display: block;
+    display: inline-block;
     color: #0073CC;
+    border: none;
+    background-color: inherit;
     font-size: 2rem;
     text-decoration: none;
+    outline: none;
 }
