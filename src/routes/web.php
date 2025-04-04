@@ -30,7 +30,7 @@ Route::middleware('custom.verified')->group(function () {
 Route::middleware('auth', 'verified')->group(function () {
     Route::get('/favorite/{item}', [DetailController::class, 'toggleItemFavorite']);
     Route::post('/comment/{item}', [DetailController::class, 'comment']);
-    Route::get('/mypage', [MypageController::class, 'index']);
+    Route::get('/mypage', [MypageController::class, 'index'])->name('mypage.index');
     Route::get('/mypage/profile', [MypageController::class, 'edit']);
     Route::patch('/mypage/profile', [MypageController::class, 'update']);
     Route::get('/sell', [ExhibitController::class, 'index']);

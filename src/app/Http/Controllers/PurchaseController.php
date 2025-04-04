@@ -9,9 +9,13 @@ use App\Models\Item;
 use App\Models\Purchase;
 use App\Http\Requests\AddressRequest;
 use App\Http\Requests\PurchaseRequest;
+use Stripe\Stripe;
+use Stripe\Checkout\Session;
 
 class PurchaseController extends Controller
 {
+    private $method  = ['', 'konbini', 'card'];
+
     public function index(Item $item)
     {
         session()->forget('selectedValue');
@@ -22,6 +26,9 @@ class PurchaseController extends Controller
 
     public function store(PurchaseRequest $request, Item $item)
     {
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+        $method = $this->method[$request->input('payment')];
+
         $item->update(['sold_flag' => true]);
 
         Purchase::create([
@@ -32,7 +39,25 @@ class PurchaseController extends Controller
             'delivery_address' => $request->input('delivery_address'),
         ]);
 
-        return redirect('/mypage?page=buy');
+
+        $session = Session::create([
+            'payment_method_types' => [$method],
+            'line_items' => [[
+                'price_data' => [
+                    'currency' => 'jpy',
+                    'product_data' => [
+                        'name' => $item->name,
+                    ],
+                    'unit_amount' =>  $item->price,
+                ],
+                'quantity' => 1,
+            ]],
+            'mode' => 'payment',
+            'success_url' => route('mypage.index', ['page' => 'buy']),
+            'cancel_url' => route('purchase.index', ['item' => $item->id])
+        ]);
+
+        return redirect($session->url);
     }
 
     public function edit(Item $item)
