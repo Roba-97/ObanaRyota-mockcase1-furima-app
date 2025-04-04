@@ -24,21 +24,10 @@ class PurchaseController extends Controller
         return view('purchase', compact('item', 'delivery_address'));
     }
 
-    public function store(PurchaseRequest $request, Item $item)
+    public function stripe(PurchaseRequest $request, Item $item)
     {
-        Stripe::setApiKey(env('STRIPE_SECRET'));
+        Stripe::setApiKey(config('services.stripe.secret'));
         $method = $this->method[$request->input('payment')];
-
-        $item->update(['sold_flag' => true]);
-
-        Purchase::create([
-            'item_id' => $item->id,
-            'buyer_id' => Auth::user()->id,
-            'payment' => $request->input('payment'),
-            'delivery_postcode' => $request->input('delivery_postcode'),
-            'delivery_address' => $request->input('delivery_address'),
-        ]);
-
 
         $session = Session::create([
             'payment_method_types' => [$method],
@@ -53,11 +42,45 @@ class PurchaseController extends Controller
                 'quantity' => 1,
             ]],
             'mode' => 'payment',
-            'success_url' => route('mypage.index', ['page' => 'buy']),
-            'cancel_url' => route('purchase.index', ['item' => $item->id])
+            'success_url' => route('purchase.store') . '?session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url' => route('purchase.index', ['item' => $item->id]),
+            'metadata' => [
+                'item_id' => $item->id,
+                'user_id' => Auth::user()->id,
+                'payment_method' => $request->input('payment'),
+                'delivery_postcode' => $request->input('delivery_postcode'),
+                'delivery_address' => $request->input('delivery_address'),
+            ]
         ]);
 
         return redirect($session->url);
+    }
+
+    public function store(Request $request)
+    {
+        Stripe::setApiKey(config('services.stripe.secret'));
+        $session = Session::retrieve($request->query('session_id'));
+
+        $item_id = $session->metadata->item_id;
+        $user_id = $session->metadata->user_id;
+        $payment = $session->metadata->payment_method;
+        $delivery_postcode = $session->metadata->delivery_postcode;
+        $delivery_address = $session->metadata->delivery_address;
+
+        $item = Item::find($item_id);
+        if ($item && !$item->sold_flag) {
+            $item->update(['sold_flag' => true]);
+
+            Purchase::create([
+                'item_id' => $item_id,
+                'buyer_id' => $user_id,
+                'payment' => $payment,
+                'delivery_postcode' => $delivery_postcode,
+                'delivery_address' => $delivery_address,
+            ]);
+        }
+
+        return redirect('mypage?page=buy');
     }
 
     public function edit(Item $item)

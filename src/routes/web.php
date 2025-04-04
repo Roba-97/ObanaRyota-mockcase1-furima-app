@@ -37,8 +37,9 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::post('/sell', [ExhibitController::class, 'store']);
     Route::get('/purchase/address/{item}', [PurchaseController::class, 'edit']);
     Route::post('/purchase/address/{item}', [PurchaseController::class, 'update']);
+    Route::get('/purchase/success', [PurchaseController::class, 'store'])->name('purchase.store');
+    Route::post('/purchase/stripe/{item}', [PurchaseController::class, 'stripe']);
     Route::get('/purchase/{item}', [PurchaseController::class, 'index'])->name('purchase.index');
-    Route::post('/purchase/{item}', [PurchaseController::class, 'store']);
 });
 
 Route::get('/email/verify', function () {
