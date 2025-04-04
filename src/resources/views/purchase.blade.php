@@ -46,7 +46,7 @@
         </div>
     </div>
     <div class="purchase-summary">
-        <form class="purchase-summary__inner" action="/purchase/{{ $item->id }}" method="post">
+        <form class="purchase-summary__inner" action="/purchase/stripe/{{ $item->id }}" method="post">
             @csrf
             <table class="purchase-summary__table">
                 <tr class="purchase-summary__table-row">
