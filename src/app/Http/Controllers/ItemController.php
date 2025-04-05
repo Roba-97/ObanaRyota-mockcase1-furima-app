@@ -9,52 +9,33 @@ use App\Models\User;
 
 class ItemController extends Controller
 {
-    private $column  = ['id','image_path','name','sold_flag'];
+    private $column  = ['id', 'image_path', 'name', 'sold_flag'];
 
     public function index(Request $request)
     {
-        $column = $this->column;
+        $showMylist = $request->page === "mylist" ? true : false;
+        $keyword = $request->keyword;
 
-        session()->put('showMylist', false);
-        
-        if($request->page === "mylist" && Auth::check()) {
-            session()->put('showMylist', true);
-            $itemsId = Auth::user()->favorites()->select('Item_id')->get();
-            $items = Item::whereIn('id', $itemsId)->where('seller_id', '<>', Auth::user()->id)->select($column)->get();
-        }
-        elseif(Auth::check()) {
-            $items = Item::where('seller_id', '<>', Auth::user()->id)->select($column)->get();
-        }
-        elseif($request->page === "mylist") {
-            session()->put('showMylist', true);
-            $items = [];
-        }
-        else {
-            $items = Item::select($column)->get();
-        }
+        $items = $this->search($showMylist, $keyword);
 
-        return view('index', ['items' => $items, 'showMylist' => session()->get('showMylist')]);
+        return view('index', ['items' => $items, 'showMylist' => $showMylist, 'keyword' => $keyword]);
     }
 
-    public function search(Request $request)
+    public function search($showMylist, $keyword)
     {
         $column = $this->column;
-        $showMylist = session()->get('showMylist');
 
-        if($showMylist && Auth::check()) {
+        if ($showMylist && Auth::check()) {
             $itemsId = Auth::user()->favorites()->select('Item_id')->get();
-            $items = Item::KeywordSearch($request->keyword)->whereIn('id', $itemsId)->where('seller_id', '<>', Auth::user()->id)->select($column)->get();
-        }
-        elseif(Auth::check()) {
-            $items = Item::KeywordSearch($request->keyword)->where('seller_id', '<>', Auth::user()->id)->select($column)->get();
-        }
-        elseif($showMylist) {
+            $items = Item::KeywordSearch($keyword)->whereIn('id', $itemsId)->where('seller_id', '<>', Auth::user()->id)->select($column)->get();
+        } elseif (Auth::check()) {
+            $items = Item::KeywordSearch($keyword)->where('seller_id', '<>', Auth::user()->id)->select($column)->get();
+        } elseif ($showMylist) {
             $items = [];
-        }
-        else {
-            $items = Item::KeywordSearch($request->keyword)->select($column)->get();
+        } else {
+            $items = Item::KeywordSearch($keyword)->select($column)->get();
         }
 
-        return view('index', ['items' => $items, 'showMylist' => $showMylist]);
+        return $items;
     }
 }

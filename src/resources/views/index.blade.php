@@ -10,13 +10,16 @@
 
 @section('content')
 <div class="tab">
-	@if($showMylist)
-	<a class="tab__link" href="/">おすすめ</a>
-	<a class="tab__link tab__link--active" href="/?page=mylist">マイリスト</a>
-	@else
-	<a class="tab__link tab__link--active" href="/">おすすめ</a>
-	<a class="tab__link" href="/?page=mylist">マイリスト</a>
-	@endif
+	<div class="tab__inner">
+		@if($showMylist)
+		<a class="tab__link" href="/?keyword={{ $keyword }}">おすすめ</a>
+		<a class="tab__link tab__link--active" href="/?page=mylist&keyword={{ $keyword }}">マイリスト</a>
+		@else
+		<a class="tab__link tab__link--active" href="/?keyword={{ $keyword }}">おすすめ</a>
+		<a class="tab__link" href="/?page=mylist&keyword={{ $keyword }}">マイリスト</a>
+		@endif
+	</div>
+	<a href="/?page={{ request('page') }}" class="tab__reset">検索リセット</a>
 </div>
 <div class="item-list">
 	@foreach($items as $item)
