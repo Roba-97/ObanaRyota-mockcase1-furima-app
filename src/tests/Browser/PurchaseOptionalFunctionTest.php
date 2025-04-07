@@ -10,8 +10,8 @@ use App\Models\Profile;
 use Tests\DuskTestCase;
 use Tests\DuskTestHelpers\BrowserUtils;
 
-// テストケースID:10
-class PurchaseTest extends DuskTestCase
+// テストケースID:11,12
+class PurchaseOptionalFunctionTest extends DuskTestCase
 {
     use BrowserUtils;
 
@@ -38,7 +38,7 @@ class PurchaseTest extends DuskTestCase
         $this->item = Item::where('name', '腕時計')->first();
     }
 
-    public function test_purchase_success()
+    public function test_select_payment_method_immediately_view()
     {
         $user = $this->user;
         $item = $this->item;
@@ -46,15 +46,16 @@ class PurchaseTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($user, $item) {
             $browser->loginAs($user)
                 ->visit("/purchase/{$item->id}")
+                ->select('payment', 1)
+                ->pause(1000)
+                ->assertSee('コンビニ払い')
                 ->select('payment', 2)
                 ->pause(1000)
-                ->press('購入する')
-                ->pause(5000)
-                ->screenshot('purchase_success');
+                ->assertSee('カード払い');
         });
     }
 
-    public function test_purchase_store_success()
+    public function test_delivery_address_correctly_changed()
     {
         $user = $this->user;
         $item = $this->item;
@@ -64,21 +65,25 @@ class PurchaseTest extends DuskTestCase
                 ->visit("/purchase/{$item->id}")
                 ->select('payment', 2)
                 ->pause(1000)
+                ->clickLink('変更する')
+                ->type('postcode', '333-3333')
+                ->type('address', 'changedAddress')
+                ->type('building', 'changedBuilding')
+                ->press('更新する')
+                ->pause(1000)
+                ->assertSee('333-3333')
+                ->assertSee('changedAddress' . 'changedBuilding') // 配送先住所変更の反映確認
                 ->press('購入する');
-            $this->type_stripe_card_payment_page($browser)
-                ->assertSee('腕時計')
-                ->screenshot('purchase_store_success') // 購入した商品一覧への追加
-                ->visit('/')
-                ->assertSee('sold')
-                ->screenshot('purchase_sold_view_success'); // 商品一覧でのsold表示
+            $this->type_stripe_card_payment_page($browser);
         });
 
+        // 送付住所が正しく結びついていることの確認
         $this->assertDatabaseHas('purchases', [
             'item_id' => $item->id,
             'buyer_id' => $user->id,
             'payment' => 2,
-            'delivery_postcode' => $this->user->profile()->first()->postcode,
-            'delivery_address' => $this->user->profile()->first()->address . $this->user->profile()->first()->building,
+            'delivery_postcode' => '333-3333',
+            'delivery_address' => 'changedAddress' . 'changedBuilding',
         ]);
     }
 }
