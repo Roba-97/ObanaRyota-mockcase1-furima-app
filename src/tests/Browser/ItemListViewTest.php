@@ -14,12 +14,18 @@ class ItemListViewTest extends DuskTestCase
 {
     use BrowserUtils;
 
+    protected static $wasSetup = false;
+
     public function setUp(): void
     {
         parent::setUp();
 
-        $this->artisan('migrate:refresh');
-        $this->artisan('db:seed');
+        if (! static::$wasSetup) {
+            $this->artisan('migrate:refresh');
+            $this->artisan('db:seed');
+
+            static::$wasSetup = true;
+        }
     }
 
     public function test_all_items_view()
@@ -37,7 +43,7 @@ class ItemListViewTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
                 ->assertSee('sold');
-            $this->screenshot_whole_page($browser, 'sold_item_view');
+            $this->screenshot_whole_page($browser, 'all_items_view_include_sold_item');
         });
     }
 
