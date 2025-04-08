@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Stripe\Stripe;
+use Stripe\Checkout\Session;
 use App\Models\Item;
 use App\Models\Purchase;
 use App\Http\Requests\AddressRequest;
 use App\Http\Requests\PurchaseRequest;
-use Stripe\Stripe;
-use Stripe\Checkout\Session;
 
 class PurchaseController extends Controller
 {

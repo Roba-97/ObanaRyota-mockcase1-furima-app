@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 use App\Models\Category;
 use App\Models\Condition;
 use App\Models\Item;
