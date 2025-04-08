@@ -2,18 +2,15 @@
 
 namespace Tests\Browser;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
+use App\Models\Favorite;
 use App\Models\Item;
 use App\Models\User;
-use App\Models\Favorite;
 
 // テストケースID:5
 class MylistItemViewTest extends DuskTestCase
 {
-    use DatabaseMigrations;
-
     private $user;
 
     public function setUp(): void
@@ -34,11 +31,15 @@ class MylistItemViewTest extends DuskTestCase
     public function test_mylist_items_view()
     {
         $user = $this->user;
+        $itemNames = Item::where('price', '>=', 5000)->pluck('name')->toArray();
 
-        $this->browse(function (Browser $browser) use ($user) {
+        $this->browse(function (Browser $browser) use ($user, $itemNames) {
             $browser->loginAs($user)
                 ->visit('/?page=mylist')
-                ->screenshot('mylist_items_view');
+                ->screenshot('MylistItemViewTest/mylist_items_view');
+            foreach ($itemNames as $itemName) {
+                $browser->assertSee($itemName);
+            }
         });
     }
 
@@ -51,7 +52,7 @@ class MylistItemViewTest extends DuskTestCase
             $browser->loginAs($user)
                 ->visit('/?page=mylist')
                 ->assertSee('sold')
-                ->screenshot('mylist_sold_item_view');
+                ->screenshot('MylistItemViewTest/mylist_sold_item_view');
         });
     }
 
@@ -64,7 +65,7 @@ class MylistItemViewTest extends DuskTestCase
             $browser->loginAs($user)
                 ->visit('/?page=mylist')
                 ->assertDontSee('HDD')
-                ->screenshot('mylist_view_other_than_exhibit');
+                ->screenshot('MylistItemViewTest/mylist_view_other_than_exhibit');
         });
     }
 
@@ -74,7 +75,7 @@ class MylistItemViewTest extends DuskTestCase
             $browser->driver->manage()->deleteAllCookies();
             $browser->visit('/?page=mylist')
                 ->assertGuest()
-                ->screenshot('unauthorized_user_mylist_view');
+                ->screenshot('MylistItemViewTest/unauthorized_user_mylist_view');
         });
     }
 }

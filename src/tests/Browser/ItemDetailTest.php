@@ -2,15 +2,14 @@
 
 namespace Tests\Browser;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
-use App\Models\Item;
-use App\Models\User;
-use App\Models\Category;
-use App\Models\Condition;
-use App\Models\Comment;
 use Tests\DuskTestCase;
 use Tests\DuskTestHelpers\BrowserUtils;
+use App\Models\Category;
+use App\Models\Comment;
+use App\Models\Condition;
+use App\Models\Item;
+use App\Models\User;
 
 // テストケースID:7
 class ItemDetailTest extends DuskTestCase

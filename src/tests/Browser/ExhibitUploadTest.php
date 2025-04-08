@@ -2,17 +2,14 @@
 
 namespace Tests\Browser;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
+use Tests\DuskTestCase;
 use App\Models\User;
 use App\Models\Item;
-use Tests\DuskTestCase;
 
 // テストケースID:15
 class ExhibitUploadTest extends DuskTestCase
 {
-    use DatabaseMigrations;
-
     public function setUp(): void
     {
         parent::setUp();

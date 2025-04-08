@@ -53,7 +53,7 @@ class UserRegistrationTest extends DuskTestCase
             $browser->visit('/register')
                 ->type('name', 'user')
                 ->type('email', 'test@example.com')
-                ->type('password', 'shorter')  // 7文字のパスワード
+                ->type('password', 'shorter')
                 ->type('password_confirmation', 'shorter')
                 ->press('登録する')
                 ->assertSee('パスワードは8文字以上で入力してください');

@@ -2,13 +2,12 @@
 
 namespace Tests\Browser;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
+use Tests\DuskTestCase;
+use Tests\DuskTestHelpers\BrowserUtils;
 use App\Models\Item;
 use App\Models\User;
 use App\Models\Profile;
-use Tests\DuskTestCase;
-use Tests\DuskTestHelpers\BrowserUtils;
 
 // テストケースID:10
 class PurchaseTest extends DuskTestCase
@@ -50,7 +49,7 @@ class PurchaseTest extends DuskTestCase
                 ->pause(1000)
                 ->press('購入する')
                 ->pause(5000)
-                ->screenshot('purchase_success');
+                ->screenshot('PurchaseTest/purchase_success');
         });
     }
 
@@ -67,10 +66,10 @@ class PurchaseTest extends DuskTestCase
                 ->press('購入する');
             $this->type_stripe_card_payment_page($browser)
                 ->assertSee('腕時計')
-                ->screenshot('purchase_store_success') // 購入した商品一覧への追加
+                ->screenshot('PurchaseTest/purchase_store_success') // 購入した商品一覧への追加
                 ->visit('/')
                 ->assertSee('sold')
-                ->screenshot('purchase_sold_view_success'); // 商品一覧でのsold表示
+                ->screenshot('PurchaseTest/purchase_sold_view_success'); // 商品一覧でのsold表示
         });
 
         $this->assertDatabaseHas('purchases', [

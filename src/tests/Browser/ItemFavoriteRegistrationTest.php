@@ -2,13 +2,12 @@
 
 namespace Tests\Browser;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
+use Tests\DuskTestCase;
 use Tests\DuskTestHelpers\BrowserUtils;
+use App\Models\Favorite;
 use App\Models\Item;
 use App\Models\User;
-use App\Models\Favorite;
-use Tests\DuskTestCase;
 
 // テストケースID:8
 class ItemFavoriteRegistrationTest extends DuskTestCase
@@ -40,9 +39,11 @@ class ItemFavoriteRegistrationTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($user, $item) {
             $browser->loginAs($user)
                 ->visit("/item/{$item->id}");
-            $this->screenshot_whole_page($browser, 'before_register_favorite_item'); // アイコン押下前の色とカウントの確認
+            // アイコン押下前の色とカウントの確認
+            $this->screenshot_whole_page($browser, 'ItemFavoriteRegistrationTest/register_favorite_item_before');
             $browser->click('a[href="/favorite/' . $item->id . '"]');
-            $this->screenshot_whole_page($browser, 'after_register_favorite_item'); // アイコン押下後の確認
+            // アイコン押下後の確認
+            $this->screenshot_whole_page($browser, 'ItemFavoriteRegistrationTest/register_favorite_item_after');
         });
 
         $this->assertEquals($this->item->favorites()->count(), $countBefore + 1);
@@ -67,9 +68,11 @@ class ItemFavoriteRegistrationTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($user, $item) {
             $browser->loginAs($user)
                 ->visit("/item/{$item->id}");
-            $this->screenshot_whole_page($browser, 'before_unregister_favorite_item'); // アイコン押下前の色とカウントの確認
+            // アイコン押下前の色とカウントの確認
+            $this->screenshot_whole_page($browser, 'ItemFavoriteRegistrationTest/unregister_favorite_item_before');
             $browser->click('a[href="/favorite/' . $item->id . '"]');
-            $this->screenshot_whole_page($browser, 'after_unregister_favorite_item'); // アイコン押下後の確認
+            // アイコン押下後の確認
+            $this->screenshot_whole_page($browser, 'ItemFavoriteRegistrationTest/unregister_favorite_item_after');
         });
 
         $this->assertEquals($this->item->favorites()->count(), $countBefore - 1);

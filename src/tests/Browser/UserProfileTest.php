@@ -2,14 +2,13 @@
 
 namespace Tests\Browser;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
+use Tests\DuskTestCase;
+use Tests\DuskTestHelpers\BrowserUtils;
 use App\Models\Item;
 use App\Models\User;
 use App\Models\Profile;
 use App\Models\Purchase;
-use Tests\DuskTestCase;
-use Tests\DuskTestHelpers\BrowserUtils;
 
 // テストケースID:13,14
 class UserProfileTest extends DuskTestCase
@@ -55,11 +54,11 @@ class UserProfileTest extends DuskTestCase
                 ->visit('/mypage')
                 ->clickLink('購入した商品')
                 ->assertSee('HDD')
-                ->screenshot('mypage_user_information_with_purchase')
+                ->screenshot('UserProfileTest/mypage_user_information_with_purchase')
                 ->clickLink('出品した商品')
                 ->pause(500)
                 ->assertSee('腕時計')
-                ->screenshot('mypage_user_information_with_exhibit');
+                ->screenshot('UserProfileTest/mypage_user_information_with_exhibit');
         });
     }
 
@@ -74,7 +73,7 @@ class UserProfileTest extends DuskTestCase
                 ->assertInputValue('postcode', $user->profile()->first()->postcode)
                 ->assertInputValue('address', $user->profile()->first()->address)
                 ->assertInputValue('building', $user->profile()->first()->building);
-            $this->screenshot_whole_page($browser, 'profile_user_information');
+            $this->screenshot_whole_page($browser, 'UserProfileTest/profile_user_information');
         });
     }
 }

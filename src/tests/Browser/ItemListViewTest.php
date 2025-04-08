@@ -2,10 +2,9 @@
 
 namespace Tests\Browser;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
-use Tests\DuskTestHelpers\BrowserUtils;
 use Tests\DuskTestCase;
+use Tests\DuskTestHelpers\BrowserUtils;
 use App\Models\Item;
 use App\Models\User;
 
@@ -14,25 +13,23 @@ class ItemListViewTest extends DuskTestCase
 {
     use BrowserUtils;
 
-    protected static $wasSetup = false;
-
     public function setUp(): void
     {
         parent::setUp();
 
-        if (! static::$wasSetup) {
-            $this->artisan('migrate:refresh');
-            $this->artisan('db:seed');
-
-            static::$wasSetup = true;
-        }
+        $this->artisan('migrate:refresh');
+        $this->artisan('db:seed');
     }
 
     public function test_all_items_view()
     {
-        $this->browse(function (Browser $browser) {
+        $itemNames = Item::all()->pluck('name')->toArray();
+        $this->browse(function (Browser $browser) use ($itemNames) {
             $browser->visit('/');
-            $this->screenshot_whole_page($browser, 'all_items_view');
+            foreach ($itemNames as $itemName) {
+                $browser->assertSee($itemName);
+            }
+            $this->screenshot_whole_page($browser, 'ItemListViewTest/all_items_view');
         });
     }
 
@@ -43,7 +40,7 @@ class ItemListViewTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
                 ->assertSee('sold');
-            $this->screenshot_whole_page($browser, 'all_items_view_include_sold_item');
+            $this->screenshot_whole_page($browser, 'ItemListViewTest/all_items_view_include_sold_item');
         });
     }
 
@@ -56,7 +53,7 @@ class ItemListViewTest extends DuskTestCase
             $browser->loginAs($user)
                 ->visit('/')
                 ->assertDontSee('革靴');
-            $this->screenshot_whole_page($browser, 'all_items_view_other_than_exhibit');
+            $this->screenshot_whole_page($browser, 'ItemListViewTest/all_items_view_other_than_exhibit');
         });
     }
 }

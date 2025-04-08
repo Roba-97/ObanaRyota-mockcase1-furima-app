@@ -3,17 +3,14 @@
 namespace Tests\Browser;
 
 use Illuminate\Support\Str;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
+use Tests\DuskTestCase;
 use App\Models\Item;
 use App\Models\User;
-use Tests\DuskTestCase;
 
 // テストケースID:9
 class CommentPostTest extends DuskTestCase
 {
-    use DatabaseMigrations;
-
     private $user;
     private $item;
 

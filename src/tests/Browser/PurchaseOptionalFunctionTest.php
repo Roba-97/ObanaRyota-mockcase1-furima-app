@@ -2,13 +2,12 @@
 
 namespace Tests\Browser;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
+use Tests\DuskTestCase;
+use Tests\DuskTestHelpers\BrowserUtils;
 use App\Models\Item;
 use App\Models\User;
 use App\Models\Profile;
-use Tests\DuskTestCase;
-use Tests\DuskTestHelpers\BrowserUtils;
 
 // テストケースID:11,12
 class PurchaseOptionalFunctionTest extends DuskTestCase

@@ -2,12 +2,11 @@
 
 namespace Tests\Browser;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
+use Tests\DuskTestCase;
+use App\Models\Favorite;
 use App\Models\Item;
 use App\Models\User;
-use App\Models\Favorite;
-use Tests\DuskTestCase;
 
 // テストケースID:6
 class ItemSearchTest extends DuskTestCase
