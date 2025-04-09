@@ -53,6 +53,8 @@ class MypageController extends Controller
         if (null !== $request->file('image')) {
             $path = $request->file('image')->store('public/images/users');
             $path = 'storage/images/users/' . basename($path);
+        } elseif (null !== Profile::where('user_id', Auth::user()->id)->first()->image_path) {
+            $path = Profile::where('user_id', Auth::user()->id)->first()->image_path;
         } else {
             $path = null;
         }
@@ -68,11 +70,6 @@ class MypageController extends Controller
                 'building' => $request->building,
             ]);
             return redirect('/');
-        }
-
-        // 事前に写真が登録されていた場合image_pathは変更しない
-        if (null !== Profile::where('user_id', Auth::user()->id)->first()->image_path && $path == null) {
-            $path = Profile::where('user_id', Auth::user()->id)->first()->image_path;
         }
 
         User::find(Auth::user()->id)->update(['name' => $request->name]);

@@ -13,7 +13,7 @@ use App\Http\Requests\PurchaseRequest;
 
 class PurchaseController extends Controller
 {
-    private $method  = ['', 'konbini', 'card'];
+    private $options  = ['', 'konbini', 'card'];
 
     public function index(Item $item)
     {
@@ -26,7 +26,7 @@ class PurchaseController extends Controller
     public function stripe(PurchaseRequest $request, Item $item)
     {
         Stripe::setApiKey(config('services.stripe.secret'));
-        $method = $this->method[$request->input('payment')];
+        $method = $this->options[$request->input('payment')];
 
         $session = Session::create([
             'payment_method_types' => [$method],
@@ -36,7 +36,7 @@ class PurchaseController extends Controller
                     'product_data' => [
                         'name' => $item->name,
                     ],
-                    'unit_amount' =>  $item->price,
+                    'unit_amount' => $item->price,
                 ],
                 'quantity' => 1,
             ]],

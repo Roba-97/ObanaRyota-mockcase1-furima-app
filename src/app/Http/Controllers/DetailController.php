@@ -24,11 +24,10 @@ class DetailController extends Controller
         if (Auth::user()->favorites()->where('item_id', $item->id)->exists()) {
             Favorite::where('item_id', $item->id)->where('user_id', Auth::user()->id)->delete();
         } else {
-            $data = [
+            Favorite::create([
                 'item_id' => $item->id,
                 'user_id' => Auth::user()->id
-            ];
-            Favorite::create($data);
+            ]);
         }
 
         return redirect()->route('detail.index', ['item' => $item->id]);
@@ -36,13 +35,11 @@ class DetailController extends Controller
 
     public function comment(CommentRequest $request, Item $item)
     {
-        $data = [
+        Comment::create([
             'item_id' => $item->id,
             'user_id' => Auth::user()->id,
             'content' => $request->content,
-        ];
-
-        Comment::create($data);
+        ]);
 
         return redirect()->route('detail.index', ['item' => $item->id])->withFragment('comment-form');
     }

@@ -8,8 +8,6 @@ use App\Models\Item;
 
 class ItemController extends Controller
 {
-    private $column  = ['id', 'image_path', 'name', 'sold_flag'];
-
     public function index(Request $request)
     {
         $showMylist = $request->page === "mylist" ? true : false;
@@ -22,7 +20,7 @@ class ItemController extends Controller
 
     public function search($showMylist, $keyword)
     {
-        $column = $this->column;
+        $column = ['id', 'image_path', 'name', 'sold_flag'];
 
         if ($showMylist && Auth::check()) {
             $itemsId = Auth::user()->favorites()->select('Item_id')->get();
