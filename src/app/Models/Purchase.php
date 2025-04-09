@@ -16,14 +16,4 @@ class Purchase extends Model
         'delivery_postcode',
         'delivery_address',
     ];
-
-    public function item()
-    {
-        return $this->belongsTo(Item::class);
-    }
-
-    public function buyer()
-    {
-        return $this->belongsTo(User::class);
-    }
 }

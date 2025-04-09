@@ -10,13 +10,13 @@ class CommentRequest extends FormRequest
 {
     protected function failedValidation(Validator $validator)
     {
-        $itemId = $this->route('item')->id; // ルートパラメータから `item_id` を取得
+        $itemId = $this->route('item')->id;
 
         throw new HttpResponseException(
-            redirect()->route('detail.index', ['item' => $itemId]) // 基本のリダイレクト
-                ->withErrors($validator) // バリデーションエラーを渡す
-                ->withInput() // 入力値を保持
-                ->withFragment('comment-form') // #comment-form を追加
+            redirect()->route('detail.index', ['item' => $itemId])
+                ->withErrors($validator)
+                ->withInput()
+                ->withFragment('comment-form')
         );
     }
 
