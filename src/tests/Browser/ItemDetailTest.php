@@ -23,7 +23,7 @@ class ItemDetailTest extends DuskTestCase
     {
         parent::setUp();
 
-        $this->artisan('migrate:refresh');
+        $this->artisan('migrate:fresh');
         $this->artisan('db:seed');
 
         $this->item = Item::where('name', '腕時計')->first();
