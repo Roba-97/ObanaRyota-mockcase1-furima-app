@@ -1,0 +1,210 @@
+.sell-form {
+    margin: 75px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.sell-form__heading {
+    margin: 0 0 50px;
+    text-align: center;
+    font-size: 3.6rem;
+}
+
+.sell-form__sub-heading {
+    margin-top: 75px;
+    border-bottom: solid 1px #5F5F5F;
+    color: #5F5F5F;
+    text-align: left;
+    font-size: 3rem;
+}
+
+.sell-form__inner {
+    margin: 0 auto;
+}
+
+.sell-form__form {
+    width: 680px;
+}
+
+.sell-form__group-img {
+    width: 100%;
+    min-height: 150px;
+    max-height: 300px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px dashed #5F5F5F;
+    border-radius: 4px;
+}
+
+.sell-form__img {
+    display: inline-block;
+    margin: 15px 50px 15px 0;
+    max-height: 270px;
+    aspect-ratio: 1;
+    object-fit: contain;
+}
+
+.sell-form__label-img {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: inherit;
+    border: solid 2px #FF5555;
+    border-radius: 10px;
+    color: #FF5555;
+    font-size: 1.6rem;
+    outline: none;
+}
+.sell-form__label-img:hover {
+    cursor: pointer;
+}
+.sell-form__input-img {
+    display: none;
+}
+
+.sell-form__group {
+    margin-top: 40px;
+}
+
+.sell-form__label {
+    display: block;
+    font-size: 2.4rem;
+    font-weight: 700;
+}
+.sell-form__label--category {
+    margin-bottom: 25px;
+}
+.sell-form__label--condition {
+    margin-bottom: 10px;
+}
+
+.sell-form__input {
+    width: 100%;
+    height: 45px;
+    padding: 10px;
+    border: solid 1px #5F5F5F;
+    border-radius: 4px;
+    font-size: 2.4rem;
+    outline: none;
+}
+
+/* チェックボックス */
+.sell-form__label-check {
+    display: inline-block;
+    margin: 0 10px 15px 0;
+    padding: 0 15px;
+    height: 32px;
+    line-height: 32px;
+    background-color: #FFFFFF;
+    border: solid 1px #FF5555;
+    border-radius: 15px;
+    color: #FF5555;
+    font-size: 1.5rem;
+}
+.sell-form__label-check:hover {
+    cursor: pointer;
+}
+.sell-form__input-check:checked + .sell-form__label-check {
+    background-color: #FF5555;
+    border: solid 1px #FF5555;
+    color: #FFFFFF;
+}
+.sell-form__input-check {
+    display: none;
+}
+
+.sell-form__select {
+    width: 100%;
+    height: 45px;
+    padding: 10px;
+    border: solid 1px #5F5F5F;
+    border-radius: 4px;
+    outline: none;
+}
+.sell-form__select-item {
+    background-color: #636769;
+    color: #FFFFFF;
+}
+
+.sell-form__input-detail {
+    width: 100%;
+    padding: 10px;
+    border: solid 1px #5F5F5F;
+    border-radius: 4px;
+    font-size: 2.4rem;
+    outline: none;
+}
+
+.sell-form__group-price {
+    position: relative;
+}
+.sell-form__input-symbol {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #000000;
+    font-size: 2.4rem;
+    font-weight: 700;
+}
+.sell-form__input--price {
+    padding-left: 40px;
+}
+
+.sell-form__btn {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    margin: 60px 0 0px;
+    background-color: #FF5555;
+    border: none;
+    border-radius: 5px;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 2.6rem;
+}
+
+.sell-form__error-message {
+    margin: 10px 0;
+    color: #FF5555;
+    font-size: 2rem;
+}
+
+@media screen and (max-width: 960px) {
+    .sell-form {
+        margin: 50px 0;
+    }
+    .sell-form__form {
+        width: 480px;
+    }
+    .sell-form__group-img {
+        min-height: 120px;
+        max-height: 240px;
+    }
+    .sell-form__img {
+        display: inline-block;
+        margin: 10px 25px 10px 0;
+        max-height: 220px;
+    }
+    .sell-form__label-img {
+        padding: 8px 20px;
+    }
+    .sell-form__sub-heading {
+        margin-top: 50px;
+    }
+    .sell-form__label-check {
+        margin: 0 7.5px 10px 0;
+        padding: 0 10px;
+        height: 28px;
+        line-height: 28px;
+    }
+    .sell-form__input, .sell-form__select {
+        height: 35px;
+    }
+    .sell-form__btn {
+        height: 45px;
+        line-height: 45px;
+        margin: 45px 0 0px;
+    }
+}

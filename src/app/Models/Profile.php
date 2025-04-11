@@ -12,34 +12,8 @@ class Profile extends Model
     protected $fillable = [
         'user_id',
         'image_path',
-        'name',
         'postcode',
-        'address'
+        'address',
+        'building'
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function items()
-    {
-        return $this->hasMany(Item::class, 'seller_id');
-    }
-
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
-    }
-
-    public function favorites()
-    {
-        return $this->hasMany(Favorite::class);
-    }
-
-    public function purchases()
-    {
-        return $this->hasMany(Purchase::class);
-    }
-
 }

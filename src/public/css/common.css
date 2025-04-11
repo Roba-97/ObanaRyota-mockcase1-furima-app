@@ -1,17 +1,5 @@
-
-.inter-bold {
-    font-family: "Inter", serif;
-    font-optical-sizing: auto;
-    font-weight: 700;
-    font-style: normal;
-}
-
-
-.inter-regular {
-    font-family: "Inter", serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
+html {
+    font-size: 62.5%; /* -> 10px */
 }
 
 .app {
@@ -36,7 +24,7 @@
     background-image: url(../images/logo.svg);
     background-size: cover;
     display: inline-block;
-    margin: auto 30px;
+    margin: auto 20px;
     width: 300px;
     height: 32px;
 }
@@ -44,32 +32,65 @@
 .header__search {
     align-items: center;
     margin: 0 auto;
+    max-width: 500px;
+}
+
+.header__search-form {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    font-size: 2.4rem;
 }
 
 .header__search-input {
-    padding: 5px 15px 5px 30px;
-    width: 500px;
+    padding: 5px 15px;
     height: 50px;
-    background-color: #FFFFFF;
+    background-color: inherit;
     border: none;
-    border-radius: 5px;
+    border-radius: 5px 0 0 5px;
     color: #000000;
-    font-size: 24px;
+    font-size: inherit;
     outline: none;
+    flex-grow: 1;
 }
 
 .header__search-input::placeholder {
     color: #000000;
-    font-size: 24px;
+    font-size: inherit;
+}
+
+.header__search-reset {
+    display: inline-block;
+    margin-right: 10px;
+    color: #000000;
+    font-size: 2.4rem;
+    text-decoration: none;
+    outline: none;
+    line-height: 50px;
+}
+
+.header__search-btn {
+    display: inline-block;
+    padding-right: 15px;
+    height: 50px;
+    background-color: inherit;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    font-size: inherit;
+    outline: none;
+    cursor: pointer;
 }
 
 .header__nav {
-    margin-right: 30px;
+    margin-right: 20px;
 }
 
 .header__nav-list {
     display: flex;
     justify-content: space-around;
+    font-size: 2.4rem;
 }
 
 .header__nav-item a {
@@ -77,7 +98,7 @@
     padding: 5px 15px;
     color: #FFFFFF;
     text-decoration: none;
-    font-size: 24px;
+    font-size: inherit;
 }
 
 .header__nav-item--sell a {
@@ -95,7 +116,7 @@
     background: #000000;
     border: none;
     color: #FFFFFF;
-    font-size: 24px;
+    font-size: inherit;
 }
 
 .content {
@@ -103,4 +124,38 @@
     flex-direction: column;
     flex-grow: 1;
     justify-content: center;
+}
+
+@media screen and (max-width: 960px) {
+    html {
+        font-size: 43.75%; /* タブレットでのフォントサイズは通常の70%(10px -> 7px)に*/
+    }
+    .header__logo {
+        margin: auto 0 auto 10px;
+        width: 187.5px;
+        height: 20px;
+    }
+    .header__search-form {
+        font-size: 14px;
+        width: auto;
+    }
+    .header__nav {
+        margin-right: 10px;
+    }
+    .header__nav-list {
+        font-size: 14px;
+    }
+    .header__search-input {
+        width: min-content;
+    }
+    .header__search-btn {
+        white-space: nowrap;
+    }
+    .header__nav-item a, .header__nav-logout{
+        padding: 5px;
+    }
+    .header__nav-item--sell a {
+        margin-left: 5px;
+        padding: 5px 10px;
+    }
 }

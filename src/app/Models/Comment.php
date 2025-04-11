@@ -11,7 +11,7 @@ class Comment extends Model
 
     protected $fillable = [
         'item_id',
-        'profile_id',
+        'user_id',
         'content'
     ];
 
@@ -20,8 +20,8 @@ class Comment extends Model
         return $this->belongsTo(Item::class);
     }
 
-    public function profile()
+    public function user()
     {
-        return $this->belongsTo(Profile::class);
+        return $this->belongsTo(User::class);
     }
 }

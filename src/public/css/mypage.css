@@ -1,0 +1,124 @@
+.user {
+    margin: 75px auto;
+    display: flex;
+    align-items: center;
+}
+
+.user__img {
+    display: block;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user__name {
+    display: block;
+    margin: 0 300px 0 75px;
+    font-size: 3.6rem;
+}
+
+.user_edit-btn {
+    display: inline-block;
+    padding: 0 40px;
+    height: 60px;
+    line-height: 60px;
+    background-color: inherit;
+    border: solid 2px #FF5555;
+    border-radius: 10px;
+    color: #FF5555;
+    font-size: 2.6rem;
+}
+
+.tab {
+    margin-bottom: 60px;
+    padding: 0 5%;
+    display: flex;
+    border-bottom: solid 2px #5F5F5F;
+}
+
+.tab__link{
+    display: block;
+    margin: 5px 75px;
+    border: none;
+    background-color: inherit;
+    color: #000000;
+    font-size: 2.4rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.tab__link--active {
+    color: #FF0000;
+}
+
+.item-list {
+    margin: 0 50px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 50px;
+}
+
+.item-list__item {
+    width: 100%;
+    position: relative;
+}
+
+.item-list__img {
+    width: 100%;
+    border-radius: 4px;
+    object-fit: contain;
+    aspect-ratio: 1;
+}
+
+.item-list__name {
+    font-size: 2.5rem;
+    margin-top: 5px;
+}
+
+.item-list__sold-mask {
+    top: 0;
+    left: 0;
+    width: 100%;
+    position: absolute;
+    z-index: 100;
+    aspect-ratio: 1;
+}
+
+.item-list__sold-text {
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    border-radius: 4px;
+}
+
+.item-list__sold-text span {
+    color: #FFFFFF;
+    font-size: 3.4rem;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 960px) {
+    .user__img  {
+        width: 100px;
+        height: 100px;
+    }
+    .user__name {
+        margin: 0 150px 0 50px;
+    }
+    .user_edit-btn {
+        padding: 0 25px;
+        height: 45px;
+        line-height: 45px;
+        background-color: inherit;
+    }
+    .tab  {
+        justify-content: center;
+    }
+    .item-list {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px
+    }
+}

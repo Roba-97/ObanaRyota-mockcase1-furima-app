@@ -11,7 +11,6 @@ class Item extends Model
 
     protected $fillable = [
         'seller_id',
-        'category_id',
         'condition_id',
         'image_path',
         'name',
@@ -21,9 +20,16 @@ class Item extends Model
         'sold_flag'
     ];
 
+    public function scopeKeywordSearch($query, $keyword)
+    {
+        if (!empty($keyword)) {
+            $query->where('name', 'like', '%' . $keyword . '%');
+        }
+    }
+
     public function seller()
     {
-        return $this->belongsTo(Profile::class);
+        return $this->belongsTo(User::class);
     }
 
     public function categories() {
@@ -31,7 +37,7 @@ class Item extends Model
     }
 
     public function condition() {
-        return $this->hasOne(Condition::class);
+        return $this->belongsTo(Condition::class);
     }
 
     public function comments()

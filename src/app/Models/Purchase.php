@@ -11,16 +11,9 @@ class Purchase extends Model
 
     protected $fillable = [
         'item_id',
-        'profile_id',
+        'buyer_id',
+        'payment',
+        'delivery_postcode',
+        'delivery_address',
     ];
-
-    public function item()
-    {
-        return $this->belongsTo(Item::class);
-    }
-
-    public function buyer()
-    {
-        return $this->belongsTo(Profile::class);
-    }
 }
