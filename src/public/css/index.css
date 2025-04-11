@@ -3,16 +3,11 @@
     margin: 40px 0 60px;
     padding: 0 5%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     border-bottom: solid 2px #5F5F5F;
 }
 
-.tab__inner {
-    display: flex;
-}
-
-.tab__link, .tab__reset{
+.tab__link {
     display: block;
     margin: 5px 75px;
     border: none;
@@ -21,12 +16,6 @@
     font-size: 2.4rem;
     text-decoration: none;
     cursor: pointer;
-}
-
-.tab__reset {
-    margin: 5px 0;
-    color: #0073CC;
-    font-size: 2rem;
 }
 
 .tab__link--active {
@@ -83,6 +72,9 @@
 }
 
 @media screen and (max-width: 960px) {
+    .tab {
+        justify-content: center;
+    }
     .tab__link {
         margin: 5px 50px;
     }

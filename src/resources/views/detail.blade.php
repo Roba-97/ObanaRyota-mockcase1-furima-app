@@ -79,9 +79,9 @@
             <div class="item-detail__comment-content">
                 @foreach($comments as $comment)
                 @isset($comment->user()->first()->profile()->first()->image_path)
-                <img src="{{ asset($comment->user()->first()->profile()->first()->image_path) }}" alt="ユーザアイコン" class="comment__user-img">
+                <img class="comment__user-img" src="{{ asset($comment->user()->first()->profile()->first()->image_path) }}" alt="ユーザアイコン">
                 @else
-                <img src="{{ asset('images/default_user_icon.png') }}" alt="ユーザアイコン" class="comment__user-img">
+                <img class="comment__user-img" src="{{ asset('images/default_user_icon.png') }}" alt="ユーザアイコン">
                 @endisset
                 <span class="comment__user-name">{{ $comment->user()->first()->name }}</span>
                 <div class="comment__text">

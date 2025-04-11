@@ -2,20 +2,6 @@ html {
     font-size: 62.5%; /* -> 10px */
 }
 
-.inter-bold {
-    font-family: "Inter", serif;
-    font-optical-sizing: auto;
-    font-weight: 700;
-    font-style: normal;
-}
-
-.inter-regular {
-    font-family: "Inter", serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-}
-
 .app {
     display: flex;
     flex-direction: column;
@@ -46,12 +32,13 @@ html {
 .header__search {
     align-items: center;
     margin: 0 auto;
+    max-width: 500px;
 }
 
 .header__search-form {
     display: flex;
     justify-content: space-between;
-    width: 500px;
+    width: 100%;
     background-color: #FFFFFF;
     border-radius: 5px;
     font-size: 2.4rem;
@@ -72,6 +59,16 @@ html {
 .header__search-input::placeholder {
     color: #000000;
     font-size: inherit;
+}
+
+.header__search-reset {
+    display: inline-block;
+    margin-right: 10px;
+    color: #000000;
+    font-size: 2.4rem;
+    text-decoration: none;
+    outline: none;
+    line-height: 50px;
 }
 
 .header__search-btn {
