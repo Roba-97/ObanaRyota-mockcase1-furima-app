@@ -18,7 +18,7 @@ class MylistItemViewTest extends DuskTestCase
         parent::setUp();
 
         $this->artisan('migrate:fresh');
-        $this->artisan('db:seed');
+        $this->artisan('db:seed', ['--class' => 'TestDatabaseSeeder']);
 
         $this->user = User::factory()->create();
 

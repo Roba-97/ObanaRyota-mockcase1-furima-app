@@ -16,7 +16,7 @@ class ItemSearchTest extends DuskTestCase
         parent::setUp();
 
         $this->artisan('migrate:fresh');
-        $this->artisan('db:seed');
+        $this->artisan('db:seed', ['--class' => 'TestDatabaseSeeder']);
     }
 
     public function test_search_item()

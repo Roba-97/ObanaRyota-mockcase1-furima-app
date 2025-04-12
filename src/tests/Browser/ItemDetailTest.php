@@ -5,7 +5,6 @@ namespace Tests\Browser;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use Tests\DuskTestHelpers\BrowserUtils;
-use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Condition;
 use App\Models\Item;
@@ -24,13 +23,9 @@ class ItemDetailTest extends DuskTestCase
         parent::setUp();
 
         $this->artisan('migrate:fresh');
-        $this->artisan('db:seed');
+        $this->artisan('db:seed', ['--class' => 'TestDatabaseSeeder']);
 
         $this->item = Item::where('name', '腕時計')->first();
-        $this->item->update(['brand' => 'test']);
-
-        $categoryIds = Category::whereIn('content', ['ファッション', 'メンズ', 'アクセサリー'])->pluck('id')->toArray();
-        $this->item->categories()->sync($categoryIds);
 
         $this->commentUser = User::factory()->create();
         Comment::create([
@@ -45,7 +40,7 @@ class ItemDetailTest extends DuskTestCase
         $item = $this->item;
         $commentUser = $this->commentUser;
         $condition = Condition::find($item->condition_id)->content;
-        $categories = ['ファッション', 'メンズ', 'アクセサリー'];
+        $categories = $item->categories()->pluck('content')->toArray();
 
         $this->browse(function (Browser $browser) use ($item, $condition, $categories, $commentUser) {
             $browser->visit("/item/{$item->id}")

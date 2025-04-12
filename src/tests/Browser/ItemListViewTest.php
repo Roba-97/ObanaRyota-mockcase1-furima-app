@@ -18,7 +18,7 @@ class ItemListViewTest extends DuskTestCase
         parent::setUp();
 
         $this->artisan('migrate:fresh');
-        $this->artisan('db:seed');
+        $this->artisan('db:seed', ['--class' => 'TestDatabaseSeeder']);
     }
 
     public function test_all_items_view()
