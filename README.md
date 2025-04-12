@@ -20,6 +20,7 @@ DB_PASSWORD=laravel_pass
 ```
 4. `php artisan key:generate`
 5. `php artisan migrate --seed`
+6. `php artisan storage:link`
 
 ### Mailhog接続設定
 .env ファイルに以下の環境変数を追加
@@ -44,6 +45,13 @@ Stripeアカウントを作成されてない方は、[Stripeトップページ]
 
 
 ## アプリケーションの動作確認について
+
+### 開発環境アクセス時のエラーについて
+「The stream or file "/var/www/storage/logs/laravel.log" could not be opened in append mode　･･･」<br>
+開発環境にアクセスした際に、上記のエラーが表示された場合は以下のコマンドで権限変更を行うことで対処できます<br>
+`chmod 777 -R src/*`<br>
+
+### 動作確認用テストユーザーについて
 テスト用のユーザが TestUserSeeder.php によって作成されます（DatabaseSeeder.phpに登録済み）<br>
 以下のアカウント情報でログインしてください
 | 入力欄| 入力内容 |
@@ -53,11 +61,15 @@ Stripeアカウントを作成されてない方は、[Stripeトップページ]
 
 このテスト用ユーザでは、出品、購入、お気に入り登録した商品が確認できます
 
+### Stripe決済画面接続後の注意点について
+Stripeの決済画面接続後は、ブラウザの「戻る」ボタンをクリックしないようにしてください<br>
+※ 決済のキャンセルを行いたい場合は、商品名の上にある「←」をクリックしてください
+
 
 ## テストの実行について
 Laravel Dusk を用いてテストを作成しています。以下のコマンドで実行してください。<br>
 `php artisan dusk test/Browser/テストファイル名`<br>
-テスト実行後は、以下のコマンドで再度マイグレーションを行ってください。<br>
+テスト実行後、開発環境に再度アクセスする際は、以下のコマンドで再度マイグレーションを行ってください。<br>
 `php artisan migrate:fresh --seed`
 
 
@@ -69,10 +81,13 @@ Laravel Dusk を用いてテストを作成しています。以下のコマン�
 - mailhog:latest
 - selenium standalone-chrome-debug:latest
 
+
 ## ER図
 ![ER図](/src/er-diagram.drawio.png)
 
+
 ## URL
 - 開発環境 : [http://localhost/](http://localhost/ )
+- ユーザー登録 : [http://localhost/register/](http://localhost/register)
 - phpMyAdmin : [http://localhost:8080/](http://localhost:8080/)
 - MailHog : [http://localhost:8025/](http://localhost:8025/)
