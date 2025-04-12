@@ -38,7 +38,7 @@ class ExhibitUploadTest extends DuskTestCase
                 ->type('price', 1000)
                 ->press('出品する')
                 ->assertPathIs('/mypage')
-                ->screenshot('upload_exhibit_success');
+                ->screenshot('ExhibitUploadTest/upload_exhibit_success');
         });
 
         $this->assertDatabaseHas('items', [
