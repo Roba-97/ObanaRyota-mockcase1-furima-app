@@ -41,15 +41,15 @@ MAIL_FROM_NAME="${APP_NAME}"
 STRIPE_KEY={Your_Public_API_Key}
 STRIPE_SECRET={Your_Secret_API_Key}
 ```
-Stripeアカウントを作成されてない方は、[Stripeトップページ](https://stripe.com/jp) から
+Stripe API Keyは、[Stripeトップページ](https://stripe.com/jp) からアカウントを作成して取得してください
 
 
 ## アプリケーションの動作確認について
 
 ### 開発環境アクセス時のエラーについて
 「The stream or file "/var/www/storage/logs/laravel.log" could not be opened in append mode　･･･」<br>
-開発環境にアクセスした際に、上記のエラーが表示された場合は以下のコマンドで権限変更を行うことで対処できます<br>
-`chmod 777 -R src/*`<br>
+開発環境にアクセスした際に、上記のエラーが表示された場合は以下のコマンドで権限変更を行ってください<br>
+`chmod 777 -R src *`<br>
 
 ### 動作確認用テストユーザーについて
 テスト用のユーザが TestUserSeeder.php によって作成されます（DatabaseSeeder.phpに登録済み）<br>
@@ -67,10 +67,18 @@ Stripeの決済画面接続後は、ブラウザの「戻る」ボタンをク�
 
 
 ## テストの実行について
-Laravel Dusk を用いてテストを作成しています。以下のコマンドで実行してください。<br>
+Laravel Dusk を用いてテストを作成しています<br>
+テストの実行前に、テスト用のデータベースを以下の手順で作成してください
+1. `docker-compose exec mysql bash`
+2. `mysql -u root -p`
+3. パスワード `root` を入力
+4. `CREATE DATABASE demo_test;`
+5. `SHOW DATABASES;` で「demo_test」データベースが作成されていることを確認
+
+以上が完了したら、phpコンテナから以下のコマンドでテストを実行してください<br>
 `php artisan dusk test/Browser/テストファイル名`<br>
-テスト実行後、開発環境に再度アクセスする際は、以下のコマンドで再度マイグレーションを行ってください。<br>
-`php artisan migrate:fresh --seed`
+※ tests/Browser/ に作成したテストファイルには、対象のテストケースIDを記しています<br>
+※ テストによってはスクリーンショットを取得するので、tests/Browser/screenshots/ を確認してください<br>
 
 
 ## 使用技術
