@@ -26,7 +26,7 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::get('/purchase/address/{item}', [PurchaseController::class, 'edit']);
     Route::post('/purchase/address/{item}', [PurchaseController::class, 'update']);
     Route::post('/purchase/stripe/{item}', [PurchaseController::class, 'stripe']);
-    Route::get('/purchase/{item}', [PurchaseController::class, 'index'])->name('purchase.index');
+    Route::get('/purchase/{item}', [PurchaseController::class, 'index'])->middleware('profile.registered')->name('purchase.index');
 });
 
 Route::get('/email/verify', function () {
