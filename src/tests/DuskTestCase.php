@@ -5,11 +5,30 @@ namespace Tests;
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
+use Illuminate\Support\Facades\Artisan;
 use Laravel\Dusk\TestCase as BaseTestCase;
 
 abstract class DuskTestCase extends BaseTestCase
 {
     use CreatesApplication;
+
+    private $dusk_env = '.env.dusk.local';
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->app = $this->createApplication();
+        if (file_exists($this->app->basePath($this->dusk_env))) {
+            $this->app->loadEnvironmentFrom($this->dusk_env);
+            Artisan::call('config:cache');
+        }
+    }
+
+    public function tearDown(): void
+    {
+        Artisan::call('config:clear');
+        parent::tearDown();
+    }
 
     protected function baseUrl()
     {
