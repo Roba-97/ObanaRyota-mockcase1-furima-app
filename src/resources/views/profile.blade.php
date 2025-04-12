@@ -22,6 +22,9 @@
 			<div class="profile-form__group-img">
 				<livewire:profile-image-preview-component />
 			</div>
+			@if(session('message'))
+			<p class="profile-form__error-message--middleware">{{ session('message') }}</p>
+			@endif
 			<div class="profile-form__group">
 				<label class="profile-form__label" for="name">ユーザー名</label>
 				<input class="profile-form__input" type="text" name="name" id="name" value="{{ old('name', $profile['name']) }}">
