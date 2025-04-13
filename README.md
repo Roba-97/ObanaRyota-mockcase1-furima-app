@@ -23,7 +23,7 @@ DB_PASSWORD=laravel_pass
 6. `php artisan storage:link`
 
 ### Mailhog接続設定
-.env ファイルに以下の環境変数を追加
+.env ファイルに以下の環境変数があることを確認（ない場合は追加）
 ``` copy
 MAIL_MAILER=smtp
 MAIL_HOST=mailhog
@@ -31,7 +31,7 @@ MAIL_PORT=1025
 MAIL_USERNAME=null
 MAIL_PASSWORD=null
 MAIL_ENCRYPTION=null
-MAIL_FROM_ADDRESS={Any_email_address}
+MAIL_FROM_ADDRESS=Laravel@example.com
 MAIL_FROM_NAME="${APP_NAME}"
 ```
 
