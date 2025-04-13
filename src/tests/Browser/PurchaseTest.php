@@ -49,6 +49,7 @@ class PurchaseTest extends DuskTestCase
                 ->pause(1000)
                 ->press('購入する')
                 ->pause(5000)
+                ->assertSee('腕時計')
                 ->screenshot('PurchaseTest/purchase_success');
         });
     }
