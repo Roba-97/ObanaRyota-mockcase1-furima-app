@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Profile;
+use App\Models\User;
 
 class TestUserSeeder extends Seeder
 {
@@ -13,50 +15,43 @@ class TestUserSeeder extends Seeder
      */
     public function run()
     {
-        $user = \App\Models\User::create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $user1 = User::create([
+            'name' => 'Test User1',
+            'email' => 'test1@example.com',
             'password' => bcrypt('password'),
             'email_verified_at' => now(),
         ]);
-
-        $profile = \App\Models\Profile::create([
-            'user_id' => $user->id,
+        Profile::create([
+            'user_id' => $user1->id,
             'postcode' => '123-4567',
-            'address' => '東京都新宿区テスト町1-1',
+            'address' => '東京都新宿区',
             'building' => 'テストビル101',
         ]);
 
-        $favoriteItems = \App\Models\Item::orderBy('id')->take(3)->pluck('id')->toArray();
-        foreach ($favoriteItems as $itemId) {
-            \App\Models\Favorite::create([
-                'user_id' => $user->id,
-                'item_id' => $itemId,
-            ]);
-        }
-
-        $purchasedItems = \App\Models\Item::orderBy('id')->skip(2)->take(2)->pluck('id')->toArray();
-        foreach ($purchasedItems as $itemId) {
-            \App\Models\Purchase::create([
-                'buyer_id' => $user->id,
-                'item_id' => $itemId,
-                'payment' => 1,
-                'delivery_postcode' => $profile->postcode,
-                'delivery_address' => $profile->address . $profile->building,
-            ]);
-            \App\Models\Item::find($itemId)->update(['sold_flag' => true]);
-        }
-
-        $categoryIds = \App\Models\Category::whereIn('content', ['メンズ', 'アクセサリー'])->pluck('id')->toArray();
-        $exhibitItem = \App\Models\Item::create([
-            'seller_id' => $user->id,
-            'condition_id' => 1,
-            'image_path' => 'images/dummies/Armani+Mens+Clock.jpg',
-            'name' => 'テスト出品商品',
-            'price' => 3000,
-            'detail' => 'これはテスト出品された商品です',
-            'sold_flag' => false
+        $user2 = User::create([
+            'name' => 'Test User2',
+            'email' => 'test2@example.com',
+            'password' => bcrypt('password'),
+            'email_verified_at' => now(),
         ]);
-        $exhibitItem->categories()->sync($categoryIds);
+        Profile::create([
+            'user_id' => $user2->id,
+            'postcode' => '123-4567',
+            'address' => '大阪府大阪市中央区',
+            'building' => 'テストビル202',
+        ]);
+
+        $user3 = User::create([
+            'name' => 'Test User3',
+            'email' => 'test3@example.com',
+            'password' => bcrypt('password'),
+            'email_verified_at' => now(),
+        ]);
+        Profile::create([
+            'user_id' => $user3->id,
+            'postcode' => '123-4567',
+            'address' => '福岡県福岡市博多区',
+            'building' => 'テストビル303',
+        ]);
     }
 }

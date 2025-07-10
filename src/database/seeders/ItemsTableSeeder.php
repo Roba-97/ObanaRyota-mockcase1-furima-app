@@ -15,16 +15,12 @@ class ItemsTableSeeder extends Seeder
      */
     public function run()
     {
-        $userIds = User::pluck('id')->toArray();
-
-        if (empty($userIds)) {
-            $user = User::factory()->create();
-            $userIds = [$user->id];
-        }
+        $userId1 = User::where('name', 'Test User1')->first()->id;
+        $userId2 = User::where('name', 'Test User2')->first()->id;
 
         $items = [
             [
-                'seller_id' => $userIds[array_rand($userIds)],
+                'seller_id' => $userId1,
                 'condition_id' => 1,
                 'image_path' => 'images/dummies/Armani+Mens+Clock.jpg',
                 'name' => '腕時計',
@@ -34,7 +30,7 @@ class ItemsTableSeeder extends Seeder
                 'sold_flag' => false
             ],
             [
-                'seller_id' => $userIds[array_rand($userIds)],
+                'seller_id' => $userId1,
                 'condition_id' => 2,
                 'image_path' => 'images/dummies/HDD+Hard+Disk.jpg',
                 'name' => 'HDD',
@@ -44,7 +40,7 @@ class ItemsTableSeeder extends Seeder
                 'sold_flag' => false
             ],
             [
-                'seller_id' => $userIds[array_rand($userIds)],
+                'seller_id' => $userId1,
                 'condition_id' => 3,
                 'image_path' => 'images/dummies/iLoveIMG+d.jpg',
                 'name' => '玉ねぎ3束',
@@ -54,7 +50,7 @@ class ItemsTableSeeder extends Seeder
                 'sold_flag' => false
             ],
             [
-                'seller_id' => $userIds[array_rand($userIds)],
+                'seller_id' => $userId1,
                 'condition_id' => 4,
                 'image_path' => 'images/dummies/Leather+Shoes+Product+Photo.jpg',
                 'name' => '革靴',
@@ -64,7 +60,7 @@ class ItemsTableSeeder extends Seeder
                 'sold_flag' => false
             ],
             [
-                'seller_id' => $userIds[array_rand($userIds)],
+                'seller_id' => $userId1,
                 'condition_id' => 1,
                 'image_path' => 'images/dummies/Living+Room+Laptop.jpg',
                 'name' => 'ノートパソコン',
@@ -74,7 +70,7 @@ class ItemsTableSeeder extends Seeder
                 'sold_flag' => false
             ],
             [
-                'seller_id' => $userIds[array_rand($userIds)],
+                'seller_id' => $userId2,
                 'condition_id' => 2,
                 'image_path' => 'images/dummies/Music+Mic+4632231.jpg',
                 'name' => 'マイク',
@@ -84,7 +80,7 @@ class ItemsTableSeeder extends Seeder
                 'sold_flag' => false
             ],
             [
-                'seller_id' => $userIds[array_rand($userIds)],
+                'seller_id' => $userId2,
                 'condition_id' => 3,
                 'image_path' => 'images/dummies/Purse+fashion+pocket.jpg',
                 'name' => 'ショルダーバッグ',
@@ -94,7 +90,7 @@ class ItemsTableSeeder extends Seeder
                 'sold_flag' => false
             ],
             [
-                'seller_id' => $userIds[array_rand($userIds)],
+                'seller_id' => $userId2,
                 'condition_id' => 4,
                 'image_path' => 'images/dummies/Tumbler+souvenir.jpg',
                 'name' => 'タンブラー',
@@ -104,7 +100,7 @@ class ItemsTableSeeder extends Seeder
                 'sold_flag' => false
             ],
             [
-                'seller_id' => $userIds[array_rand($userIds)],
+                'seller_id' => $userId2,
                 'condition_id' => 1,
                 'image_path' => 'images/dummies/Waitress+with+Coffee+Grinder.jpg',
                 'name' => 'コーヒーミル',
@@ -114,7 +110,7 @@ class ItemsTableSeeder extends Seeder
                 'sold_flag' => false
             ],
             [
-                'seller_id' => $userIds[array_rand($userIds)],
+                'seller_id' => $userId2,
                 'condition_id' => 2,
                 'image_path' => 'images/dummies/外出メイクアップセット.jpg',
                 'name' => 'メイクセット',
