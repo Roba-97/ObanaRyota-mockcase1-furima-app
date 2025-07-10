@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
+use App\Models\ChatRoom;
 use App\Models\Item;
 use App\Models\Purchase;
 use App\Http\Requests\AddressRequest;
@@ -35,12 +36,15 @@ class PurchaseController extends Controller
         if ($item && !$item->sold_flag) {
             $item->update(['sold_flag' => true]);
 
-            Purchase::create([
+            $purchase = Purchase::create([
                 'item_id' => $item->id,
                 'buyer_id' => Auth::user()->id,
                 'payment' => $request->input('payment'),
                 'delivery_postcode' => $request->input('delivery_postcode'),
                 'delivery_address' => $request->input('delivery_address'),
+            ]);
+            ChatRoom::create([
+                'purchase_id' => $purchase->id,
             ]);
         }
 

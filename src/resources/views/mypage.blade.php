@@ -39,7 +39,7 @@
 			<img class="item-list__img" src="{{ asset( $item->image_path ) }}" alt="商品画像">
 		</a>
 		@elseif($param === 'deal')
-		<a href="/chat">
+		<a href="/chat/{{ $item->purchase->chatRoom->id }}">
 			<img class="item-list__img" src="{{ asset( $item->image_path ) }}" alt="商品画像">
 			<span class="item-list__chat-count">1</span>
 		</a>
