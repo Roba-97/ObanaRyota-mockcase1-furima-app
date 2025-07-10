@@ -16,4 +16,12 @@ class Purchase extends Model
         'delivery_postcode',
         'delivery_address',
     ];
+
+    public function item() {
+        return $this->belongsTo(Item::class);
+    }
+
+    public function chatRoom() {
+        return $this->hasOne(ChatRoom::class);
+    }
 }
