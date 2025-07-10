@@ -13,6 +13,9 @@ use App\Http\Controllers\PurchaseController;
 Route::middleware('custom.verified')->group(function () {
     Route::get('/', [ItemController::class, 'index']);
     Route::get('/item/{item}', [DetailController::class, 'index'])->name('detail.index');
+    Route::get('/chat', function() {
+        return view("chat");
+    });
 });
 
 Route::middleware('auth', 'verified')->group(function () {
