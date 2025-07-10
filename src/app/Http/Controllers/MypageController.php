@@ -14,18 +14,31 @@ class MypageController extends Controller
 {
     public function index(Request $request)
     {
-        $showSellItems = true;
+        $param = null;
 
-        if ($request->page === "buy") {
-            $showSellItems = false;
-            $itemsId = Auth::user()->purchases()->select('item_id')->get();
-            $items = Item::whereIn('id', $itemsId)->select(['id', 'image_path', 'name', 'sold_flag'])->get();
-        } else {
-            $itemsId = Auth::user()->items()->select('id')->get();
-            $items = Item::whereIn('id', $itemsId)->select(['id', 'image_path', 'name', 'sold_flag'])->get();
+        switch ($request->page) {
+            case 'deal':
+                $param = 'deal';
+                // すべてのsold商品から出品もしくは購入が自分のitemを取得
+                $soldItemsId = Auth::user()->items()->where('sold_flag', true)->select('id')->get()->toArray();
+                $purchasedItemsId = Auth::user()->purchases()->select('item_id')->get()->toArray();
+                $itemsId = array_merge($soldItemsId, $purchasedItemsId);
+                $items = Item::whereIn('id', $itemsId)->select(['id', 'image_path', 'name', 'sold_flag'])->get();
+                break;
+
+            case 'buy':
+                $param = 'buy';
+                $itemsId = Auth::user()->purchases()->select('item_id')->get();
+                $items = Item::whereIn('id', $itemsId)->select(['id', 'image_path', 'name', 'sold_flag'])->get();
+                break;
+
+            default:
+                $itemsId = Auth::user()->items()->select('id')->get();
+                $items = Item::whereIn('id', $itemsId)->select(['id', 'image_path', 'name', 'sold_flag'])->get();
+                break;
         }
 
-        return view('mypage', ['items' => $items, 'showSellItems' => $showSellItems]);
+        return view('mypage', ['items' => $items, 'param' => $param]);
     }
 
     public function edit()
