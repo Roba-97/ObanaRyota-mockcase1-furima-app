@@ -31,6 +31,8 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::get('/purchase/{item}', [PurchaseController::class, 'index'])->middleware('profile.registered')->name('purchase.index');
     Route::get('/chat/{chatRoom}', [ChatRoomController::class, 'index']);
     Route::post('/chat/{chatRoom}', [ChatMessageController::class, 'create']);
+    Route::patch('/chat/{message}', [ChatMessageController::class, 'update']);
+    Route::delete('/chat/{message}', [ChatMessageController::class, 'delete']);
 });
 
 Route::get('/email/verify', function () {

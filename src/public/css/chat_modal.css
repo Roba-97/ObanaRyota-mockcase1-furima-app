@@ -17,6 +17,11 @@
     padding: 10px 30px;
     border-bottom: 1px solid #000000;
 }
+.inner__header--flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
 .inner__header-text {
     margin: 0;
@@ -26,13 +31,13 @@
     text-align: left;
 }
 
-.form__evaluation {
+.deal-form__evaluation {
     margin: 0;
     padding: 15px 30px;
     border-bottom: 1px solid #000000;
 }
 
-.form__evaluation-text {
+.deal-form__evaluation-text {
     margin: 0;
     color: #868686;
     font-size: 2rem;
@@ -40,7 +45,7 @@
     text-align: left;
 }
 
-.form__button {
+.deal-form__button {
     display: block;
     margin: 15px 30px 15px auto;
     padding: 5px 10px;
@@ -54,7 +59,7 @@
 }
 
 /*評価送信用スターの描画に関するデザイン*/
-.form__evaluation-star {
+.deal-form__evaluation-star {
     display: flex;
     flex-direction: row-reverse; /*逆順(左から右へ)で表示*/
     justify-content: center;
@@ -63,11 +68,11 @@
 }
 
 /* ラジオボタン本体は非表示にする */
-.form__evaluation-star input[type="radio"] {
+.deal-form__evaluation-star input[type="radio"] {
     display: none;
 }
 
-.form__evaluation-star label {
+.deal-form__evaluation-star label {
     font-size: 10rem;
     color: #ddd;
     cursor: pointer;
@@ -75,12 +80,53 @@
 }
 
 /* 選択された星（ラジオボタン）と、それより前の星（HTML上で後にある兄弟要素）の色を変える */
-.form__evaluation-star input[type="radio"]:checked~label {
+.deal-form__evaluation-star input[type="radio"]:checked~label {
     color: #FFF048;
 }
 
 /* マウスが乗っている星と、それより前の星の色を変える */
-.form__evaluation-star label:hover,
-.form__evaluation-star label:hover~label {
+.deal-form__evaluation-star label:hover,
+.deal-form__evaluation-star label:hover~label {
     color: #FFF04880;
+}
+
+
+/* メッセージ操作モーダルのデザイン */
+.message-control {
+    background-color: #FFFEF980;
+    border-radius: 5px;
+    box-shadow: 15px 15px 15px #00000040;
+    min-width: 50%;
+}
+
+.inner__close-button {
+    display: block;
+    border: none;
+    color: #5F5F5F;
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.message-control__form {
+    display: flex;
+    flex-direction: column;
+}
+
+.message-control__form-textarea {
+    margin: 30px;
+    padding: 10px;
+    font-size: 2.4rem;
+    font-weight: 400;
+}
+
+.message-control__form-button {
+    display: block;
+    margin: 15px 30px 15px auto;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    color: #FFFFFF;
+    font-size: 2.4rem;
+    font-weight: 400;
+    text-align: center;
 }
