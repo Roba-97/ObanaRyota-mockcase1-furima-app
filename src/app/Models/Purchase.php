@@ -21,6 +21,10 @@ class Purchase extends Model
         return $this->belongsTo(Item::class);
     }
 
+    public function buyer() {
+        return $this->belongsTo(User::class);
+    }
+
     public function chatRoom() {
         return $this->hasOne(ChatRoom::class);
     }

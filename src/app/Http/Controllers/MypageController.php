@@ -19,11 +19,7 @@ class MypageController extends Controller
         switch ($request->page) {
             case 'deal':
                 $param = 'deal';
-                // すべてのsold商品から出品もしくは購入が自分のitemを取得
-                $soldItemsId = Auth::user()->items()->where('sold_flag', true)->select('id')->get()->toArray();
-                $purchasedItemsId = Auth::user()->purchases()->select('item_id')->get()->toArray();
-                $itemsId = array_merge($soldItemsId, $purchasedItemsId);
-                $items = Item::whereIn('id', $itemsId)->select(['id', 'image_path', 'name', 'sold_flag'])->get();
+                $items = Auth::user()->dealingItems();
                 break;
 
             case 'buy':

@@ -22,4 +22,18 @@ class ChatRoom extends Model
     public function messages() {
         return $this->hasMany(Message::class);
     }
+
+    public function getOtherParticipant(User $currentUser)
+    {
+        // ChatRoomに紐づくOrderから出品者と購入者を取得
+        $seller = $this->purchase->item->seller;
+        $buyer = $this->purchase->buyer;
+
+        return $currentUser->is($buyer) ? $seller : $buyer;
+    }
+
+    public function isBuyer(User $currentUser)
+    {
+        return $currentUser->is($this->purchase->buyer);
+    }
 }

@@ -14,6 +14,9 @@ class Profile extends Model
         'image_path',
         'postcode',
         'address',
-        'building'
+        'building',
+        'average_rating',
+        'rating_count',
+        'rating_sum'
     ];
 }

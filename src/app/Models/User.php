@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Cashier\Billable;
 
@@ -70,5 +71,33 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function messages() {
         return $this->hasMany(Message::class, 'sender_id');
+    }
+
+    public function dealingItems() {
+        $soldItemsQuery = $this->items()->where('sold_flag', true)->select('id');
+        $purchasedItemsQuery = $this->purchases()->select('item_id');
+
+        return Item::whereIn('id', $soldItemsQuery)
+            ->orWhereIn('id', $purchasedItemsQuery)
+            ->get();
+    }
+
+    public function updateRating($newRating)
+    {
+        $profile = $this->profile;
+
+        // 合計点数と合計回数を更新
+        $newSum = $profile->rating_sum + $newRating;
+        $newCount = $profile->rating_count + 1;
+
+        // 新しい平均値を計算
+        $newAverage = $newSum / $newCount;
+
+        // データベースを更新
+        $profile->update([
+            'average_rating' => $newAverage,
+            'rating_count' => $newCount,
+            'rating_sum' => $newSum,
+        ]);
     }
 }

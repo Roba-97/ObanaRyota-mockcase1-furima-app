@@ -10,10 +10,14 @@
     <div class="sidebar">
         <h2 class="sidebar__heading">その他の取引</h2>
         <ul class="sidebar__heading-list">
-            @for ($i = 0; $i < 3; $i++)
-                <a href="">
-                <li class="sidebar__heading-item">商品名</li></a>
-                @endfor
+            @foreach($dealingItems as $item)
+            @if($item->purchase->chatRoom->id === $chatRoom->id)
+            @continue
+            @endif
+            <a href="/chat/{{ $item->purchase->chatRoom->id }}">
+                <li class="sidebar__heading-item">{{ $item->name }}</li>
+            </a>
+            @endforeach
         </ul>
     </div>
 
@@ -21,9 +25,11 @@
         <div class="main__heading">
             <div class="main__heading-inner">
                 <img class="main__heading-img" src="{{ asset('images/default_user_icon.png') }}" alt="{{ $chatRoom->purchase->item->seller->name }}のアイコン画像">
-                <h2 class="main__heading-text">{{ $chatRoom->purchase->item->seller->name }}さんとの取引画面</h2>
+                <h2 class="main__heading-text">{{ $chatRoom->getOtherParticipant(Auth::user())->name }}さんとの取引画面</h2>
             </div>
+            @if($chatRoom->isBuyer(Auth::user()))
             <button id="js-deal-modal-open-button" class="main__heading-button">取引を完了する</button>
+            @endif
         </div>
         <div class="main__item">
             <img class="main__item-img" src="{{ asset($chatRoom->purchase->item->image_path) }}" alt="{{ $chatRoom->purchase->item->name }}の商品画像">
@@ -50,7 +56,7 @@
             <div class="talk__item">
                 <div>
                     <img class="item__user-img" src="{{ asset('images/default_user_icon.png') }}" alt="">
-                    <span class="item__user-name">{{ $chatRoom->purchase->item->seller->name }}</span>
+                    <span class="item__user-name">{{ $chatRoom->getOtherParticipant(Auth::user())->name }}</span>
                 </div>
                 <p class="item__content-message">{!! nl2br(e($message->content)) !!}</p>
             </div>
@@ -66,7 +72,7 @@
         @endif
         <form class="main__submit-form" action="/chat/{{ $chatRoom->id }}" method="post">
             @csrf
-            <input class="submit-form__input" type="text" name="content" placeholder="取引メッセージを記入してください">
+            <input class="submit-form__input" name="content" placeholder="取引メッセージを記入してください">
             <label class="submit-form__label" for="send-img">画像を選択する</label>
             <input class="submit-form__input-file" type="file" id="send-img" name="image" accept="image/jpg, image/png">
             <input class="submit-form__img" type="image" src="{{ asset('images/send_button.jpg') }}" alt="">
@@ -82,11 +88,11 @@
                     <div class="deal-form__evaluation">
                         <p class="deal-form__evaluation-text">今回の取引相手はどうでしたか？</p>
                         <div class="deal-form__evaluation-star">
-                            <input id="star5" type="radio" name="evaluation" value="5"><label for="star5">★</label>
-                            <input id="star4" type="radio" name="evaluation" value="4"><label for="star4">★</label>
-                            <input id="star3" type="radio" name="evaluation" value="3"><label for="star3">★</label>
-                            <input id="star2" type="radio" name="evaluation" value="2"><label for="star2">★</label>
-                            <input id="star1" type="radio" name="evaluation" value="1"><label for="star1">★</label>
+                            <input id="star5" type="radio" name="rate" value="5"><label for="star5">★</label>
+                            <input id="star4" type="radio" name="rate" value="4"><label for="star4">★</label>
+                            <input id="star3" type="radio" name="rate" value="3"><label for="star3">★</label>
+                            <input id="star2" type="radio" name="rate" value="2"><label for="star2">★</label>
+                            <input id="star1" type="radio" name="rate" value="1"><label for="star1">★</label>
                         </div>
                     </div>
                     <button class="deal-form__button">送信する</button>

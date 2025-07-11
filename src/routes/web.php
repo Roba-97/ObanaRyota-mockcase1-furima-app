@@ -29,6 +29,8 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::post('/purchase/address/{item}', [PurchaseController::class, 'update']);
     Route::post('/purchase/stripe/{item}', [PurchaseController::class, 'stripe']);
     Route::get('/purchase/{item}', [PurchaseController::class, 'index'])->middleware('profile.registered')->name('purchase.index');
+
+    Route::post('/chat/{chatRoom}/deal', [ChatRoomController::class, 'rateUser']);
     Route::get('/chat/{chatRoom}', [ChatRoomController::class, 'index']);
     Route::post('/chat/{chatRoom}', [ChatMessageController::class, 'create']);
     Route::patch('/chat/{message}', [ChatMessageController::class, 'update']);

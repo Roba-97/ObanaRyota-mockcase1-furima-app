@@ -1,7 +1,9 @@
+// 取引完了モーダル
 const modal = document.getElementById("js-chat-deal-modal");
 const button = document.getElementById("js-deal-modal-open-button");
 button.addEventListener('click', () => modal.style.display = "block");
 
+// メッセージ編集・削除モーダル
 const openMessageControlModal = function (mode, jsonData) {
     const heading = document.getElementById("js-message-control-heading");
     const form = document.getElementById("js-message-control-form");
