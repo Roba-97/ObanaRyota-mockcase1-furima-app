@@ -9,13 +9,12 @@ use App\Http\Controllers\DetailController;
 use App\Http\Controllers\MypageController;
 use App\Http\Controllers\ExhibitController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\ChatRoomController;
+use App\Http\Controllers\ChatMessageController;
 
 Route::middleware('custom.verified')->group(function () {
     Route::get('/', [ItemController::class, 'index']);
     Route::get('/item/{item}', [DetailController::class, 'index'])->name('detail.index');
-    Route::get('/chat', function() {
-        return view("chat");
-    });
 });
 
 Route::middleware('auth', 'verified')->group(function () {
@@ -30,6 +29,8 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::post('/purchase/address/{item}', [PurchaseController::class, 'update']);
     Route::post('/purchase/stripe/{item}', [PurchaseController::class, 'stripe']);
     Route::get('/purchase/{item}', [PurchaseController::class, 'index'])->middleware('profile.registered')->name('purchase.index');
+    Route::get('/chat/{chatRoom}', [ChatRoomController::class, 'index']);
+    Route::post('/chat/{chatRoom}', [ChatMessageController::class, 'create']);
 });
 
 Route::get('/email/verify', function () {

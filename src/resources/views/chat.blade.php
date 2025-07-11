@@ -11,7 +11,7 @@
         <h2 class="sidebar__heading">その他の取引</h2>
         <ul class="sidebar__heading-list">
             @for ($i = 0; $i < 3; $i++)
-                <li class="sidebar__heading-item"><a href="">商品名</a></li>
+                <a href=""><li class="sidebar__heading-item">商品名</li></a>
                 @endfor
         </ul>
     </div>
@@ -22,7 +22,7 @@
                 <img class="main__heading-img" src="{{ asset('images/default_user_icon.png') }}" alt="{{ $chatRoom->purchase->item->seller->name }}のアイコン画像">
                 <h2 class="main__heading-text">{{ $chatRoom->purchase->item->seller->name }}さんとの取引画面</h2>
             </div>
-            <button class="main__heading-button" onclick="">取引を完了する</button>
+            <button id="js-modal-open-button" class="main__heading-button">取引を完了する</button>
         </div>
         <div class="main__item">
             <img class="main__item-img" src="{{ asset($chatRoom->purchase->item->image_path) }}" alt="{{ $chatRoom->purchase->item->name }}の商品画像">
@@ -71,21 +71,28 @@
             <input class="submit-form__img" type="image" src="{{ asset('images/send_button.jpg') }}" alt="">
         </form>
 
-        <div class="chat-modal">
+        <div id="js-chat-modal" class="chat-modal">
             <div class="chat-modal__inner">
                 <div class="inner__header">
                     <p class="inner__header-text">取引が完了しました。</p>
                 </div>
-                <form class="inner__form" action="">
+                <form class="inner__form" action="/chat/{{ $chatRoom->id }}/deal" method="post">
+                    @csrf
                     <div class="form__evaluation">
                         <p class="form__evaluation-text">今回の取引相手はどうでしたか？</p>
-                        <p class="form__evaluation-star">★★★★★</p>
+                        <div class="form__evaluation-star">
+                            <input id="star5" type="radio" name="evaluation" value="5"><label for="star5">★</label>
+                            <input id="star4" type="radio" name="evaluation" value="4"><label for="star4">★</label>
+                            <input id="star3" type="radio" name="evaluation" value="3"><label for="star3">★</label>
+                            <input id="star2" type="radio" name="evaluation" value="2"><label for="star2">★</label>
+                            <input id="star1" type="radio" name="evaluation" value="1"><label for="star1">★</label>
+                        </div>
                     </div>
                     <button class="form__button">送信する</button>
                 </form>
             </div>
         </div>
-
     </div>
+    <script src="{{ asset('js/modal.js') }}"></script>
 </div>
 @endsection

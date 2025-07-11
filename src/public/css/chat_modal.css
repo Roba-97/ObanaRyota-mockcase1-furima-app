@@ -28,7 +28,7 @@
 
 .form__evaluation {
     margin: 0;
-    padding: 15px 10px 15px 30px;
+    padding: 15px 30px;
     border-bottom: 1px solid #000000;
 }
 
@@ -38,13 +38,6 @@
     font-size: 2rem;
     font-weight: 400;
     text-align: left;
-}
-
-.form__evaluation-star {
-    margin: 0;
-    color: #FFF048;
-    font-size: 10rem;
-    letter-spacing: 20px;
 }
 
 .form__button {
@@ -58,4 +51,36 @@
     font-size: 2.4rem;
     font-weight: 400;
     text-align: center;
+}
+
+/*評価送信用スターの描画に関するデザイン*/
+.form__evaluation-star {
+    display: flex;
+    flex-direction: row-reverse; /*逆順(左から右へ)で表示*/
+    justify-content: center;
+    gap: 8px;
+    margin: 0;
+}
+
+/* ラジオボタン本体は非表示にする */
+.form__evaluation-star input[type="radio"] {
+    display: none;
+}
+
+.form__evaluation-star label {
+    font-size: 10rem;
+    color: #ddd;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+/* 選択された星（ラジオボタン）と、それより前の星（HTML上で後にある兄弟要素）の色を変える */
+.form__evaluation-star input[type="radio"]:checked~label {
+    color: #FFF048;
+}
+
+/* マウスが乗っている星と、それより前の星の色を変える */
+.form__evaluation-star label:hover,
+.form__evaluation-star label:hover~label {
+    color: #FFF04880;
 }

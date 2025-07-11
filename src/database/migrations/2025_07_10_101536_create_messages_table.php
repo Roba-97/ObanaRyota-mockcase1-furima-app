@@ -15,8 +15,8 @@ class CreateMessagesTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('chat_room_id')->constrained();
-            $table->foreignId('sender_id')->constrained('users');
+            $table->foreignId('chat_room_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('sender_id')->constrained('users', 'id')->cascadeOnDelete();
             $table->tinyInteger('content_type');  // 1:message, 2:img_path
             $table->text('content');
             $table->timestamps();
