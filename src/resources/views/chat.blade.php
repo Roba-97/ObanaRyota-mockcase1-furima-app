@@ -2,6 +2,7 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/chat.css')}}">
+<link rel="stylesheet" href="{{ asset('css/chat_modal.css')}}">
 @endsection
 
 @section('content')
@@ -14,6 +15,7 @@
                 @endfor
         </ul>
     </div>
+
     <div class="main">
         <div class="main__heading">
             <div class="main__heading-inner">
@@ -68,6 +70,22 @@
             <input class="submit-form__input-file" type="file" id="send-img" name="image" accept="image/jpg, image/png">
             <input class="submit-form__img" type="image" src="{{ asset('images/send_button.jpg') }}" alt="">
         </form>
+
+        <div class="chat-modal">
+            <div class="chat-modal__inner">
+                <div class="inner__header">
+                    <p class="inner__header-text">取引が完了しました。</p>
+                </div>
+                <form class="inner__form" action="">
+                    <div class="form__evaluation">
+                        <p class="form__evaluation-text">今回の取引相手はどうでしたか？</p>
+                        <p class="form__evaluation-star">★★★★★</p>
+                    </div>
+                    <button class="form__button">送信する</button>
+                </form>
+            </div>
+        </div>
+
     </div>
 </div>
 @endsection
