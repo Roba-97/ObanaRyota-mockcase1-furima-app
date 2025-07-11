@@ -15,7 +15,7 @@ class Profile extends Model
         'postcode',
         'address',
         'building',
-        'average_rating',
+        'rating_average',
         'rating_count',
         'rating_sum'
     ];

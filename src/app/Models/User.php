@@ -95,7 +95,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
         // データベースを更新
         $profile->update([
-            'average_rating' => $newAverage,
+            'rating_average' => $newAverage,
             'rating_count' => $newCount,
             'rating_sum' => $newSum,
         ]);

@@ -20,7 +20,7 @@ class CreateProfilesTable extends Migration
             $table->string('postcode', 8);
             $table->string('address');
             $table->string('building');
-            $table->decimal('average_rating', 3, 2)->default(0);
+            $table->decimal('rating_average', 3, 2)->default(0);
             $table->unsignedInteger('rating_count')->default(0);
             $table->unsignedInteger('rating_sum')->default(0);
             $table->timestamps();
