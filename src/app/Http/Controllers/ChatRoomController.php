@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\DealNotification;
 use App\Models\ChatRoom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ChatRoomController extends Controller
 {
@@ -18,8 +20,14 @@ class ChatRoomController extends Controller
 
     public function rateUser(ChatRoom $chatRoom, Request $request)
     {
-        $ratedUser = $chatRoom->getOtherParticipant(Auth::user());
+        $user = Auth::user();
+        $ratedUser = $chatRoom->getOtherParticipant($user);
+
         $ratedUser->updateRating($request->input('rate'));
+
+        if($chatRoom->isBuyer($user)) {
+            Mail::to($ratedUser)->send(new DealNotification($chatRoom, $user));
+        }
 
         return redirect('/');
     }
