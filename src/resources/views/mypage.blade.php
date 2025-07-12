@@ -17,7 +17,16 @@
 	@endisset
 	<div class="user__inner">
 		<p class="user__name">{{ Auth::user()->name }}</p>
-		<p class="user__evaluation">★★★★★</p>
+		@if(Auth::user()->profile->rating_count !== 0)
+		<p class="user__evaluation">
+			@for($i = 0; $i < round(Auth::user()->profile->rating_average); $i++)
+			<span class="user__evaluation--filled-star">★</span>
+			@endfor
+			@for($i = 0; $i < 5 - round(Auth::user()->profile->rating_average); $i++)
+			<span>★</span>
+			@endfor
+		</p>
+		@endif
 	</div>
 	<form class="user__edit-form" action="/mypage/profile" method="get">
 		<button class="user__edit-btn" type="submit">プロフィールを編集</button>
