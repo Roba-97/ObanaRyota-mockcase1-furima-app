@@ -34,6 +34,7 @@
 }
 
 .sidebar__heading-item {
+    position: relative;
     margin: 20px 0;
     padding: 10px 30px;
     background-color: #EEEFEB;
@@ -43,6 +44,24 @@
     font-size: 2.4rem;
     font-weight: 400;
     text-align: center;
+}
+.sidebar__heading-item--active {
+    background-color: #FFFFFF;
+    border: 5px solid #0073CC;
+}
+.sidebar__heading-item > span {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    display: inline-block;
+    padding: 5px;
+    background-color: #FF0000;
+    border: none;
+    border-radius: 10px;
+    color: #FFFFFF;
+    font-size: 1.8rem;
+    font-weight: 700;
 }
 
 .main {

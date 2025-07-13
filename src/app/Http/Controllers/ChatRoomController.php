@@ -17,7 +17,15 @@ class ChatRoomController extends Controller
             'last_accessed_at' => Carbon::now(),
         ]);
 
-        $dealingItems = Auth::user()->dealingItems();
+        $activeChatRoomId = $chatRoom->id;
+        $partitionedItems = Auth::user()->dealingItems()->partition(function ($item) use ($activeChatRoomId) {
+            return $item->chatRoom->id === $activeChatRoomId;
+        });
+        $sortedInactiveItems = $partitionedItems[1]->sortByDesc(function ($item) {
+            return optional($item->chatRoom->messages()->latest()->first())->created_at;
+        });
+        $dealingItems = $partitionedItems[0]->merge($sortedInactiveItems);
+
         $messages = $chatRoom->messages()->get();
 
         return view("chat", compact('chatRoom', 'dealingItems', 'messages'));

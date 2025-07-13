@@ -20,11 +20,11 @@
 		@if(Auth::user()->profile->rating_count !== 0)
 		<p class="user__evaluation">
 			@for($i = 0; $i < round(Auth::user()->profile->rating_average); $i++)
-				<span class="user__evaluation--filled-star">★</span>
-				@endfor
-				@for($i = 0; $i < 5 - round(Auth::user()->profile->rating_average); $i++)
-					<span>★</span>
-					@endfor
+			<span class="user__evaluation--filled-star">★</span>
+			@endfor
+			@for($i = 0; $i < 5 - round(Auth::user()->profile->rating_average); $i++)
+			<span>★</span>
+			@endfor
 		</p>
 		@endif
 	</div>

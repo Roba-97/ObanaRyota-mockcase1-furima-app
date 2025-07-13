@@ -11,12 +11,25 @@
         <h2 class="sidebar__heading">その他の取引</h2>
         <ul class="sidebar__heading-list">
             @foreach($dealingItems as $item)
-            @if($item->purchase->chatRoom->id === $chatRoom->id)
-            @continue
-            @endif
-            <a href="/chat/{{ $item->purchase->chatRoom->id }}">
-                <li class="sidebar__heading-item">{{ $item->name }}</li>
+            @if($item->chatRoom->id === $chatRoom->id)
+            <a href="/chat/{{ $item->chatRoom->id }}">
+                <li class="sidebar__heading-item sidebar__heading-item--active">
+                    {{ $item->name }}
+                    @if($item->chatRoom->getNotificationCount(Auth::user()) !== 0)
+                    <span>{{ $item->chatRoom->getNotificationCount(Auth::user()) }}</span>
+                    @endif
+                </li>
             </a>
+            @else
+            <a href="/chat/{{ $item->chatRoom->id }}">
+                <li class="sidebar__heading-item">
+                    {{ $item->name }}
+                    @if($item->chatRoom->getNotificationCount(Auth::user()) !== 0)
+                    <span>{{ $item->chatRoom->getNotificationCount(Auth::user()) }}</span>
+                    @endif
+                </li>
+            </a>
+            @endif
             @endforeach
         </ul>
     </div>
