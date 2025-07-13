@@ -68,9 +68,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Purchase::class, 'buyer_id');
     }
 
-    public function chatRoom()
+    public function chatRooms()
     {
-        return $this->belongsToMany(ChatRoom::class);
+        return $this->belongsToMany(ChatRoom::class, 'chat_room_user')->withPivot('last_accessed_at')->withTimestamps();
     }
 
     public function messages() {
@@ -83,6 +83,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
         return Item::whereIn('id', $soldItemsQuery)
             ->orWhereIn('id', $purchasedItemsQuery)
+            ->with('chatRoom.participants')
             ->get();
     }
 
@@ -90,14 +91,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $profile = $this->profile;
 
-        // 合計点数と合計回数を更新
         $newSum = $profile->rating_sum + $newRating;
         $newCount = $profile->rating_count + 1;
-
-        // 新しい平均値を計算
         $newAverage = $newSum / $newCount;
 
-        // データベースを更新
         $profile->update([
             'rating_average' => $newAverage,
             'rating_count' => $newCount,

@@ -20,11 +20,11 @@
 		@if(Auth::user()->profile->rating_count !== 0)
 		<p class="user__evaluation">
 			@for($i = 0; $i < round(Auth::user()->profile->rating_average); $i++)
-			<span class="user__evaluation--filled-star">★</span>
-			@endfor
-			@for($i = 0; $i < 5 - round(Auth::user()->profile->rating_average); $i++)
-			<span>★</span>
-			@endfor
+				<span class="user__evaluation--filled-star">★</span>
+				@endfor
+				@for($i = 0; $i < 5 - round(Auth::user()->profile->rating_average); $i++)
+					<span>★</span>
+					@endfor
 		</p>
 		@endif
 	</div>
@@ -35,7 +35,14 @@
 <div class="tab">
 	<a href="/mypage/?page=sell" @class(['tab__link', 'tab__link--active'=> $param === null])>出品した商品</a>
 	<a href="/mypage/?page=buy" @class(['tab__link', 'tab__link--active'=> $param === 'buy'])>購入した商品</a>
-	<a href="/mypage/?page=deal" @class(['tab__link', 'tab__link--active'=> $param === 'deal'])>取引中の商品<span>2</span></a>
+	<a href="/mypage/?page=deal" @class(['tab__link', 'tab__link--active'=> $param === 'deal'])>
+		取引中の商品
+		@if($notificationCount !== 0)
+		<span>
+		{{ $notificationCount }}
+		</span>
+		@endif
+	</a>
 </div>
 <div class="item-list">
 	@foreach($items as $item)
@@ -50,8 +57,8 @@
 		@elseif($param === 'deal')
 		<a href="/chat/{{ $item->chatRoom->id }}">
 			<img class="item-list__img" src="{{ asset( $item->image_path ) }}" alt="商品画像">
-			@if($item->chatRoom->messages->count() !== 0)
-			<span class="item-list__chat-count">{{ $item->chatRoom->messages->count() }}</span>
+			@if($item->chatRoom->getNotificationCount(Auth::user()) !== 0)
+			<span class="item-list__chat-count">{{ $item->chatRoom->getNotificationCount(Auth::user()) }}</span>
 			@endif
 		</a>
 		@else

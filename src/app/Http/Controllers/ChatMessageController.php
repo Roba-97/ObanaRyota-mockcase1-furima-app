@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ChatMessageRequest;
 use App\Models\ChatRoom;
 use App\Models\Message;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class ChatMessageController extends Controller
@@ -18,6 +19,10 @@ class ChatMessageController extends Controller
                 'sender_id' => Auth::user()->id,
                 'content_type' => 1,
                 'content' => $content,
+            ]);
+
+            $chatRoom->participants()->updateExistingPivot(Auth::user()->id, [
+                'last_accessed_at' => Carbon::now(),
             ]);
         }
         return redirect("/chat/$chatRoom->id");

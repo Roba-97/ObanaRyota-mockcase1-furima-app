@@ -34,7 +34,11 @@ class MypageController extends Controller
                 break;
         }
 
-        return view('mypage', ['items' => $items, 'param' => $param]);
+        $count = Auth::user()->dealingItems()->sum(function ($item) {
+            return $item->chatRoom->getNotificationCount(Auth::user());
+        });
+
+        return view('mypage', ['items' => $items, 'param' => $param, 'notificationCount' => $count]);
     }
 
     public function edit()

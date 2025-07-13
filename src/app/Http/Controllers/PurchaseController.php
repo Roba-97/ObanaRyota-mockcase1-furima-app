@@ -43,11 +43,17 @@ class PurchaseController extends Controller
                 'delivery_postcode' => $request->input('delivery_postcode'),
                 'delivery_address' => $request->input('delivery_address'),
             ]);
-            ChatRoom::create([
+            $chatroom = ChatRoom::create([
                 'purchase_id' => $purchase->id,
             ]);
+            $chatroom->participants()->sync([$purchase->buyer_id, $item->seller_id]);
+
+            return redirect(route('mypage.index', ['page' => 'buy']));
         }
 
+        return redirect(route('purchase.index', ['item' => $item, 'status' => 'canceled']));
+
+        /*
         Stripe::setApiKey(config('services.stripe.secret'));
         $method = $this->options[$request->input('payment')];
 
@@ -69,6 +75,7 @@ class PurchaseController extends Controller
         ]);
 
         return redirect($session->url);
+        */
     }
 
     public function edit(Item $item)

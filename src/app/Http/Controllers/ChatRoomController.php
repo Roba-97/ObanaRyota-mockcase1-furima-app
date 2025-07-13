@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\DealNotification;
 use App\Models\ChatRoom;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -12,6 +13,10 @@ class ChatRoomController extends Controller
 {
     public function index(ChatRoom $chatRoom)
     {
+        $chatRoom->participants()->updateExistingPivot(Auth::user()->id, [
+            'last_accessed_at' => Carbon::now(),
+        ]);
+
         $dealingItems = Auth::user()->dealingItems();
         $messages = $chatRoom->messages()->get();
 

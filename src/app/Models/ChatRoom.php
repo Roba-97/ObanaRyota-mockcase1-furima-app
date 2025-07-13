@@ -22,24 +22,20 @@ class ChatRoom extends Model
         return $this->hasMany(Message::class);
     }
 
-    public function participant() {
-        return $this->belongsToMany(User::class);
+    public function participants() {
+        return $this->belongsToMany(User::class, 'chat_room_user')->withPivot('last_accessed_at')->withTimestamps();
     }
 
-
-    public function isBuyer(User $currentUser)
-    {
+    public function isBuyer(User $currentUser) {
         return $currentUser->is($this->purchase->buyer);
     }
 
-    public function isSeller(User $currentUser)
-    {
+    public function isSeller(User $currentUser) {
         return $currentUser->is($this->purchase->item->seller);
     }
 
     public function getOtherParticipant(User $currentUser)
     {
-        // ChatRoomに紐づくPurchaseから出品者と購入者を取得
         $seller = $this->purchase->item->seller;
         $buyer = $this->purchase->buyer;
 
@@ -52,5 +48,27 @@ class ChatRoom extends Model
         }
 
         return null;
+    }
+
+    public function getNotificationCount(User $currentUser)
+    {
+        $chatRoomId = $this->id;
+        $last_accessed_at = null;
+
+        foreach($this->participants as $participant) {
+            if($participant->pivot->user_id === $currentUser->id && $participant->pivot->chat_room_id === $chatRoomId) {
+                $last_accessed_at = $participant->pivot->last_accessed_at;
+                break;
+            }
+        }
+
+        if ($last_accessed_at === null) {
+            return $this->messages->count();
+        }
+
+        return $this->messages
+            ->where('created_at', '>', $last_accessed_at)
+            ->where('sender_id', '!=', $currentUser->id)
+            ->count();
     }
 }
