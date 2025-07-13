@@ -24,11 +24,13 @@
     <div class="main">
         <div class="main__heading">
             <div class="main__heading-inner">
-                <img class="main__heading-img" src="{{ asset('images/default_user_icon.png') }}" alt="{{ $chatRoom->purchase->item->seller->name }}のアイコン画像">
+                <img class="main__heading-img"
+                    src="{{ asset($chatRoom->getOtherParticipant(Auth::user())->profile->image_path ?? 'images/default_user_icon.png') }}"
+                    alt="{{ $chatRoom->getOtherParticipant(Auth::user())->name }}さんのアイコン画像">
                 <h2 class="main__heading-text">{{ $chatRoom->getOtherParticipant(Auth::user())->name }}さんとの取引画面</h2>
             </div>
-            @if($chatRoom->isBuyer(Auth::user()))
-            <button id="js-deal-modal-open-button" class="main__heading-button">取引を完了する</button>
+            @if($chatRoom->isBuyer(Auth::user()) && $chatRoom->status === 0)
+            <button class="main__heading-button" onclick="openDealModal()">取引を完了する</button>
             @endif
         </div>
         <div class="main__item">
@@ -44,7 +46,9 @@
             <div class="talk__item talk__item--sended">
                 <div>
                     <span class="item__user-name">{{ Auth::user()->name }}</span>
-                    <img class="item__user-img item__user-img--sended" src="{{ asset('images/default_user_icon.png') }}" alt="">
+                    <img class="item__user-img item__user-img--sended"
+                        src="{{ asset(Auth::user()->profile->image_path ?? 'images/default_user_icon.png') }}"
+                        alt="{{ Auth::user()->name }}のアイコン画像">
                 </div>
                 <p class="item__content-message">{!! nl2br(e($message->content)) !!}</p>
                 <div class="item__content-control">
@@ -55,7 +59,9 @@
             @else
             <div class="talk__item">
                 <div>
-                    <img class="item__user-img" src="{{ asset('images/default_user_icon.png') }}" alt="">
+                    <img class="item__user-img"
+                        src="{{ asset($chatRoom->getOtherParticipant(Auth::user())->profile->image_path ?? 'images/default_user_icon.png') }}"
+                        alt="{{ $chatRoom->getOtherParticipant(Auth::user())->name }}さんのアイコン画像">
                     <span class="item__user-name">{{ $chatRoom->getOtherParticipant(Auth::user())->name }}</span>
                 </div>
                 <p class="item__content-message">{!! nl2br(e($message->content)) !!}</p>
@@ -99,7 +105,6 @@
                 </form>
             </div>
         </div>
-
         <div id="js-message-control-modal" class="chat-modal message-control">
             <div class="message-control__inner">
                 <div class="inner__header inner__header--flex">
@@ -118,4 +123,9 @@
     </div>
 </div>
 <script src="{{ asset('js/modal.js') }}"></script>
+@if($chatRoom->isSeller(Auth::user()) && $chatRoom->status === 1)
+<script>
+    openDealModal();
+</script>
+@endif
 @endsection

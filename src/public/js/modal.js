@@ -1,7 +1,8 @@
 // 取引完了モーダル
-const modal = document.getElementById("js-chat-deal-modal");
-const button = document.getElementById("js-deal-modal-open-button");
-button.addEventListener('click', () => modal.style.display = "block");
+const openDealModal = function () {
+    const modal = document.getElementById("js-chat-deal-modal");
+    modal.style.display = "block";
+}
 
 // メッセージ編集・削除モーダル
 const openMessageControlModal = function (mode, jsonData) {
@@ -46,7 +47,7 @@ function closeModal() {
 }
 
 /**
- * フォームにHTTPメソッドを指定する隠しフィールドを追加します。
+ * フォームにHTTPメソッドを指定する隠しフィールドを追加
  * @param {HTMLFormElement} form - 対象のフォーム要素
  * @param {string} method - 'PATCH', 'DELETE' などのHTTPメソッド
  */

@@ -11,7 +11,7 @@ class ChatRoom extends Model
 
     protected $fillable = [
         'purchase_id',
-        'is_deal',
+        'status',
         'last_accessed_at'
     ];
 
@@ -25,15 +25,28 @@ class ChatRoom extends Model
 
     public function getOtherParticipant(User $currentUser)
     {
-        // ChatRoomに紐づくOrderから出品者と購入者を取得
+        // ChatRoomに紐づくPurchaseから出品者と購入者を取得
         $seller = $this->purchase->item->seller;
         $buyer = $this->purchase->buyer;
 
-        return $currentUser->is($buyer) ? $seller : $buyer;
+        if ($currentUser->is($buyer)) {
+            return $seller;
+        }
+
+        if ($currentUser->is($seller)) {
+            return $buyer;
+        }
+
+        return null;
     }
 
     public function isBuyer(User $currentUser)
     {
         return $currentUser->is($this->purchase->buyer);
+    }
+
+    public function isSeller(User $currentUser)
+    {
+        return $currentUser->is($this->purchase->item->seller);
     }
 }

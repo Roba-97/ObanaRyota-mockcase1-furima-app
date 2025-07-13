@@ -23,10 +23,15 @@ class ChatRoomController extends Controller
         $user = Auth::user();
         $ratedUser = $chatRoom->getOtherParticipant($user);
 
-        $ratedUser->updateRating($request->input('rate'));
-
-        if($chatRoom->isBuyer($user)) {
+        if($chatRoom->isBuyer($user) && $chatRoom->status === 0) {
+            $ratedUser->updateRating($request->input('rate'));
             Mail::to($ratedUser)->send(new DealNotification($chatRoom, $user));
+            $chatRoom->update(['status' => 1]);
+        }
+
+        if($chatRoom->isSeller($user) && $chatRoom->status === 1) {
+            $ratedUser->updateRating($request->input('rate'));
+            $chatRoom->update(['status' => 2]);
         }
 
         return redirect('/');
