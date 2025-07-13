@@ -20,7 +20,6 @@ class ChatMessageController extends Controller
                 'content' => $content,
             ]);
         }
-
         return redirect("/chat/$chatRoom->id");
     }
 

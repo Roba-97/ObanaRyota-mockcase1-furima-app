@@ -11,8 +11,7 @@ class ChatRoom extends Model
 
     protected $fillable = [
         'purchase_id',
-        'status',
-        'last_accessed_at'
+        'status'
     ];
 
     public function purchase() {
@@ -21,6 +20,21 @@ class ChatRoom extends Model
 
     public function messages() {
         return $this->hasMany(Message::class);
+    }
+
+    public function participant() {
+        return $this->belongsToMany(User::class);
+    }
+
+
+    public function isBuyer(User $currentUser)
+    {
+        return $currentUser->is($this->purchase->buyer);
+    }
+
+    public function isSeller(User $currentUser)
+    {
+        return $currentUser->is($this->purchase->item->seller);
     }
 
     public function getOtherParticipant(User $currentUser)
@@ -38,15 +52,5 @@ class ChatRoom extends Model
         }
 
         return null;
-    }
-
-    public function isBuyer(User $currentUser)
-    {
-        return $currentUser->is($this->purchase->buyer);
-    }
-
-    public function isSeller(User $currentUser)
-    {
-        return $currentUser->is($this->purchase->item->seller);
     }
 }

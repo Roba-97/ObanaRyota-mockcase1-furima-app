@@ -54,4 +54,9 @@ class Item extends Model
     {
         return $this->hasOne(Purchase::class);
     }
+
+    public function chatRoom()
+    {
+        return $this->hasOneThrough(ChatRoom::class, Purchase::class);
+    }
 }
