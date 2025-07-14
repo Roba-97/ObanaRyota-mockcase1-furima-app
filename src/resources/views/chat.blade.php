@@ -63,11 +63,15 @@
                         src="{{ asset(Auth::user()->profile->image_path ?? 'images/default_user_icon.png') }}"
                         alt="{{ Auth::user()->name }}のアイコン画像">
                 </div>
+                @if($message->content_type === 2)
+                <img class="item__content-img" src="{{ asset($message->content) }}" alt="">
+                @else
                 <p class="item__content-message">{!! nl2br(e($message->content)) !!}</p>
                 <div class="item__content-control">
                     <button onclick="openMessageControlModal('edit', {{ $message->toJson(JSON_UNESCAPED_UNICODE) }} )">編集</button>
                     <button onclick="openMessageControlModal('delete', {{ $message->toJson(JSON_UNESCAPED_UNICODE) }} )">削除</button>
                 </div>
+                @endif
             </div>
             @else
             <div class="talk__item">
@@ -77,23 +81,25 @@
                         alt="{{ $chatRoom->getOtherParticipant(Auth::user())->name }}さんのアイコン画像">
                     <span class="item__user-name">{{ $chatRoom->getOtherParticipant(Auth::user())->name }}</span>
                 </div>
+                @if($message->content_type === 2)
+                <img class="item__content-img" src="{{ asset($message->content) }}" alt="">
+                @else
                 <p class="item__content-message">{!! nl2br(e($message->content)) !!}</p>
+                @endif
             </div>
             @endif
             @endforeach
         </div>
         @if($errors)
-        <p class="error">
-            @foreach ($errors->all() as $error)
-            {{$error}},　
-            @endforeach
-        </p>
+        @foreach ($errors->all() as $error)
+        <p class="error">{{$error}}</p>
+        @endforeach
         @endif
-        <form class="main__submit-form" action="/chat/{{ $chatRoom->id }}" method="post">
+        <form class="main__submit-form" action="/chat/{{ $chatRoom->id }}" method="post" enctype="multipart/form-data">
             @csrf
-            <input class="submit-form__input" name="content" placeholder="取引メッセージを記入してください">
+            <input class="submit-form__input" name="content" placeholder="取引メッセージを記入してください" value="{{ old('content') }}">
             <label class="submit-form__label" for="send-img">画像を選択する</label>
-            <input class="submit-form__input-file" type="file" id="send-img" name="image" accept="image/jpg, image/png">
+            <input class="submit-form__input-file" type="file" id="send-img" name="image">
             <input class="submit-form__img" type="image" src="{{ asset('images/send_button.jpg') }}" alt="">
         </form>
 
@@ -127,7 +133,7 @@
                 <form id="js-message-control-form" class="message-control__form" method="post">
                     @csrf
                     <input id="js-message-id-input" type="hidden" name="message-id">
-                    <textarea id="js-message-textarea" class="message-control__form-textarea" name="content"></textarea>
+                    <textarea id="js-message-textarea" class="message-control__form-textarea" name="update_content"></textarea>
                     <button id="js-message-control-submit-button" class="message-control__form-button"></button>
                 </form>
             </div>

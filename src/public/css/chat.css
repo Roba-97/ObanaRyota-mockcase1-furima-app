@@ -187,6 +187,17 @@
     text-align: left;
 }
 
+.item__content-img {
+    display: block;
+    margin: 15px 0 0;
+    background-color: inherit;
+    border: none;
+    width: 40%;
+    min-width: 200px;
+    object-fit: contain;
+    aspect-ratio: 1;
+}
+
 .item__content-control {
     margin-top: 5px;
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ChatMessageRequest extends FormRequest
+class UpdateChatMessageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,18 +24,15 @@ class ChatMessageRequest extends FormRequest
     public function rules()
     {
         return [
-            'content' => 'required|max:400',
-            'image' => 'nullable|file|mimes:jpg,png',
+            'update_content' => 'required|max:400',
         ];
     }
 
     public function messages()
     {
         return [
-            'content.required' => '本文を入力してください',
-            'content.max' => '本文は:max文字以内で入力してください',
-            'image.file' => '画像はファイルである必要があります',
-            'image.mimes' => '「.png」または「.jpg」形式でアップロードしてください',
+            'update_content.required' => '本文を入力してください、あるいは削除ボタンから削除が可能です',
+            'update_content.max' => 'メッセージの編集は:max文字以内で入力してください',
         ];
     }
 }

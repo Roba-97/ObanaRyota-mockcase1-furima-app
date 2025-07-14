@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ChatMessageRequest;
+use App\Http\Requests\UpdateChatMessageRequest;
 use App\Models\ChatRoom;
 use App\Models\Message;
 use Carbon\Carbon;
@@ -13,6 +14,8 @@ class ChatMessageController extends Controller
     public function create(ChatMessageRequest $request, ChatRoom $chatRoom)
     {
         $content = $request->input('content');
+        $image = $request->file('image');
+
         if ($content) {
             Message::create([
                 'chat_room_id' => $chatRoom->id,
@@ -20,18 +23,29 @@ class ChatMessageController extends Controller
                 'content_type' => 1,
                 'content' => $content,
             ]);
+        }
 
-            $chatRoom->participants()->updateExistingPivot(Auth::user()->id, [
-                'last_accessed_at' => Carbon::now(),
+        if ($image) {
+            $path = $request->file('image')->store('public/images/messages');
+            Message::create([
+                'chat_room_id' => $chatRoom->id,
+                'sender_id' => Auth::user()->id,
+                'content_type' => 2,
+                'content' => 'storage/images/messages/' . basename($path),
             ]);
         }
+
+        $chatRoom->participants()->updateExistingPivot(Auth::user()->id, [
+            'last_accessed_at' => Carbon::now(),
+        ]);
+
         return redirect("/chat/$chatRoom->id");
     }
 
-    public function update(ChatMessageRequest $request, Message $message)
+    public function update(UpdateChatMessageRequest $request, Message $message)
     {
         $chatRoomId = $message->chatRoom->id;
-        $message->update(['content' => $request->content]);
+        $message->update(['content' => $request->update_content]);
         return redirect("/chat/$chatRoomId");
     }
 

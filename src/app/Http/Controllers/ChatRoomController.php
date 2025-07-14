@@ -47,6 +47,6 @@ class ChatRoomController extends Controller
             $chatRoom->update(['status' => 2]);
         }
 
-        return redirect('/');
+        return redirect('/mypage?page=deal');
     }
 }
