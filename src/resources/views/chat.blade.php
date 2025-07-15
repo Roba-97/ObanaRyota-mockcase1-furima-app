@@ -100,7 +100,7 @@
         @endif
         <form id="js-message-send-form" class="main__submit-form" action="/chat/{{ $chatRoom->id }}" method="post" enctype="multipart/form-data">
             @csrf
-            <input id="chat-input" class="submit-form__input" name="content" placeholder="取引メッセージを記入してください" value="{{ $draft }}">
+            <input id="chat-input" class="submit-form__input" name="content" placeholder="取引メッセージを記入してください" value="{{ $draft ?? old('content') }}">
             <label class="submit-form__label" for="send-img">画像を選択する</label>
             <input class="submit-form__input-file" type="file" id="send-img" name="image">
             <input class="submit-form__img" type="image" src="{{ asset('images/send_button.jpg') }}" alt="">

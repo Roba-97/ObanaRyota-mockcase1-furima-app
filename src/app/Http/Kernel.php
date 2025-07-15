@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'custom.verified' => \App\Http\Middleware\EnsureEmailIsVerified::class,
         'profile.registered' => \App\Http\Middleware\EnsureProfileIsRegistered::class,
+        'participant' => \App\Http\Middleware\EnsureUserIsChatRoomParticipant::class,
     ];
 }
