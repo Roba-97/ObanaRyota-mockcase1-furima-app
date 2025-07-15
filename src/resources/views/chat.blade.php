@@ -108,7 +108,9 @@
             @csrf
             <input id="chat-input" class="submit-form__input" name="content" placeholder="取引メッセージを記入してください" value="{{ $draft ?? old('content') }}">
             <livewire:send-image-preview-component />
-            <input class="submit-form__img" type="image" src="{{ asset('images/send_button.jpg') }}" alt="">
+            <button type="submit" class="submit-form__button">
+                <img src="{{ asset('images/send_button.jpg') }}" alt="送信する">
+            </button>
         </form>
 
         <div id="js-chat-deal-modal" class="chat-modal">
@@ -142,7 +144,7 @@
                     @csrf
                     <input id="js-message-id-input" type="hidden" name="message_id">
                     <textarea id="js-message-textarea" class="message-control__form-textarea" name="update_content"></textarea>
-                    <p id="js-modal-error-message" class="error">{{ $message }}</p>
+                    <p id="js-modal-error-message" class="error"></p>
                     <button id="js-message-control-submit-button" class="message-control__form-button"></button>
                 </form>
             </div>
@@ -161,7 +163,7 @@
     window.addEventListener("DOMContentLoaded", function() {
         const jsonData = {
             id: {{ old('message_id') }},
-            content: @json($message->find(old("message_id"))->content)
+            content: @json($messages->find(old("message_id"))->content)
         };
         const errorMessage = @json($errors->first('update_content'));
         openMessageControlModal('edit', jsonData, errorMessage);

@@ -42,7 +42,12 @@ class ChatMessageRequest extends FormRequest
     public function withValidator(Validator $validator)
     {
         $validator->after(function ($validator) {
-            if(!$this->content && !$this->image) {
+            $data = $validator->getData();
+
+            $content = $data['content'] ?? null;
+            $image = $data['image'] ?? null;
+
+            if(!$content && !$image) {
                 $validator->errors()->add('content', '送信する内容がありません');
             }
         });

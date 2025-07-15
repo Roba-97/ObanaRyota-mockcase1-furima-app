@@ -82,10 +82,22 @@ class User extends Authenticatable implements MustVerifyEmail
         $soldItemsQuery = $this->items()->where('sold_flag', true)->select('id');
         $purchasedItemsQuery = $this->purchases()->select('item_id');
 
-        return Item::whereIn('id', $soldItemsQuery)
+        $dealingItems = Item::whereIn('id', $soldItemsQuery)
             ->orWhereIn('id', $purchasedItemsQuery)
             ->with('chatRoom.participants')
             ->get();
+
+        $user = $this;
+        $filteredItems = $dealingItems->filter(function ($item) use ($user) {
+            // ステータスが1以上 かつ ユーザーが購入者
+            $filter1 = $item->chatRoom->status >= 1 && $item->chatRoom->isBuyer($user);
+            // ステータスが2以上 かつ ユーザーが販売者
+            $filter2= $item->chatRoom->status >= 2 && $item->chatRoom->isSeller($user);
+
+            return !$filter1 && !$filter2;
+        });
+
+        return $filteredItems;
     }
 
     public function updateRating($newRating)

@@ -19,9 +19,21 @@ class EnsureUserIsChatRoomParticipant
     {
         $chatRoom = $request->route('chatRoom');
 
+        // チャットルームの参加者でない
         if (!$chatRoom->isSeller(Auth::user()) && !$chatRoom->isBuyer(Auth::user())) {
             return redirect('/mypage/?page=deal');
         }
+
+        // 購入者が取引終了済み
+        if ($chatRoom->isBuyer(Auth::user()) && $chatRoom->status >= 1) {
+            return redirect('/mypage/?page=deal');
+        }
+
+        // 出品者も取引完了済み
+        if ($chatRoom->isSeller(Auth::user()) && $chatRoom->status >= 2) {
+            return redirect('/mypage/?page=deal');
+        }
+
         return $next($request);
     }
 }

@@ -61,6 +61,9 @@
 			@if($item->chatRoom->getNotificationCount(Auth::user()) !== 0)
 			<span class="item-list__chat-count">{{ $item->chatRoom->getNotificationCount(Auth::user()) }}</span>
 			@endif
+			@if($item->chatRoom->status === 1)
+			<span class="item-list__deal-notice">評価送信待ち</span>
+			@endif
 		</a>
 		@else
 		<a href="/item/{{ $item->id }}">
