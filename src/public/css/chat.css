@@ -262,6 +262,21 @@
     display: none;
 }
 
+.submit-form__img-preview {
+    display: block;
+    position: absolute;
+    z-index: 10;
+    top: -5px;
+    right: 10px;
+    transform: translateY(-100%);
+    width: 175%;
+    min-width: 150px;
+    height:auto;
+    object-fit: contain;
+    background-color: inherit;
+    border: 2px solid #5F5F5F;
+}
+
 .error {
     margin: 0 0 0 30px;
     color: #FF5555;

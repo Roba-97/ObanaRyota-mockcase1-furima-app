@@ -8,6 +8,10 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
+@section('livewireStyles')
+@livewireStyles
+@endsection
+
 @section('content')
 <div class="chat">
     <div class="sidebar">
@@ -93,16 +97,16 @@
             @endif
             @endforeach
         </div>
-        @if($errors)
-        @foreach ($errors->all() as $error)
-        <p class="error">{{$error}}</p>
-        @endforeach
-        @endif
+        @error('content')
+        <p class="error">{{$message}}</p>
+        @enderror
+        @error('image')
+        <p class="error">{{$message}}</p>
+        @enderror
         <form id="js-message-send-form" class="main__submit-form" action="/chat/{{ $chatRoom->id }}" method="post" enctype="multipart/form-data">
             @csrf
             <input id="chat-input" class="submit-form__input" name="content" placeholder="取引メッセージを記入してください" value="{{ $draft ?? old('content') }}">
-            <label class="submit-form__label" for="send-img">画像を選択する</label>
-            <input class="submit-form__input-file" type="file" id="send-img" name="image">
+            <livewire:send-image-preview-component />
             <input class="submit-form__img" type="image" src="{{ asset('images/send_button.jpg') }}" alt="">
         </form>
 
@@ -135,15 +139,24 @@
                 </div>
                 <form id="js-message-control-form" class="message-control__form" method="post">
                     @csrf
-                    <input id="js-message-id-input" type="hidden" name="message-id">
+                    <input id="js-message-id-input" type="hidden" name="message_id">
                     <textarea id="js-message-textarea" class="message-control__form-textarea" name="update_content"></textarea>
+                    @error('update_content')
+                    <p class="error">{{ $message }}</p>
+                    @enderror
                     <button id="js-message-control-submit-button" class="message-control__form-button"></button>
                 </form>
             </div>
         </div>
-
     </div>
 </div>
+@if($errors->has('update_content'))
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+                openMessageControlModal('edit', );
+            }
+</script>
+@endif
 @if($chatRoom->isSeller(Auth::user()) && $chatRoom->status === 1)
 <script>
     openDealModal();
@@ -152,4 +165,8 @@
 <script>
     saveDraftRequest(@json($chatRoom));
 </script>
+@endsection
+
+@section('livewireScripts')
+@livewireScripts
 @endsection
