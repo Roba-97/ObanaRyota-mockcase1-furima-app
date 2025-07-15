@@ -30,6 +30,7 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::post('/purchase/stripe/{item}', [PurchaseController::class, 'stripe']);
     Route::get('/purchase/{item}', [PurchaseController::class, 'index'])->middleware('profile.registered')->name('purchase.index');
 
+    Route::post('/chat/{chatRoom}/draft', [ChatRoomController::class, 'saveDraft']);
     Route::post('/chat/{chatRoom}/deal', [ChatRoomController::class, 'rateUser']);
     Route::get('/chat/{chatRoom}', [ChatRoomController::class, 'index']);
     Route::post('/chat/{chatRoom}', [ChatMessageController::class, 'create']);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\DealNotification;
 use App\Models\ChatRoom;
 use Carbon\Carbon;
+use Illuminate\Database\Seeder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -28,7 +29,19 @@ class ChatRoomController extends Controller
 
         $messages = $chatRoom->messages()->get();
 
-        return view("chat", compact('chatRoom', 'dealingItems', 'messages'));
+        $draft = Auth::user()->haveDraftOn($chatRoom);
+        session()->forget('chat_drafts.' . $chatRoom->id);
+
+        return view("chat", compact('chatRoom', 'dealingItems', 'messages', 'draft'));
+    }
+
+    public function saveDraft(ChatRoom $chatRoom, Request $request)
+    {
+        $user = Auth::user();
+        $draft = $request->input('draft');
+
+        session()->put('chat_drafts.' . $chatRoom->id, ["user_id" => $user->id, "draft" => $draft]);
+        return response()->noContent();
     }
 
     public function rateUser(ChatRoom $chatRoom, Request $request)

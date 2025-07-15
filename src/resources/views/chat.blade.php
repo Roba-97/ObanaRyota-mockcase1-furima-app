@@ -3,6 +3,9 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/chat.css')}}">
 <link rel="stylesheet" href="{{ asset('css/chat_modal.css')}}">
+<script src="{{ asset('js/modal.js') }}"></script>
+<script src="{{ asset('js/draft.js') }}"></script>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
 @section('content')
@@ -95,9 +98,9 @@
         <p class="error">{{$error}}</p>
         @endforeach
         @endif
-        <form class="main__submit-form" action="/chat/{{ $chatRoom->id }}" method="post" enctype="multipart/form-data">
+        <form id="js-message-send-form" class="main__submit-form" action="/chat/{{ $chatRoom->id }}" method="post" enctype="multipart/form-data">
             @csrf
-            <input class="submit-form__input" name="content" placeholder="取引メッセージを記入してください" value="{{ old('content') }}">
+            <input id="chat-input" class="submit-form__input" name="content" placeholder="取引メッセージを記入してください" value="{{ $draft }}">
             <label class="submit-form__label" for="send-img">画像を選択する</label>
             <input class="submit-form__input-file" type="file" id="send-img" name="image">
             <input class="submit-form__img" type="image" src="{{ asset('images/send_button.jpg') }}" alt="">
@@ -108,7 +111,7 @@
                 <div class="inner__header">
                     <p class="inner__header-text">取引が完了しました。</p>
                 </div>
-                <form class="inner__deal-form" action="/chat/{{ $chatRoom->id }}/deal" method="post">
+                <form id="js-rating-form" class="inner__deal-form" action="/chat/{{ $chatRoom->id }}/deal" method="post">
                     @csrf
                     <div class="deal-form__evaluation">
                         <p class="deal-form__evaluation-text">今回の取引相手はどうでしたか？</p>
@@ -141,10 +144,12 @@
 
     </div>
 </div>
-<script src="{{ asset('js/modal.js') }}"></script>
 @if($chatRoom->isSeller(Auth::user()) && $chatRoom->status === 1)
 <script>
     openDealModal();
 </script>
 @endif
+<script>
+    saveDraftRequest(@json($chatRoom));
+</script>
 @endsection

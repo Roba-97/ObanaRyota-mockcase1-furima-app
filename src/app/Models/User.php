@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Cashier\Billable;
+use Nette\Utils\Strings;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -100,5 +101,16 @@ class User extends Authenticatable implements MustVerifyEmail
             'rating_count' => $newCount,
             'rating_sum' => $newSum,
         ]);
+    }
+
+    public function haveDraftOn(ChatRoom $chatRoom)
+    {
+        if(session()->exists('chat_drafts.' . $chatRoom->id)
+            && session()->get('chat_drafts.' . $chatRoom->id)["user_id"] === $this->id
+        ) {
+            return session()->get('chat_drafts.' . $chatRoom->id)["draft"];
+        }
+
+        return null;
     }
 }
