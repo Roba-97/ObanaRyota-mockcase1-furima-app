@@ -141,30 +141,38 @@
                     @csrf
                     <input id="js-message-id-input" type="hidden" name="message_id">
                     <textarea id="js-message-textarea" class="message-control__form-textarea" name="update_content"></textarea>
-                    @error('update_content')
-                    <p class="error">{{ $message }}</p>
-                    @enderror
+                    <p id="js-modal-error-message" class="error">{{ $message }}</p>
                     <button id="js-message-control-submit-button" class="message-control__form-button"></button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-@if($errors->has('update_content'))
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-                openMessageControlModal('edit', );
-            }
-</script>
-@endif
+
 @if($chatRoom->isSeller(Auth::user()) && $chatRoom->status === 1)
 <script>
     openDealModal();
 </script>
 @endif
+
+@if($errors->has('update_content'))
+<script>
+    window.addEventListener("DOMContentLoaded", function() {
+
+        const jsonData = {
+            id: {{ old('message_id') }},
+            content: @json($message->find(old("message_id"))->content)
+        };
+        const errorMessage = @json($errors->first('update_content'));
+        openMessageControlModal('edit', jsonData, errorMessage);
+    });
+</script>
+@endif
+
 <script>
     saveDraftRequest(@json($chatRoom));
 </script>
+
 @endsection
 
 @section('livewireScripts')

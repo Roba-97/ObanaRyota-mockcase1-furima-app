@@ -31,7 +31,7 @@ class UpdateChatMessageRequest extends FormRequest
     public function messages()
     {
         return [
-            'update_content.required' => '本文を入力してください、あるいは削除ボタンから削除が可能です',
+            'update_content.required' => '本文を入力するか、削除ボタンから削除が可能です',
             'update_content.max' => 'メッセージの編集は:max文字以内で入力してください',
         ];
     }

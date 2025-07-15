@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Validator;
 
 class ChatMessageRequest extends FormRequest
 {
@@ -24,7 +25,7 @@ class ChatMessageRequest extends FormRequest
     public function rules()
     {
         return [
-            'content' => 'required|max:400',
+            'content' => 'nullable|max:400',
             'image' => 'nullable|file|mimes:jpg,png',
         ];
     }
@@ -32,10 +33,18 @@ class ChatMessageRequest extends FormRequest
     public function messages()
     {
         return [
-            'content.required' => '本文を入力してください',
             'content.max' => '本文は:max文字以内で入力してください',
             'image.file' => '画像はファイルである必要があります',
             'image.mimes' => '「.png」または「.jpg」形式でアップロードしてください',
         ];
+    }
+
+    public function withValidator(Validator $validator)
+    {
+        $validator->after(function ($validator) {
+            if(!$this->content && !$this->image) {
+                $validator->errors()->add('content', '送信する内容がありません');
+            }
+        });
     }
 }

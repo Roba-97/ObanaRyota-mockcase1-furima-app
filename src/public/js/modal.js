@@ -5,7 +5,7 @@ const openDealModal = function () {
 }
 
 // メッセージ編集・削除モーダル
-const openMessageControlModal = function (mode, jsonData) {
+const openMessageControlModal = function (mode, jsonData, error='') {
     const heading = document.getElementById("js-message-control-heading");
     const form = document.getElementById("js-message-control-form");
     const textarea = document.getElementById("js-message-textarea");
@@ -37,10 +37,14 @@ const openMessageControlModal = function (mode, jsonData) {
     const inputId = document.getElementById("js-message-id-input");
     inputId.setAttribute("value", jsonData.id);
 
+    const errorText = document.getElementById("js-modal-error-message");
+    error ? errorText.textContent = error : errorText.style.display = "none";
+
     const modal = document.getElementById("js-message-control-modal");
     modal.style.display = "block"
 }
 
+// モーダルを閉じる
 function closeModal() {
     const modal = document.getElementById("js-message-control-modal");
     modal.style.display = "none";
