@@ -19,11 +19,12 @@
 		<p class="user__name">{{ Auth::user()->name }}</p>
 		@if(Auth::user()->profile->rating_count !== 0)
 		<p class="user__evaluation">
-			@for($i = 0; $i < round(Auth::user()->profile->rating_average); $i++)
+			@for($i = 0; $i < 5; $i++)
+			@if($i < round(Auth::user()->profile->rating_average))
 			<span class="user__evaluation--filled-star">★</span>
-			@endfor
-			@for($i = 0; $i < 5 - round(Auth::user()->profile->rating_average); $i++)
+			@else
 			<span>★</span>
+			@endif
 			@endfor
 		</p>
 		@endif
@@ -39,7 +40,7 @@
 		取引中の商品
 		@if($notificationCount !== 0)
 		<span>
-		{{ $notificationCount }}
+			{{ $notificationCount }}
 		</span>
 		@endif
 	</a>

@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{{ asset('css/chat_modal.css')}}">
 <script src="{{ asset('js/modal.js') }}"></script>
 <script src="{{ asset('js/draft.js') }}"></script>
+<script src="{{ asset('js/scrollMessage.js') }}"></script>
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
@@ -60,7 +61,7 @@
                 <p class="main__item-price">￥{{ number_format($chatRoom->purchase->item->price) }}</p>
             </div>
         </div>
-        <div class="main__talk">
+        <div id="js-talk-room" class="main__talk">
             @foreach($messages as $message)
             @if($message->sender_id === Auth::user()->id)
             <div class="talk__item talk__item--sended">
@@ -158,7 +159,6 @@
 @if($errors->has('update_content'))
 <script>
     window.addEventListener("DOMContentLoaded", function() {
-
         const jsonData = {
             id: {{ old('message_id') }},
             content: @json($message->find(old("message_id"))->content)
