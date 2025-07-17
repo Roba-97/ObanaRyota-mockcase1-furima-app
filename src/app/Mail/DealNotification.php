@@ -5,7 +5,6 @@ namespace App\Mail;
 use App\Models\ChatRoom;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -36,10 +35,11 @@ class DealNotification extends Mailable
      */
     public function build()
     {
+        $chatroom = $this->chatroom;
         return $this->subject("商品の取引が完了しました")->markdown('emails.deal', [
             'dealUser' => $this->user,
-            'dealItem' => $this->chatroom->purchase->item,
-            'url' => url('/login'),
+            'dealItem' => $chatroom->purchase->item,
+            'url' => url("/chat/$chatroom->id"),
         ]);
     }
 }
