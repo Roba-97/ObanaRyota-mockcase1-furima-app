@@ -73,6 +73,9 @@
                 </div>
                 @if($message->content_type === 2)
                 <img class="item__content-img" src="{{ asset($message->content) }}" alt="">
+                <div class="item__content-control">
+                    <button onclick="openMessageControlModal('delete-img', {{ $message->toJson(JSON_UNESCAPED_UNICODE) }}, '{{ asset($message->content) }}' )">削除</button>
+                </div>
                 @else
                 <p class="item__content-message">{!! nl2br(e($message->content)) !!}</p>
                 <div class="item__content-control">
@@ -144,6 +147,7 @@
                     @csrf
                     <input id="js-message-id-input" type="hidden" name="message_id">
                     <textarea id="js-message-textarea" class="message-control__form-textarea" name="update_content"></textarea>
+                    <img id="js-delete-img" class="message-control__delete-img">
                     <p id="js-modal-error-message" class="error"></p>
                     <button id="js-message-control-submit-button" class="message-control__form-button"></button>
                 </form>

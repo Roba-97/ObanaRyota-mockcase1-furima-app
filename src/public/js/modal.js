@@ -5,11 +5,24 @@ const openDealModal = function () {
 }
 
 // メッセージ編集・削除モーダル
-const openMessageControlModal = function (mode, jsonData, error='') {
+const openMessageControlModal = function (mode, jsonData, optional='') {
     const heading = document.getElementById("js-message-control-heading");
     const form = document.getElementById("js-message-control-form");
     const textarea = document.getElementById("js-message-textarea");
+    const img = document.getElementById("js-delete-img");
     const button = document.getElementById("js-message-control-submit-button");
+    const inputId = document.getElementById("js-message-id-input");
+    const errorText = document.getElementById("js-modal-error-message");
+    const modal = document.getElementById("js-message-control-modal");
+
+    textarea.style.display = "block";
+    img.style.display = "none";
+    errorText.style.display = "none";
+    modal.style.display = "block"
+
+    form.action = `/chat/${jsonData.id}`;
+    textarea.textContent = jsonData.content;
+    inputId.setAttribute("value", jsonData.id);
 
     switch (mode) {
         case "edit":
@@ -28,20 +41,23 @@ const openMessageControlModal = function (mode, jsonData, error='') {
             button.textContent = "削除";
             button.style.background = "#FF8282"
             break;
+        case "delete-img":
+            heading.textContent = "画像を削除する";
+            setFormMethod(form, 'DELETE');
+            textarea.style.display = "none";
+            img.style.display = "block";
+            button.textContent = "削除";
+            button.style.background = "#FF8282"
         default:
             break;
     }
-    form.action = `/chat/${jsonData.id}`;
-    textarea.textContent = jsonData.content;
 
-    const inputId = document.getElementById("js-message-id-input");
-    inputId.setAttribute("value", jsonData.id);
-
-    const errorText = document.getElementById("js-modal-error-message");
-    error ? errorText.textContent = error : errorText.style.display = "none";
-
-    const modal = document.getElementById("js-message-control-modal");
-    modal.style.display = "block"
+    if (jsonData.content_type === 2 && optional !== '') {
+        img.setAttribute("src", optional);
+    } else if (optional !== '') {
+        errorText.textContent = optional
+        errorText.style.display = "block";
+    }
 }
 
 // モーダルを閉じる
